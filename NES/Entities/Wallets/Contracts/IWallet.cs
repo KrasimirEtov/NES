@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace NES.Entities.Market.Contracts
+namespace NES.Entities.Wallets.Contracts
 {
-    interface IMarket
+	public interface IWallet
     {
-
     }
 }

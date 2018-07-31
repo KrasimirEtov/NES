@@ -2,6 +2,7 @@
 using NES.Entities.Assets.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NES
 {
@@ -12,13 +13,13 @@ namespace NES
             Console.WriteLine("Hello World!");
 
 			var dict = new Dictionary<IAsset, decimal>();
-			var bitcoin = new Bitcoin();
+			var bitcoin = new Bitcoin(5m, 6m);
 			var dollar = new Dollars();
+			dict[bitcoin] = 5m;
+		
+			var lines = dict.Select(kvp => kvp.Key + ": " + kvp.Value);
+			Console.WriteLine(String.Join(Environment.NewLine, lines));
 
-			//if (dict.ContainsKey(bitcoin.name))
-			//{
-
-			//}
-        }
+		}
     }
 }

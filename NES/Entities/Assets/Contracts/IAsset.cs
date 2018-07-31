@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NES.Entities.Assets.Contracts
 {
-    interface IAsset
+	public interface IAsset
     {
 		string Name { get; }
 		string Id { get; }

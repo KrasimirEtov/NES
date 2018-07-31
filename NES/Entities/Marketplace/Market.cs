@@ -1,10 +1,9 @@
 ﻿using NES.Entities.Assets.Contracts;
-using NES.Entities.Category.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace NES.Entities.Market
+namespace NES.Entities.Marketplace
 {
     public class Market
     {
