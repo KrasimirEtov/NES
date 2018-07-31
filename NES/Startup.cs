@@ -1,4 +1,6 @@
-﻿using NES.Entities.Assets;
+﻿using NES.Core.Commands;
+using NES.Core.Commands.Contracts;
+using NES.Entities.Assets;
 using NES.Entities.Assets.Contracts;
 using System;
 using System.Collections.Generic;
@@ -10,16 +12,19 @@ namespace NES
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ICommand command = Command.Parse("exit");
+            Console.WriteLine(command.Action);
+            Console.WriteLine(command.ID);
+            Console.WriteLine(command.Amount);
 
-			var dict = new Dictionary<IAsset, decimal>();
-			var bitcoin = new Bitcoin(5m, 6m);
-			var dollar = new Dollar();
-			dict[bitcoin] = 5m;
-		
-			var lines = dict.Select(kvp => kvp.Key + ": " + kvp.Value);
-			Console.WriteLine(String.Join(Environment.NewLine, lines));
+            var dict = new Dictionary<IAsset, decimal>();
+            var bitcoin = new Bitcoin(5m, 6m);
+            var dollar = new Dollar();
+            dict[bitcoin] = 5m;
 
-		}
+            var lines = dict.Select(kvp => kvp.Key + ": " + kvp.Value);
+            Console.WriteLine(String.Join(Environment.NewLine, lines));
+
+        }
     }
 }

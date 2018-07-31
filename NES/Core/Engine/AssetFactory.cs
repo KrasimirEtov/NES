@@ -8,21 +8,18 @@ using NES.Entities.Assets;
 
 namespace NES.Core.Engine
 {
-	public class Factory : IFactory
+	public class AssetFactory : IFactory
     {
-        private static IFactory instanceHolder = new Factory();
+        private static IFactory InstanceHolder = new AssetFactory();
 
-        private Factory()
+        private AssetFactory()
         {
 
         }
 
         public static IFactory Instance
         {
-            get
-            {
-                return instanceHolder;
-            }
+            get => InstanceHolder;
         }
 
         public IAsset CreateApple(decimal price, decimal amount)
@@ -81,11 +78,6 @@ namespace NES.Core.Engine
         }
 
         public IAsset CreateSilver(decimal price, decimal amount)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IUser CreateUser(string name, int age)
         {
             throw new NotImplementedException();
         }

@@ -23,7 +23,5 @@ namespace NES.Core.Engine.Contracts
         IAsset CreateApple(decimal price, decimal amount);
         IAsset CreateFacebook(decimal price, decimal amount);
         IAsset CreateGoogle(decimal price, decimal amount);
-
-        IUser CreateUser(string name, int age);
     }
 }
