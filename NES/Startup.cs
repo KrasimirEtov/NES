@@ -14,7 +14,7 @@ namespace NES
 
 			var dict = new Dictionary<IAsset, decimal>();
 			var bitcoin = new Bitcoin(5m, 6m);
-			var dollar = new Dollars();
+			var dollar = new Dollar();
 			dict[bitcoin] = 5m;
 		
 			var lines = dict.Select(kvp => kvp.Key + ": " + kvp.Value);
