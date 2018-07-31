@@ -1,4 +1,5 @@
 ﻿using NES.Core.Commands.Contracts;
+using NES.Entities.Users;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -47,11 +48,20 @@ namespace NES.Core.Commands
         private void TranslateInput(string input)
         {
             string[] chunks = input.Split(SplitCommandSymbol);
-            if (chunks.Length == 1)
-            {
-                this.Action = chunks[0];
-                return;
-            }
+			if (chunks.Length == 1)
+			{
+				/* this is to test the register */
+				if (chunks[0].Equals("register"))
+				{
+					Console.WriteLine("Type: 'username' 'password' 'cash'");
+					string[] inputData = Console.ReadLine().Split(' ');
+					var register = new Register(inputData[0]);
+					register.Writer.WriteLine(register.RegisterUser(inputData[0], inputData[1], decimal.Parse(inputData[2])));
+					register.Writer.Close();
+				}
+				this.Action = chunks[0];
+				return;
+			}
 
             this.ID = chunks[1];
             this.Amount = decimal.Parse(chunks[2]);
