@@ -4,8 +4,7 @@ using System.Text;
 
 namespace NES.Core.Engine
 {
-	public class Engine
-    {
-
+    public class Engine
+    { 
     }
 }

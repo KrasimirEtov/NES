@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NES.Entities.Assets
 {
-    public class Dollars
+    public class Dollar
     {
 		public string name = "test";
 
