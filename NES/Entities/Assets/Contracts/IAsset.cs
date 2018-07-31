@@ -6,5 +6,11 @@ namespace NES.Entities.Assets.Contracts
 {
     interface IAsset
     {
-    }
+		string Name { get; }
+		string Id { get; }
+		decimal Price { get; }
+		decimal Amount { get; }
+
+
+	}
 }

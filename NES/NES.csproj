@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <Folder Include="Core\Commands\" />
-    <Folder Include="Entities\Category\Contracts\" />
     <Folder Include="Entities\User\Contracts\" />
     <Folder Include="Entities\Wallet\Contracts\" />
   </ItemGroup>
