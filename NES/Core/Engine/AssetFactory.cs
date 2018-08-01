@@ -4,7 +4,7 @@ using NES.Entities.Assets.Contracts;
 using NES.Entities.Users.Contracts;
 using System.Collections.Generic;
 using System.Text;
-using NES.Entities.Assets;
+using NES.Entities.Assets.Entities;
 
 namespace NES.Core.Engine
 {
@@ -34,17 +34,17 @@ namespace NES.Core.Engine
 
         public IAsset CreateDollar(decimal price, decimal amount)
         {
-            throw new NotImplementedException();
+            return new Dollar(price, amount);
         }
 
         public IAsset CreateEtherium(decimal price, decimal amount)
         {
-            throw new NotImplementedException();
+            return new Ethereum(price, amount);
         }
 
         public IAsset CreateEuro(decimal price, decimal amount)
         {
-            throw new NotImplementedException();
+            return new Euro(price, amount);
         }
 
         public IAsset CreateFacebook(decimal price, decimal amount)
@@ -54,7 +54,7 @@ namespace NES.Core.Engine
 
         public IAsset CreateGold(decimal price, decimal amount)
         {
-            throw new NotImplementedException();
+            return new Gold(price, amount);
         }
 
         public IAsset CreateGoogle(decimal price, decimal amount)
@@ -79,7 +79,7 @@ namespace NES.Core.Engine
 
         public IAsset CreateSilver(decimal price, decimal amount)
         {
-            throw new NotImplementedException();
+            return new Silver(price, amount);
         }
     }
 }

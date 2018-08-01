@@ -1,9 +1,6 @@
 ﻿using NES.Entities.Assets.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace NES.Entities.Assets
+namespace NES.Entities.Assets.Entities
 {
     public class Bitcoin : Asset, IAsset
     {

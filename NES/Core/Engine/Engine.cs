@@ -25,7 +25,6 @@ namespace NES.Core.Engine
 
 		private Engine()
 		{
-			//this.market = Market.Instance;
 			this.broker = new Broker();
             this.consoleMenager = new IOConsole();
 		}
@@ -46,8 +45,15 @@ namespace NES.Core.Engine
             string input;
             while ((input = this.consoleMenager.ReadLine()) != exitCommand)
             {
-                command = Command.Parse(input);
-                ProcessCommand.Process(command, this.user, this.broker);
+                try
+                {
+                    command = Command.Parse(input);
+                    ProcessCommand.Process(command, this.user, this.broker);
+                }
+                catch (Exception ex)
+                {
+                    this.consoleMenager.WriteLine(ex.Message);
+                }
             }
         }
 
