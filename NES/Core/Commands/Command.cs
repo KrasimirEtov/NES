@@ -50,15 +50,16 @@ namespace NES.Core.Commands
             string[] chunks = input.Split(SplitCommandSymbol);
 			if (chunks.Length == 1)
 			{
-				/* this is to test the register */
-				if (chunks[0].Equals("register"))
+				/* this is to test the register 
+				if (chunks[0].equals("register"))
 				{
-					Console.WriteLine("Type: 'username' 'password' 'cash'");
-					string[] inputData = Console.ReadLine().Split(' ');
-					var register = new Register(inputData[0]);
-					register.Writer.WriteLine(register.RegisterUser(inputData[0], inputData[1], decimal.Parse(inputData[2])));
-					register.Writer.Close();
+					console.writeline("type: 'username' 'password' 'cash'");
+					string[] inputdata = console.readline().split(' ');
+					var register = new register(inputdata[0]);
+					register.writer.writeline(register.registeruser(inputdata[0], inputdata[1], decimal.parse(inputdata[2])));
+					register.writer.close();
 				}
+				*/
 				this.Action = chunks[0];
 				return;
 			}
