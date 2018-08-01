@@ -12,7 +12,15 @@ namespace NES
     {
         static void Main(string[] args)
         {
-            ICommand command = Command.Parse("buybtc 100");
+			// this can be in a class that contains print methods?
+			//user testing - we need an engine to process the commands
+			Console.WriteLine("Welcome!");
+			Console.WriteLine("Type: 'register' to register if you are a new user");
+			Console.WriteLine("Type: 'login' if you already have an account");
+			var registerUser = Command.Parse("register");
+
+			/*
+            ICommand command = Command.Parse("exit");
             Console.WriteLine(command.Action);
             Console.WriteLine(command.Amount);
 
@@ -22,8 +30,8 @@ namespace NES
             dict[bitcoin] = 5m;
 
             var lines = dict.Select(kvp => kvp.Key + ": " + kvp.Value);
-            Console.WriteLine(String.Join(Environment.NewLine, lines));
-
+			Console.WriteLine(String.Join(Environment.NewLine, lines));
+			*/
         }
     }
 }

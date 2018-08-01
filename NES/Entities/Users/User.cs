@@ -9,8 +9,7 @@ namespace NES.Entities.Users
     {
 		private string name;
 		private int age;
-		private IWallet wallet;
-		//private decimal cash;
+		private decimal cash;
 
 		public string Name
 		{
@@ -34,15 +33,21 @@ namespace NES.Entities.Users
 			}
 		}
 
-		public IWallet Wallet
+		public decimal Cash
 		{
-			get => wallet;
+			get => Cash;
 			set
 			{
-				wallet = value ?? throw new ArgumentNullException("Wallet cannot be null!");
+				if (value < 1) throw new ArgumentOutOfRangeException("You are broke!");
+				cash = value;
 			}
 		}
 
-		public decimal Cash { get; set; }
+		public User(string name, int age, decimal cash)
+		{
+			Name = name;
+			Age = age;
+			Cash = cash;
+		}
 	}
 }
