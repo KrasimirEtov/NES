@@ -15,7 +15,7 @@ namespace NES.Core.Commands
             switch (command.Action)
             {
                 case "BuyBTC":
-                    command.Amount
+                    command.Amount;
                     this.engine.BuyBTC(amount);
                     break;
                 case "BuyETH": break;

@@ -22,8 +22,7 @@ namespace NES.Core.Commands
             get => this.action;
             private set
             {
-                if (value == null) throw new ArgumentNullException("Command cannot be null!");
-                this.action = value;
+                this.action = value ?? throw new ArgumentNullException("Command cannot be null!");
             }
         }
         
