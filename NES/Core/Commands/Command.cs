@@ -11,7 +11,6 @@ namespace NES.Core.Commands
         private const char SplitCommandSymbol = ' ';
 
         private string action;
-        private string id;
 
         private Command(string input)
         {
@@ -27,17 +26,7 @@ namespace NES.Core.Commands
                 this.action = value;
             }
         }
-
-        public string ID
-        {
-            get => this.id;
-            private set
-            {
-                if (value == null) throw new ArgumentNullException("Command id cannot be null!");
-                this.id = value;
-            }
-        }
-
+        
         public decimal Amount { get; private set; }
 
         public static ICommand Parse(string input)
@@ -64,8 +53,8 @@ namespace NES.Core.Commands
 				return;
 			}
 
-            this.ID = chunks[1];
-            this.Amount = decimal.Parse(chunks[2]);
+            this.Action = chunks[0];
+            this.Amount = decimal.Parse(chunks[1]);
         }
     }
 }

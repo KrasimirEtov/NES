@@ -22,7 +22,6 @@ namespace NES
 			/*
             ICommand command = Command.Parse("exit");
             Console.WriteLine(command.Action);
-            Console.WriteLine(command.ID);
             Console.WriteLine(command.Amount);
 
             var dict = new Dictionary<IAsset, decimal>();
