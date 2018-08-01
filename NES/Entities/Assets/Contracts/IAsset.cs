@@ -9,8 +9,7 @@ namespace NES.Entities.Assets.Contracts
 		string Name { get; }
 		string Id { get; }
 		decimal Price { get; }
-		decimal Amount { get; }
-
+		decimal Amount { get; set; }
 
 	}
 }

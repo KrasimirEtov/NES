@@ -1,5 +1,6 @@
 ﻿using NES.Core.Commands;
 using NES.Core.Commands.Contracts;
+using NES.Core.Engine;
 using NES.Entities.Assets;
 using NES.Entities.Assets.Contracts;
 using System;
@@ -33,14 +34,7 @@ namespace NES
             //Console.WriteLine(String.Join(Environment.NewLine, lines));
             //*/
 
-            string das = "BuyBTC 100";
-            ICommand g = Command.Parse(das);
-
-            switch (g.Action)
-            {
-                case "BuyBTC": break;
-                case "SellBTC": break;
-            }
+            Engine.Instance.Start();
 
         }
     }

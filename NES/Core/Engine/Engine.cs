@@ -2,7 +2,11 @@
 using NES.Core.Commands.Contracts;
 using NES.Core.Engine.Contracts;
 using NES.Core.Providers;
+using NES.Entities.Assets.Contracts;
+using NES.Entities.Broker;
+using NES.Entities.Broker.Contracts;
 using NES.Entities.Users;
+using NES.Entities.Users.Contracts;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,15 +19,14 @@ namespace NES.Core.Engine
         private const string exitCommand = "exit";
 		private static readonly Engine SingleInstance = new Engine();
 
-		// private readonly IMarket market;
-		// private readonly IUser user;
-		private readonly IFactory factory;
+		private readonly IUser user;
+		private readonly IBroker broker;
         private IOConsole consoleMenager;
 
 		private Engine()
 		{
 			//this.market = Market.Instance;
-			this.factory = AssetFactory.Instance;
+			this.broker = new Broker();
             this.consoleMenager = new IOConsole();
 		}
 
@@ -44,8 +47,11 @@ namespace NES.Core.Engine
             while ((input = this.consoleMenager.ReadLine()) != exitCommand)
             {
                 command = Command.Parse(input);
+                ProcessCommand.Process(command, this.user, this.broker);
             }
         }
+
+
 
 	}
 

@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using System.Text;
 using NES.Core.Commands;
 using NES.Core.Commands.Contracts;
+using NES.Core.Engine.Contracts;
 using NES.Entities.Assets;
 using NES.Entities.Assets.Contracts;
+using NES.Entities.Broker.Contracts;
+using NES.Entities.Users.Contracts;
 
 namespace NES.Core.Commands
 {
-    public class CommandParser
+    public static class ProcessCommand
     {
-        public void ParseCommand(Command command)
+        public static void Process(ICommand command, IUser user, IBroker broker)
         {
             switch (command.Action)
             {
                 case "BuyBTC":
-                    command.Amount;
-                    this.engine.BuyBTC(amount);
+                    broker.BuyBTC(command.Amount, user);
                     break;
                 case "BuyETH": break;
                 case "BuyGLD": break;

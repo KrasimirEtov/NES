@@ -6,6 +6,6 @@ namespace NES.Entities.Wallets.Contracts
 {
 	public interface IWallet
     {
-		int Amount { get; }
+		decimal Cash { get; }
     }
 }

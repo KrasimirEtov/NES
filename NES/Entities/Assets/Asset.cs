@@ -61,7 +61,7 @@ namespace NES.Entities.Assets
 			}
 		}
 
-		protected Asset(string name, string id, decimal price, decimal amount)
+		public Asset(string name, string id, decimal price, decimal amount)
 		{
 			Name = name;
 			Id = id;
