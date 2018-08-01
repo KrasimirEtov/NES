@@ -12,9 +12,8 @@ namespace NES
     {
         static void Main(string[] args)
         {
-            ICommand command = Command.Parse("exit");
+            ICommand command = Command.Parse("buybtc 100");
             Console.WriteLine(command.Action);
-            Console.WriteLine(command.ID);
             Console.WriteLine(command.Amount);
 
             var dict = new Dictionary<IAsset, decimal>();
