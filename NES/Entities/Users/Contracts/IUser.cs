@@ -10,6 +10,5 @@ namespace NES.Entities.Users.Contracts
 		string Name { get; }
 		int Age { get; }
 		IWallet Wallet { get; }
-		decimal Cash { get; }
 	}
 }

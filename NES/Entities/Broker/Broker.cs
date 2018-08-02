@@ -17,17 +17,17 @@ namespace NES.Entities.Broker
 
         public Broker()
         {
-
+			this.factory = AssetFactory.Instance;
         }
 
         public void BuyBTC(decimal amount, IUser user)
         {
             //decimal price = market.btc.parice
             decimal price = 10;
-            if (user.Cash >= price * amount)
+            if (user.Wallet.Cash >= price * amount)
             {
                 IAsset asset = factory.CreateBitcoin(price, amount);
-                //user.Wallet.AddAsset(asset);
+                user.Wallet.AddAsset(asset);
             }
             else
             {

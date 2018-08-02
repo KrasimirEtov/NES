@@ -1,15 +1,17 @@
-﻿using NES.Entities.Wallets.Contracts;
+﻿using NES.Entities.Users.Contracts;
+using NES.Entities.Wallets;
+using NES.Entities.Wallets.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace NES.Entities.Users
 {
-    public class User
+    public class User : IUser
     {
 		private string name;
 		private int age;
-		private decimal cash;
+		private IWallet wallet;
 
 		public string Name
 		{
@@ -33,21 +35,20 @@ namespace NES.Entities.Users
 			}
 		}
 
-		public decimal Cash
+		public IWallet Wallet
 		{
-			get => Cash;
+			get => wallet;
 			set
 			{
-				if (value < 1) throw new ArgumentOutOfRangeException("You are broke!");
-				cash = value;
+				wallet = value ?? throw new ArgumentNullException("Wallet cannot be null");
 			}
 		}
 
 		public User(string name, int age, decimal cash)
 		{
+			Wallet = new Wallet(cash);
 			Name = name;
 			Age = age;
-			Cash = cash;
 		}
 	}
 }

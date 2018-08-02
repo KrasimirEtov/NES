@@ -27,6 +27,7 @@ namespace NES.Core.Engine
 		{
 			this.broker = new Broker();
             this.consoleMenager = new IOConsole();
+			this.user = new User("krasi", 20, 2000);
 		}
 
 		public static Engine Instance
