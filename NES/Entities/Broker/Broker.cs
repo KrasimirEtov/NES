@@ -22,8 +22,8 @@ namespace NES.Entities.Broker
 
         public void BuyBTC(decimal amount, IUser user)
         {
-            //decimal price = market.btc.parice
-            decimal price = 10;
+            decimal price = market.AssetPrice("Bitcoin");
+
             if (user.Wallet.Cash >= price * amount)
             {
                 IAsset bitcoin = factory.CreateBitcoin(price, amount);

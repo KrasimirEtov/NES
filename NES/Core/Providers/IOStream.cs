@@ -10,7 +10,7 @@ namespace NES.Core.Providers
     {
         public static IEnumerable<string> ReadLine(string filename)
         {
-            using (StreamReader sr = new StreamReader($"../../{filename}"))
+            using (StreamReader sr = new StreamReader($"../../../{filename}"))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)
