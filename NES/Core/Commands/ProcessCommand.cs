@@ -24,6 +24,7 @@ namespace NES.Core.Commands
                     broker.BuyETH(command.Amount, user);
                     break;
                 case "BuyLTC":
+                    broker.BuyLitecoin(command.Amount, user);
                     break;
                 case "BuyGLD":
                     broker.BuyGold(command.Amount, user);
@@ -31,18 +32,23 @@ namespace NES.Core.Commands
                 case "BuySLR":
                     broker.BuySilver(command.Amount, user);
                     break;
-                case "BuyFacebook":
+                case "BuyPT":
+                    broker.BuyPlatinum(command.Amount, user);
+                    break;
+                case "BuyFB":
                     broker.BuyFacebookStock(command.Amount, user);
                     break;
-                case "BuyGoogle":
+                case "BuyGOOGL":
                     broker.BuyGoogleStock(command.Amount, user);
+                    break;
+                case "BuyNFLX":
+                    broker.BuyNetflixStock(command.Amount, user);
                     break;
                 case "Register":
                     break;
                 case "Login":
                     break;
                 case "EndDay":
-                    broker.EndDayTraiding();
                     break;
                 case "Exit":
                     break;
