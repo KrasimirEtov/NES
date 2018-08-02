@@ -5,6 +5,7 @@ using NES.Entities.Users.Contracts;
 using System.Collections.Generic;
 using System.Text;
 using NES.Entities.Assets.Entities;
+using NES.Entities.Users;
 
 namespace NES.Core.Engine
 {
@@ -65,5 +66,10 @@ namespace NES.Core.Engine
         {
             return new Platinum(price, amount);
         }
+
+		public IUser CreateUser(string name, int age, decimal cash)
+		{
+			return new User(name, age, cash); // need to do login logic
+		}
     }
 }

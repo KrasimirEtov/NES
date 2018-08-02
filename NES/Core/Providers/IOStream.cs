@@ -8,9 +8,9 @@ namespace NES.Core.Providers
 {
     static public class IOStream
     {
-        public static IEnumerable<string> ReadLine(string filename)
+        public static IEnumerable<string> ReadLine(string fileName)
         {
-            using (StreamReader sr = new StreamReader($"../../../{filename}"))
+            using (StreamReader sr = new StreamReader($"../../../{fileName}.txt"))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)
@@ -20,12 +20,12 @@ namespace NES.Core.Providers
             }
         }
         
-        public static void WriteLine(string message, string filename)
+        public static void WriteLine(string message, string fileName)
         {
-            using (StreamWriter sr = new StreamWriter($"../../{filename}", true))
-            {
-                sr.Write(message);
-            }
+			using (StreamWriter sw = new StreamWriter($"../../../{fileName}.txt", true))
+			{
+				sw.WriteLine(message);
+			}
         }
     }
 }

@@ -33,25 +33,16 @@ namespace NES.Core.Commands
             return new Command(input);
         }
 
-        private void TranslateInput(string input)
-        {
-            string[] chunks = input.Split(SplitCommandSymbol);
-            if (chunks.Length == 1)
-            {
-                if (chunks[0] != "exit" && chunks.Length == 1)
-                {
-                    
-                    //console.writeline("type: 'username' 'password' 'cash'");
-                    //string[] inputdata = console.readline().split(' ');
-                    //var register = new register(inputdata[0]);
-                    //register.writer.writeline(register.registeruser(inputdata[0], inputdata[1], decimal.parse(inputdata[2])));
-                    //register.writer.close();
-                }
-                this.Action = chunks[0];
-                return;
-            }
-                this.Action = chunks[0];
-                this.Amount = decimal.Parse(chunks[1]);
-        }
+		private void TranslateInput(string input)
+		{
+			string[] chunks = input.Split(SplitCommandSymbol);
+			if (chunks.Length == 1)
+			{
+				this.Action = chunks[0];
+				return;
+			}
+			this.Action = chunks[0];
+			this.Amount = decimal.Parse(chunks[1]);
+		}
     }
 }

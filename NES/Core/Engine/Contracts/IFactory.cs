@@ -19,5 +19,8 @@ namespace NES.Core.Engine.Contracts
         IAsset CreateFacebookStock(decimal price, decimal amount);
         IAsset CreateGoogleStock(decimal price, decimal amount);
         IAsset CreateNetflixStock(decimal price, decimal amount);
-    }
+
+		IUser CreateUser(string name, int age, decimal cash);
+
+	}
 }
