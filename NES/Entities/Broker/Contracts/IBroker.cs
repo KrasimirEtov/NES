@@ -9,6 +9,7 @@ namespace NES.Entities.Broker.Contracts
 {
     public interface IBroker
     {
+        void EndDayTraiding();
         void BuyBTC(decimal amount, IUser user);
         void BuyETH(decimal amount, IUser user);
         void BuyGold(decimal amount, IUser user);

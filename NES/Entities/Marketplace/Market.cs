@@ -3,6 +3,7 @@ using NES.Entities.Assets.Contracts;
 using NES.Entities.Marketplace.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace NES.Entities.Marketplace
@@ -35,17 +36,8 @@ namespace NES.Entities.Marketplace
         public void UpdatePrices()
         {
             Random random = new Random();
-            decimal randomNumber = 0;
-            foreach (string key in this.assetPrices.Keys)
-            {
-                this.assetPrices[key] += random.Next(1, 20);
-                randomNumber = random.Next(1, 15);
-                if (this.assetPrices[key] - randomNumber < 0)
-                {
-                    this.assetPrices[key] -= randomNumber;
-                }                
-            }
-
+            this.assetPrices.Values.Select(x => x += random.Next(1, 20)).Select(x => x -= random.Next(1, 15)).Where(x => x < 1).Select(x => x = 1);
+            
             SavePrices(fileWithPrices);
         }
 

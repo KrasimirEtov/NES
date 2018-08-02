@@ -22,6 +22,10 @@ namespace NES.Entities.Broker
             this.market = Market.Instance;
         }
 
+        public void EndDayTraiding()
+        {
+            market.UpdatePrices();
+        }
 
         public void BuyBTC(decimal amount, IUser user)
         {

@@ -24,7 +24,7 @@ namespace NES.Core.Commands
                     broker.BuyETH(command.Amount, user);
                     break;
                 case "BuyLTC":
-                    broker.Buy
+                    break;
                 case "BuyGLD":
                     broker.BuyGold(command.Amount, user);
                     break;
@@ -42,6 +42,7 @@ namespace NES.Core.Commands
                 case "Login":
                     break;
                 case "EndDay":
+                    broker.EndDayTraiding();
                     break;
                 case "Exit":
                     break;
