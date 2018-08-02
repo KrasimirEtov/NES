@@ -32,6 +32,8 @@ namespace NES.Entities.Wallets
         {
             if (portfolio.ContainsKey(asset.Name))
             {
+                decimal price = ((this.portfolio[asset.Name].Price * this.portfolio[asset.Name].Amount) + (asset.Price * asset.Amount)) / (this.portfolio[asset.Name].Amount + asset.Amount);
+                this.portfolio[asset.Name].Price += price;
                 this.portfolio[asset.Name].Amount += asset.Amount;
             }
             else

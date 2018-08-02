@@ -2,6 +2,7 @@
 using NES.Core.Engine.Contracts;
 using NES.Entities.Assets.Contracts;
 using NES.Entities.Broker.Contracts;
+using NES.Entities.Marketplace;
 using NES.Entities.Marketplace.Contracts;
 using NES.Entities.Users.Contracts;
 using System;
@@ -18,6 +19,7 @@ namespace NES.Entities.Broker
         public Broker()
         {
 			this.factory = AssetFactory.Instance;
+            this.market = Market.Instance;
         }
 
         public void BuyBTC(decimal amount, IUser user)
