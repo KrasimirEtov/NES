@@ -9,17 +9,17 @@ namespace NES.Entities.Marketplace
 {
     public class Market : IMarket
     {
+        private const string fileWithPrices = "marketPrices.txt";
+
         private readonly Dictionary<string, ICollection<IAsset>> categories;
         private Dictionary<string, decimal> assetPrices;
         private static readonly IMarket InstanceHolder = new Market();
-        private IOStream stream;
 
         private Market()
         {
             this.assetPrices = new Dictionary<string, decimal>();
             this.categories = new Dictionary<string, ICollection<IAsset>>();
-            this.stream = new IOStream();
-            LoadPrices("marketPrices.txt");
+            LoadPrices(fileWithPrices);
         }
 
         public static IMarket Instance
@@ -34,12 +34,27 @@ namespace NES.Entities.Marketplace
         
         public void UpdatePrices()
         {
-            throw new NotImplementedException();
+            Random random = new Random();
+            decimal randomNumber = 0;
+            foreach (string key in this.assetPrices.Keys)
+            {
+                this.assetPrices[key] += random.Next(1, 20);
+                randomNumber = random.Next(1, 15);
+                if (this.assetPrices[key] - randomNumber < 0)
+                {
+                    this.assetPrices[key] -= randomNumber;
+                }                
+            }
+
+            SavePrices(fileWithPrices);
         }
 
-        public void SavePrices()
+        private void SavePrices(string filename)
         {
-            throw new NotImplementedException();
+            foreach (string key in this.assetPrices.Keys)
+            {
+                IOStream.WriteLine($"{key} {this.assetPrices[key].ToString()}", filename);
+            }
         }
 
         private void LoadPrices(string filename)

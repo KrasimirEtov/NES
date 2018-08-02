@@ -22,6 +22,7 @@ namespace NES.Entities.Broker
             this.market = Market.Instance;
         }
 
+
         public void BuyBTC(decimal amount, IUser user)
         {
             decimal price = market.AssetPrice("Bitcoin");
