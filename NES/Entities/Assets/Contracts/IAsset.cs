@@ -10,6 +10,5 @@ namespace NES.Entities.Assets.Contracts
 		string Id { get; }
 		decimal Price { get; set; }
 		decimal Amount { get; set; }
-
 	}
 }
