@@ -39,5 +39,13 @@ namespace NES.Entities.Wallets
                 this.portfolio[asset.Name] = asset;
             }
         } 
+
+        public void PrintWallet()
+        {
+            foreach (var asset in portfolio)
+            {
+                Console.WriteLine($"{asset.Key} Amount: {asset.Value.Amount} Price per unit: {asset.Value.Price}");
+            }
+        }
     }
 }

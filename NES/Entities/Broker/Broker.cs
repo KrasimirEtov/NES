@@ -41,7 +41,7 @@ namespace NES.Entities.Broker
 
             if (user.Wallet.Cash >= price * amount)
             {
-                IAsset ethereum = factory.CreateBitcoin(price, amount);
+                IAsset ethereum = factory.CreateEtherium(price, amount);
                 user.Wallet.AddAsset(ethereum);
             }
             else

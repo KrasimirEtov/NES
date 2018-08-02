@@ -21,14 +21,19 @@ namespace NES.Core.Commands
                     broker.BuyBTC(command.Amount, user);
                     break;
                 case "BuyETH":
+                    broker.BuyETH(command.Amount, user);
                     break;
                 case "BuyGLD":
+                    broker.BuyGold(command.Amount, user);
                     break;
                 case "BuySLR":
+                    broker.BuySilver(command.Amount, user);
                     break;
-                case "BuyUSD":
+                case "BuyFacebook":
+                    broker.BuyFacebookStock(command.Amount, user);
                     break;
-                case "BuyEUR":
+                case "BuyGoogle":
+                    broker.BuyGoogleStock(command.Amount, user);
                     break;
                 case "Register":
                     break;
@@ -37,6 +42,9 @@ namespace NES.Core.Commands
                 case "EndDay":
                     break;
                 case "Exit":
+                    break;
+                case "PrintWallet":
+                    user.Wallet.PrintWallet();
                     break;
                 default:
                     throw new ArgumentException($"{command.Action} is not a valid command.");
