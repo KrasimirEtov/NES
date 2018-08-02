@@ -31,9 +31,23 @@ namespace NES.Entities.Broker
             }
             else
             {
-                throw new ArgumentException("Don't have cash to buy that much.");
+                throw new ArgumentException("You don't have enough funds for this purchase.");
             }
+        }
 
+        public void BuyETH (decimal amount, IUser user)
+        {
+            //decimal price = market.eth.price;
+            
+            //if (user.Cash >= price * amount)
+            //{
+            //    IAsset asset = factory.CreateBitcoin(price, amount);
+            //    //user.Wallet.AddAsset(asset);
+            //}
+            else
+            {
+                throw new ArgumentException("You don't have enough funds for this purchase.");
+            }
         }
     }
 }

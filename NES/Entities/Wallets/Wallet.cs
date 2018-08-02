@@ -1,8 +1,9 @@
-﻿using NES.Entities.Assets.Contracts;
-using NES.Entities.Wallets.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using NES.Entities.Assets.Contracts;
+using NES.Entities.Wallets.Contracts;
+
 
 namespace NES.Entities.Wallets
 {
@@ -37,6 +38,6 @@ namespace NES.Entities.Wallets
             {
                 this.portfolio[asset.Name] = asset;
             }
-        }
+        } 
     }
 }
