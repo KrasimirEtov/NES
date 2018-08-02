@@ -22,19 +22,9 @@ namespace NES.Core.Engine
             get => InstanceHolder;
         }
 
-        public IAsset CreateApple(decimal price, decimal amount)
-        {
-            throw new NotImplementedException();
-        }
-
         public IAsset CreateBitcoin(decimal price, decimal amount)
         {
             return new Bitcoin(price, amount);
-        }
-
-        public IAsset CreateDollar(decimal price, decimal amount)
-        {
-            return new Dollar(price, amount);
         }
 
         public IAsset CreateEtherium(decimal price, decimal amount)
@@ -42,39 +32,19 @@ namespace NES.Core.Engine
             return new Ethereum(price, amount);
         }
 
-        public IAsset CreateEuro(decimal price, decimal amount)
+        public IAsset CreateFacebookStock(decimal price, decimal amount)
         {
-            return new Euro(price, amount);
+            return new FacebookStock(price, amount);
         }
 
-        public IAsset CreateFacebook(decimal price, decimal amount)
+        public IAsset CreateGoogleStock(decimal price, decimal amount)
         {
-            throw new NotImplementedException();
+            return new GoogleStock(price, amount);
         }
 
         public IAsset CreateGold(decimal price, decimal amount)
         {
             return new Gold(price, amount);
-        }
-
-        public IAsset CreateGoogle(decimal price, decimal amount)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IAsset CreatePetrol(decimal price, decimal amount)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IAsset CreatePound(decimal price, decimal amount)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IAsset CreateRipple(decimal price, decimal amount)
-        {
-            throw new NotImplementedException();
         }
 
         public IAsset CreateSilver(decimal price, decimal amount)
