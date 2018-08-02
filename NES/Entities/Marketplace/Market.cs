@@ -36,7 +36,8 @@ namespace NES.Entities.Marketplace
         public void UpdatePrices()
         {
             Random random = new Random();
-            this.assetPrices.Values.Select(x => x += random.Next(1, 20)).Select(x => x -= random.Next(1, 15)).Where(x => x < 1).Select(x => x = 1);
+            this.assetPrices.Values.Select(x => x += random.Next(1, 20) - random.Next(1, 15));
+            this.assetPrices.Values.Where(x => x < 1).Select(x => x = 1);
             
             SavePrices(fileWithPrices);
         }
