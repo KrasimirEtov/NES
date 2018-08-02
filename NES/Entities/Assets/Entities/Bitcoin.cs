@@ -2,7 +2,7 @@
 
 namespace NES.Entities.Assets.Entities
 {
-    public class Bitcoin : Asset, IAsset
+    public class Bitcoin : Asset
     {
 		public const string name = "Bitcoin";
 		public const string id = "BTC";

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NES.Entities.Assets.Entities
 {
-    class Silver : Asset, IAsset
+    class Silver : Asset
     {
         public const string name = "Silver";
         public const string id = "SLV";

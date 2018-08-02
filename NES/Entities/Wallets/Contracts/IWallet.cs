@@ -9,6 +9,6 @@ namespace NES.Entities.Wallets.Contracts
     {
 		decimal Cash { get; set; }
 		void AddAsset(IAsset asset);
-
+        void PrintWallet();
 	}
 }
