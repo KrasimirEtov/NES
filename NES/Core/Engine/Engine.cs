@@ -5,6 +5,8 @@ using NES.Core.Providers;
 using NES.Entities.Assets.Contracts;
 using NES.Entities.Broker;
 using NES.Entities.Broker.Contracts;
+using NES.Entities.Marketplace;
+using NES.Entities.Marketplace.Contracts;
 using NES.Entities.Users;
 using NES.Entities.Users.Contracts;
 using System;
@@ -22,12 +24,14 @@ namespace NES.Core.Engine
 		private readonly IUser user;
 		private readonly IBroker broker;
         private IOConsole consoleMenager;
+        private IMarket market;
 
-		private Engine()
+        private Engine()
 		{
 			this.broker = new Broker();
             this.consoleMenager = new IOConsole();
-			this.user = new User("krasi", 20, 2000);
+			this.user = new User("krasi", 20, 20000);
+            this.market = Market.Instance;
 		}
 
 		public static Engine Instance
