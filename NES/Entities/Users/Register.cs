@@ -1,13 +1,12 @@
 ﻿using NES.Core.Providers;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
 namespace NES.Entities.Users
 {
 	public class Register
-    {
+	{
 		private const string userFileName = "Users";
 		private string name;
 		private string password;
@@ -51,7 +50,7 @@ namespace NES.Entities.Users
 			Password = password;
 			Cash = cash;
 			if (CheckIfUserExists(name)) throw new ArgumentException("That user is already registered");
-			IOStream.WriteLine(GenerateUserInfo(Name, Password, Cash), userFileName);
+			IOStream.WriteLineAppend(GenerateUserInfo(Name, Password, Cash), userFileName);
 		}
 
 

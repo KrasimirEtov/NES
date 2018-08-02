@@ -1,8 +1,6 @@
 ﻿using NES.Core.Commands;
 using NES.Core.Commands.Contracts;
-using NES.Core.Engine.Contracts;
 using NES.Core.Providers;
-using NES.Entities.Assets.Contracts;
 using NES.Entities.Broker;
 using NES.Entities.Broker.Contracts;
 using NES.Entities.Marketplace;
@@ -10,9 +8,6 @@ using NES.Entities.Marketplace.Contracts;
 using NES.Entities.Users;
 using NES.Entities.Users.Contracts;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 
 namespace NES.Core.Engine
 {
@@ -30,7 +25,7 @@ namespace NES.Core.Engine
 		{
 			this.broker = new Broker();
 			this.consoleManager = new IOConsole();
-			//this.user = new User("krasi", 20, 20000);
+			this.user = new User("krasi", 20, 20000);
 			this.market = Market.Instance;
 		}
 

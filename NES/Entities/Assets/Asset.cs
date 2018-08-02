@@ -1,12 +1,10 @@
 ﻿using NES.Entities.Assets.Contracts;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NES.Entities.Assets
 {
-    public abstract class Asset : IAsset
-    {
+	public abstract class Asset : IAsset
+	{
 		private string name;
 		private string id;
 		private decimal price;
@@ -14,49 +12,38 @@ namespace NES.Entities.Assets
 
 		public string Name
 		{
-			get
-			{
-				return name;
-			}
+			get => name;
 			set
 			{
-				name = value;
+				name = value ?? throw new ArgumentNullException("Name cannot be null!");
 			}
 		}
 
 		public string Id
 		{
-			get
-			{
-				return id;
-
-			}
+			get => id;
 			set
 			{
-				id = value;
+				id = value ?? throw new ArgumentNullException("ID cannot be null!");
 			}
 		}
 
 		public decimal Price
 		{
-			get
-			{
-				return price;
-			}
+			get => price;
 			set
 			{
+				if (value < 0) throw new ArgumentOutOfRangeException("Price cannot be negative!");
 				price = value;
 			}
 		}
 
 		public decimal Amount
 		{
-			get
-			{
-				return amount;
-			}
+			get => amount;
 			set
 			{
+				if (value < 0) throw new ArgumentOutOfRangeException("Amount cannot be negative!");
 				amount = value;
 			}
 		}

@@ -2,13 +2,11 @@
 using NES.Entities.Wallets;
 using NES.Entities.Wallets.Contracts;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NES.Entities.Users
 {
-    public class User : IUser
-    {
+	public class User : IUser
+	{
 		private string name;
 		private int age;
 		private IWallet wallet;
