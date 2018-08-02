@@ -2,6 +2,7 @@
 using NES.Core.Engine.Contracts;
 using NES.Entities.Assets.Contracts;
 using NES.Entities.Broker.Contracts;
+using NES.Entities.Marketplace;
 using NES.Entities.Marketplace.Contracts;
 using NES.Entities.Users.Contracts;
 using System;
@@ -18,12 +19,12 @@ namespace NES.Entities.Broker
         public Broker()
         {
 			this.factory = AssetFactory.Instance;
+            this.market = Market.Instance;
         }
 
         public void BuyBTC(decimal amount, IUser user)
         {
-            //decimal price = market.btc.parice
-            decimal price = 10;
+            decimal price = market.AssetPrice("Bitcoin");
             if (user.Wallet.Cash >= price * amount)
             {
                 IAsset asset = factory.CreateBitcoin(price, amount);
@@ -44,10 +45,10 @@ namespace NES.Entities.Broker
             //    IAsset asset = factory.CreateBitcoin(price, amount);
             //    //user.Wallet.AddAsset(asset);
             //}
-            else
-            {
-                throw new ArgumentException("You don't have enough funds for this purchase.");
-            }
+            //else
+            //{
+            //    throw new ArgumentException("You don't have enough funds for this purchase.");
+            //}
         }
     }
 }
