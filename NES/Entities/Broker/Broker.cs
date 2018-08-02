@@ -112,5 +112,50 @@ namespace NES.Entities.Broker
                 throw new ArgumentException("You don't have enough funds for this purchase.");
             }
         }
+        
+        public void BuyLitecoin(decimal amount, IUser user)
+        {
+            decimal price = 10;
+
+            if (user.Wallet.Cash >= price * amount)
+            {
+                IAsset litecoin = factory.CreateLitecoin(price, amount);
+                user.Wallet.AddAsset(litecoin);
+            }
+            else
+            {
+                throw new ArgumentException("You don't have enough funds for this purchase.");
+            }
+        }
+
+        public void BuyNetflixStock(decimal amount, IUser user)
+        {
+            decimal price = 10;
+
+            if (user.Wallet.Cash >= price * amount)
+            {
+                IAsset netflix = factory.CreateNetflixStock(price, amount);
+                user.Wallet.AddAsset(netflix);
+            }
+            else
+            {
+                throw new ArgumentException("You don't have enough funds for this purchase.");
+            }
+        }
+
+        public void BuyPlatinum(decimal amount, IUser user)
+        {
+            decimal price = 10;
+
+            if (user.Wallet.Cash >= price * amount)
+            {
+                IAsset platinum= factory.CreatePlatinum(price, amount);
+                user.Wallet.AddAsset(platinum);
+            }
+            else
+            {
+                throw new ArgumentException("You don't have enough funds for this purchase.");
+            }
+        }
     }
 }
