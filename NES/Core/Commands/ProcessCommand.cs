@@ -49,6 +49,7 @@ namespace NES.Core.Commands
                 case "Login":
                     break;
                 case "EndDay":
+                    broker.EndDayTraiding();
                     break;
                 case "Exit":
                     break;
