@@ -23,6 +23,8 @@ namespace NES.Core.Commands
                 case "BuyETH":
                     broker.BuyETH(command.Amount, user);
                     break;
+                case "BuyLTC":
+                    broker.Buy
                 case "BuyGLD":
                     broker.BuyGold(command.Amount, user);
                     break;
