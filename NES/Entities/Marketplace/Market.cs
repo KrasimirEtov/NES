@@ -36,18 +36,28 @@ namespace NES.Entities.Marketplace
         public void UpdatePrices()
         {
             Random random = new Random();
-            this.assetPrices.Values.Select(x => x += random.Next(1, 20) - random.Next(1, 15));
-            this.assetPrices.Values.Where(x => x < 1).Select(x => x = 1);
+            for (int i = 0; i < this.assetPrices.Count; i++)
+            {
+                var item = this.assetPrices.ElementAt(i);
+                this.assetPrices[item.Key] += random.Next(1, 20) - random.Next(1, 15);
+                if (item.Value <= 0)
+                {
+                    this.assetPrices[item.Key] = 0.1m;
+                }
+            }
             
             SavePrices(fileWithPrices);
         }
 
         private void SavePrices(string filename)
         {
-            foreach (string key in this.assetPrices.Keys)
+            StringBuilder sb = new StringBuilder();
+            foreach (var asset in this.assetPrices)
             {
-                IOStream.WriteLine($"{key} {this.assetPrices[key].ToString()}", filename);
+                sb.AppendLine($"{asset.Key} {asset.Value}");
             }
+
+            IOStream.OverrideLine(sb.ToString(), filename);
         }
 
         private void LoadPrices(string filename)

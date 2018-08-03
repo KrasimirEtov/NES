@@ -22,7 +22,15 @@ namespace NES.Core.Providers
         
         public static void WriteLine(string message, string filename)
         {
-            using (StreamWriter sr = new StreamWriter($"../../{filename}", true))
+            using (StreamWriter sr = new StreamWriter($"../../../{filename}", true))
+            {
+                sr.WriteLine(message);
+            }
+        }
+
+        public static void OverrideLine(string message, string filename)
+        {
+            using (StreamWriter sr = new StreamWriter($"../../../{filename}", false))
             {
                 sr.Write(message);
             }
