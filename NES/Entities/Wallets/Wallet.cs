@@ -50,6 +50,10 @@ namespace NES.Entities.Wallets
             {
                 throw new ArgumentException($"You can't sell {asset.Amount} assets of {asset.Name} because you have {this.portfolio[asset.Name].Amount}.");
             }
+            else if (this.portfolio[asset.Name].Amount - asset.Amount == 0)
+            {
+                this.portfolio.Remove(asset.Name);
+            }
             else
             {
                 this.portfolio[asset.Name].Amount -= asset.Amount;
@@ -58,6 +62,7 @@ namespace NES.Entities.Wallets
 
         public void PrintWallet()
 		{
+            Console.WriteLine($"Cash: ${this.Cash}");
 			foreach (var asset in portfolio)
 			{
 				Console.WriteLine($"{asset.Key} Amount: {asset.Value.Amount} Price per unit: {asset.Value.Price}");

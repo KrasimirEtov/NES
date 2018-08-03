@@ -33,7 +33,9 @@ namespace NES.Entities.Broker
 			{
 				IAsset asset = factory.CreateAsset(assetName, price, amount);
 				user.Wallet.AddAsset(asset);
-			}
+                user.Wallet.Cash -= price * amount;
+
+            }
 			else
 			{
 				throw new ArgumentException("You don't have enough funds for this purchase.");
