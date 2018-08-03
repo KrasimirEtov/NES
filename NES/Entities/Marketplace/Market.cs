@@ -57,7 +57,7 @@ namespace NES.Entities.Marketplace
                 sb.AppendLine($"{asset.Key} {asset.Value}");
             }
 
-            IOStream.WriteLine(sb.ToString(), filename);
+            IOStream.WriteLine(sb.ToString().Trim(), filename);
         }
 
         private void LoadPrices(string filename)

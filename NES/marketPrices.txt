@@ -1,10 +1,9 @@
-Bitcoin 6719
-Ethereum 1856
-FacebookStock 5350
-Gold 8489
-GoogleStock 2681
-LiteCoin 1761
-NetflixStock 4345
-Platinum 8445
-Silver 6744
-
+Bitcoin 6713
+Ethereum 1850
+FacebookStock 5343
+Gold 8510
+GoogleStock 2690
+LiteCoin 1754
+NetflixStock 4344
+Platinum 8451
+Silver 6761
