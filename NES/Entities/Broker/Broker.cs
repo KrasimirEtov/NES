@@ -1,11 +1,11 @@
 ﻿using NES.Core.Engine;
+using System;
 using NES.Core.Engine.Contracts;
 using NES.Entities.Assets.Contracts;
 using NES.Entities.Broker.Contracts;
 using NES.Entities.Marketplace;
 using NES.Entities.Marketplace.Contracts;
 using NES.Entities.Users.Contracts;
-using System;
 
 namespace NES.Entities.Broker
 {

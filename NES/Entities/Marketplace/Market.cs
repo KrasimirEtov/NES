@@ -68,6 +68,5 @@ namespace NES.Entities.Marketplace
                 this.assetPrices[lineArr[0]] = decimal.Parse(lineArr[1]);
             }
         }
-
     }
 }
