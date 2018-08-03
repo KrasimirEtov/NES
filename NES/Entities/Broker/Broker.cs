@@ -41,10 +41,10 @@ namespace NES.Entities.Broker
 		}
 
 		public void BuyETH(decimal amount, IUser user)
-		{
-			decimal price = 10;
+        {
+            decimal price = market.AssetPrice("Ethereum");
 
-			if (user.Wallet.Cash >= price * amount)
+            if (user.Wallet.Cash >= price * amount)
 			{
 				IAsset ethereum = factory.CreateEtherium(price, amount);
 				user.Wallet.AddAsset(ethereum);
@@ -56,10 +56,10 @@ namespace NES.Entities.Broker
 		}
 
 		public void BuyGold(decimal amount, IUser user)
-		{
-			decimal price = 10;
+        {
+            decimal price = market.AssetPrice("Gold");
 
-			if (user.Wallet.Cash >= price * amount)
+            if (user.Wallet.Cash >= price * amount)
 			{
 				IAsset gold = factory.CreateGold(price, amount);
 				user.Wallet.AddAsset(gold);
@@ -71,10 +71,10 @@ namespace NES.Entities.Broker
 		}
 
 		public void BuySilver(decimal amount, IUser user)
-		{
-			decimal price = 10;
+        {
+            decimal price = market.AssetPrice("Silver");
 
-			if (user.Wallet.Cash >= price * amount)
+            if (user.Wallet.Cash >= price * amount)
 			{
 				IAsset silver = factory.CreateSilver(price, amount);
 				user.Wallet.AddAsset(silver);
@@ -86,10 +86,10 @@ namespace NES.Entities.Broker
 		}
 
 		public void BuyFacebookStock(decimal amount, IUser user)
-		{
-			decimal price = 10;
+        {
+            decimal price = market.AssetPrice("FacebookStock");
 
-			if (user.Wallet.Cash >= price * amount)
+            if (user.Wallet.Cash >= price * amount)
 			{
 				IAsset facebookStock = factory.CreateFacebookStock(price, amount);
 				user.Wallet.AddAsset(facebookStock);
@@ -101,10 +101,10 @@ namespace NES.Entities.Broker
 		}
 
 		public void BuyGoogleStock(decimal amount, IUser user)
-		{
-			decimal price = 10;
+        {
+            decimal price = market.AssetPrice("GoogleStock");
 
-			if (user.Wallet.Cash >= price * amount)
+            if (user.Wallet.Cash >= price * amount)
 			{
 				IAsset googleStock = factory.CreateGoogleStock(price, amount);
 				user.Wallet.AddAsset(googleStock);
@@ -116,10 +116,10 @@ namespace NES.Entities.Broker
 		}
 
 		public void BuyLitecoin(decimal amount, IUser user)
-		{
-			decimal price = 10;
+        {
+            decimal price = market.AssetPrice("Litecoin");
 
-			if (user.Wallet.Cash >= price * amount)
+            if (user.Wallet.Cash >= price * amount)
 			{
 				IAsset litecoin = factory.CreateLitecoin(price, amount);
 				user.Wallet.AddAsset(litecoin);
@@ -131,10 +131,10 @@ namespace NES.Entities.Broker
 		}
 
 		public void BuyNetflixStock(decimal amount, IUser user)
-		{
-			decimal price = 10;
+        {
+            decimal price = market.AssetPrice("NetflixStock");
 
-			if (user.Wallet.Cash >= price * amount)
+            if (user.Wallet.Cash >= price * amount)
 			{
 				IAsset netflix = factory.CreateNetflixStock(price, amount);
 				user.Wallet.AddAsset(netflix);
@@ -146,10 +146,10 @@ namespace NES.Entities.Broker
 		}
 
 		public void BuyPlatinum(decimal amount, IUser user)
-		{
-			decimal price = 10;
+        {
+            decimal price = market.AssetPrice("Platinum");
 
-			if (user.Wallet.Cash >= price * amount)
+            if (user.Wallet.Cash >= price * amount)
 			{
 				IAsset platinum = factory.CreatePlatinum(price, amount);
 				user.Wallet.AddAsset(platinum);
