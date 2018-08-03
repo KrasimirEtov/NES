@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using NES.Core.Providers;
+using System;
 using System.IO;
 using System.Text;
 
@@ -7,17 +7,15 @@ namespace NES.Entities.Users
 {
 	public class Register
 	{
+		private const string userFileName = "Users";
 		private string name;
 		private string password;
 		private decimal cash;
-		private StreamWriter writer;
-		private StreamReader reader;
 
-		// this can be in abstract class - but not sure if it's gonna be used
 		public string Name
 		{
 			get => name;
-			private set
+			set
 			{
 				if (value == null) throw new ArgumentNullException("Name cannot be null!");
 				if (value.Length < 1 || value.Length > 50) throw new ArgumentOutOfRangeException("Name length cannot be less than 1 or more than 50 characters!");
@@ -38,7 +36,7 @@ namespace NES.Entities.Users
 
 		public decimal Cash
 		{
-			get => Cash;
+			get => cash;
 			set
 			{
 				if (value < 1) throw new ArgumentOutOfRangeException("You are broke!");
@@ -46,36 +44,17 @@ namespace NES.Entities.Users
 			}
 		}
 
-		public StreamWriter Writer
+		public Register(string name, string password, decimal cash)
 		{
-			get => writer;
-			private set
-			{
-				writer = value ?? throw new ArgumentNullException("StreamWriter cannot be null!");
-			}
-		}
-
-		public StreamReader Reader
-		{
-			get => reader;
-			private set
-			{
-				reader = value ?? throw new ArgumentNullException("StreamReader cannot be null!");
-			}
-		}
-
-		public Register(string name)
-		{
-			Writer = new StreamWriter("D:\\Programming\\Projects\\C#\\Telerik\\Teamworks\\users.txt", true);
-			Writer.Close();
-			Reader = new StreamReader("D:\\Programming\\Projects\\C#\\Telerik\\Teamworks\\users.txt");
-			if (CheckIfUserExists(name)) throw new ArgumentException("User already exist in the database :D");
-			Reader.Close();
-			Writer = new StreamWriter("D:\\Programming\\Projects\\C#\\Telerik\\Teamworks\\users.txt", true);
+			Name = name;
+			Password = password;
+			Cash = cash;
+			if (CheckIfUserExists(name)) throw new ArgumentException("That user is already registered");
+			IOStream.WriteLineAppend(GenerateUserInfo(Name, Password, Cash), userFileName);
 		}
 
 
-		public string RegisterUser(string name, string password, decimal cash)
+		public string GenerateUserInfo(string name, string password, decimal cash)
 		{
 			StringBuilder temp = new StringBuilder();
 			temp.Append(name);
@@ -88,11 +67,10 @@ namespace NES.Entities.Users
 
 		public bool CheckIfUserExists(string name)
 		{
-			string line;
-			if (!File.Exists("D:\\Programming\\Projects\\C#\\Telerik\\Teamworks\\users.txt")) throw new ArgumentException("No such file");
-			while ((line = Reader.ReadLine()) != null)
+			if (!File.Exists($"../../../{userFileName}.txt")) return false;
+			foreach (var read in IOStream.ReadLine(userFileName))
 			{
-				var nameFromFile = line.Substring(0, line.IndexOf('|'));
+				var nameFromFile = read.Substring(0, read.IndexOf('|'));
 				if (nameFromFile.Equals(name)) return true; // there is already such a name in the file
 			}
 			return false;
