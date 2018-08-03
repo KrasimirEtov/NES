@@ -65,7 +65,7 @@ namespace NES.Entities.Marketplace
             foreach (string line in IOStream.ReadLine(filename))
             {
                 string[] lineArr = line.Split();
-                this.assetPrices[lineArr[0]] = decimal.Parse(lineArr[1]);
+                this.assetPrices[lineArr[0].ToLower()] = decimal.Parse(lineArr[1]);
             }
         }
     }

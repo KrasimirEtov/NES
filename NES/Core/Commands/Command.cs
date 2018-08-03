@@ -8,8 +8,9 @@ namespace NES.Core.Commands
 		private const char SplitCommandSymbol = ' ';
 
 		private string action;
+        private string asset;
 
-		private Command(string input)
+        private Command(string input)
 		{
 			this.TranslateInput(input);
 		}
@@ -23,7 +24,16 @@ namespace NES.Core.Commands
 			}
 		}
 
-		public decimal Amount { get; private set; }
+        public string Asset
+        {
+            get => this.asset;
+            private set
+            {
+                this.asset = value ?? throw new ArgumentNullException("Command cannot be null!");
+            }
+        }
+
+        public decimal Amount { get; private set; }
 
 		public static ICommand Parse(string input)
 		{
@@ -32,14 +42,15 @@ namespace NES.Core.Commands
 
 		private void TranslateInput(string input)
 		{
-			string[] chunks = input.Split(SplitCommandSymbol);
+			string[] chunks = input.ToLower().Split(SplitCommandSymbol);
 			if (chunks.Length == 1)
 			{
 				this.Action = chunks[0];
 				return;
 			}
 			this.Action = chunks[0];
-			this.Amount = decimal.Parse(chunks[1]);
+            this.Asset = chunks[1];
+            this.Amount = decimal.Parse(chunks[2]);
 		}
 	}
 }

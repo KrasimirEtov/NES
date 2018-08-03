@@ -3,6 +3,9 @@ using NES.Entities.Assets.Contracts;
 using NES.Entities.Users.Contracts;
 using NES.Entities.Assets.Entities;
 using NES.Entities.Users;
+using System;
+using NES.Entities.Assets;
+using System.Linq;
 
 namespace NES.Core.Engine
 {
@@ -20,49 +23,12 @@ namespace NES.Core.Engine
 			get => InstanceHolder;
 		}
 
-		public IAsset CreateBitcoin(decimal price, decimal amount)
+		public IAsset CreateAsset(string type, decimal price, decimal amount)
 		{
-			return new Bitcoin(price, amount);
+            type = type.First().ToString().ToUpper() + type.Substring(1);
+            return (Asset)Activator.CreateInstance(Type.GetType($"NES.Entities.Assets.Entities.{type}"), price, amount);
 		}
 
-		public IAsset CreateEtherium(decimal price, decimal amount)
-		{
-			return new Ethereum(price, amount);
-		}
-		public IAsset CreateLitecoin(decimal price, decimal amount)
-		{
-			return new Litecoin(price, amount);
-		}
-
-		public IAsset CreateFacebookStock(decimal price, decimal amount)
-		{
-			return new FacebookStock(price, amount);
-		}
-
-		public IAsset CreateGoogleStock(decimal price, decimal amount)
-		{
-			return new GoogleStock(price, amount);
-		}
-
-		public IAsset CreateNetflixStock(decimal price, decimal amount)
-		{
-			return new NetflixStock(price, amount);
-		}
-
-		public IAsset CreateGold(decimal price, decimal amount)
-		{
-			return new Gold(price, amount);
-		}
-
-		public IAsset CreateSilver(decimal price, decimal amount)
-		{
-			return new Silver(price, amount);
-		}
-
-		public IAsset CreatePlatinum(decimal price, decimal amount)
-		{
-			return new Platinum(price, amount);
-		}
 
 		public IUser CreateUser(string name, int age, decimal cash)
 		{

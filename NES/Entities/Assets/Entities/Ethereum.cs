@@ -1,6 +1,6 @@
 ﻿namespace NES.Entities.Assets.Entities
 {
-    class Ethereum : Asset
+    public class Ethereum : Asset
     {
         public const string name = "Ethereum";
         public const string id = "ETH";

@@ -1,10 +1,10 @@
 ﻿namespace NES.Entities.Assets.Entities
 {
-    class FacebookStock : Asset
+    public class Facebookstock : Asset
     {
-        public const string name = "FacebookStock";
+        public const string name = "Facebook";
         public const string id = "FB";
-        public FacebookStock(decimal price, decimal amount) : base(name, id, price, amount)
+        public Facebookstock(decimal price, decimal amount) : base(name, id, price, amount)
         {
 
         }

@@ -40,7 +40,23 @@ namespace NES.Entities.Wallets
 			}
 		}
 
-		public void PrintWallet()
+        public void RemoveAsset(IAsset asset)
+        {
+            if (!portfolio.ContainsKey(asset.Name))
+            {
+                throw new ArgumentException("You can't cell what you don't have.");
+            }
+            else if (this.portfolio[asset.Name].Amount - asset.Amount < 0)
+            {
+                throw new ArgumentException($"You can't sell {asset.Amount} assets of {asset.Name} because you have {this.portfolio[asset.Name].Amount}.");
+            }
+            else
+            {
+                this.portfolio[asset.Name].Amount -= asset.Amount;
+            }
+        }
+
+        public void PrintWallet()
 		{
 			foreach (var asset in portfolio)
 			{

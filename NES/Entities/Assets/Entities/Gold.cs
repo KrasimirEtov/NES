@@ -1,6 +1,6 @@
 ﻿namespace NES.Entities.Assets.Entities
 {
-    class Gold : Asset
+    public class Gold : Asset
     {
         public const string name = "Gold";
         public const string id = "GLD";

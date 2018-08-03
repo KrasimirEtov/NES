@@ -25,14 +25,14 @@ namespace NES.Entities.Broker
 			market.UpdatePrices();
 		}
 
-		public void BuyBTC(decimal amount, IUser user)
+		public void Buy(string assetName, decimal amount, IUser user)
 		{
-			decimal price = market.AssetPrice("Bitcoin");
+			decimal price = market.AssetPrice(assetName);
 
 			if (user.Wallet.Cash >= price * amount)
 			{
-				IAsset bitcoin = factory.CreateBitcoin(price, amount);
-				user.Wallet.AddAsset(bitcoin);
+				IAsset asset = factory.CreateAsset(assetName, price, amount);
+				user.Wallet.AddAsset(asset);
 			}
 			else
 			{
@@ -40,124 +40,15 @@ namespace NES.Entities.Broker
 			}
 		}
 
-		public void BuyETH(decimal amount, IUser user)
+        public void Sell(string assetName, decimal amount, IUser user)
         {
-            decimal price = market.AssetPrice("Ethereum");
+            decimal price = market.AssetPrice(assetName);
 
-            if (user.Wallet.Cash >= price * amount)
-			{
-				IAsset ethereum = factory.CreateEtherium(price, amount);
-				user.Wallet.AddAsset(ethereum);
-			}
-			else
-			{
-				throw new ArgumentException("You don't have enough funds for this purchase.");
-			}
-		}
+            IAsset asset = factory.CreateAsset(assetName, price, amount);
+            user.Wallet.RemoveAsset(asset);
 
-		public void BuyGold(decimal amount, IUser user)
-        {
-            decimal price = market.AssetPrice("Gold");
+            user.Wallet.Cash += price * amount;
 
-            if (user.Wallet.Cash >= price * amount)
-			{
-				IAsset gold = factory.CreateGold(price, amount);
-				user.Wallet.AddAsset(gold);
-			}
-			else
-			{
-				throw new ArgumentException("You don't have enough funds for this purchase.");
-			}
-		}
-
-		public void BuySilver(decimal amount, IUser user)
-        {
-            decimal price = market.AssetPrice("Silver");
-
-            if (user.Wallet.Cash >= price * amount)
-			{
-				IAsset silver = factory.CreateSilver(price, amount);
-				user.Wallet.AddAsset(silver);
-			}
-			else
-			{
-				throw new ArgumentException("You don't have enough funds for this purchase.");
-			}
-		}
-
-		public void BuyFacebookStock(decimal amount, IUser user)
-        {
-            decimal price = market.AssetPrice("FacebookStock");
-
-            if (user.Wallet.Cash >= price * amount)
-			{
-				IAsset facebookStock = factory.CreateFacebookStock(price, amount);
-				user.Wallet.AddAsset(facebookStock);
-			}
-			else
-			{
-				throw new ArgumentException("You don't have enough funds for this purchase.");
-			}
-		}
-
-		public void BuyGoogleStock(decimal amount, IUser user)
-        {
-            decimal price = market.AssetPrice("GoogleStock");
-
-            if (user.Wallet.Cash >= price * amount)
-			{
-				IAsset googleStock = factory.CreateGoogleStock(price, amount);
-				user.Wallet.AddAsset(googleStock);
-			}
-			else
-			{
-				throw new ArgumentException("You don't have enough funds for this purchase.");
-			}
-		}
-
-		public void BuyLitecoin(decimal amount, IUser user)
-        {
-            decimal price = market.AssetPrice("Litecoin");
-
-            if (user.Wallet.Cash >= price * amount)
-			{
-				IAsset litecoin = factory.CreateLitecoin(price, amount);
-				user.Wallet.AddAsset(litecoin);
-			}
-			else
-			{
-				throw new ArgumentException("You don't have enough funds for this purchase.");
-			}
-		}
-
-		public void BuyNetflixStock(decimal amount, IUser user)
-        {
-            decimal price = market.AssetPrice("NetflixStock");
-
-            if (user.Wallet.Cash >= price * amount)
-			{
-				IAsset netflix = factory.CreateNetflixStock(price, amount);
-				user.Wallet.AddAsset(netflix);
-			}
-			else
-			{
-				throw new ArgumentException("You don't have enough funds for this purchase.");
-			}
-		}
-
-		public void BuyPlatinum(decimal amount, IUser user)
-        {
-            decimal price = market.AssetPrice("Platinum");
-
-            if (user.Wallet.Cash >= price * amount)
-			{
-				IAsset platinum = factory.CreatePlatinum(price, amount);
-				user.Wallet.AddAsset(platinum);
-			}
-			else
-			{
-				throw new ArgumentException("You don't have enough funds for this purchase.");
-			}
-		}
-	}
+        }
+    }
 }
