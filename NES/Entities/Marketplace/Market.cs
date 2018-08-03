@@ -10,7 +10,7 @@ namespace NES.Entities.Marketplace
 {
     public class Market : IMarket
     {
-        private const string fileWithPrices = "marketPrices.txt";
+        private const string fileWithPrices = "marketPrices";
 
         private readonly Dictionary<string, ICollection<IAsset>> categories;
         private Dictionary<string, decimal> assetPrices;
@@ -57,7 +57,7 @@ namespace NES.Entities.Marketplace
                 sb.AppendLine($"{asset.Key} {asset.Value}");
             }
 
-            IOStream.OverrideLine(sb.ToString(), filename);
+            IOStream.WriteLine(sb.ToString(), filename);
         }
 
         private void LoadPrices(string filename)
