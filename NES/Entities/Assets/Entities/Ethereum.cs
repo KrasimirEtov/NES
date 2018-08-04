@@ -1,6 +1,9 @@
-﻿namespace NES.Entities.Assets.Entities
+﻿using System;
+
+namespace NES.Entities.Assets.Entities
 {
-    public class Ethereum : Asset
+	[Serializable]
+	public class Ethereum : Asset
     {
         public const string name = "Ethereum";
         public const string id = "ETH";

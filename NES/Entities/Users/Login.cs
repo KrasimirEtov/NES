@@ -1,38 +1,39 @@
 ﻿using NES.Core.Providers;
 using NES.Entities.Users.Abstracts;
 using NES.Entities.Users.Contracts;
-using NES.Entities.Wallets;
 using NES.Entities.Wallets.Contracts;
 using System;
 using System.IO;
-using System.Linq;
 
 namespace NES.Entities.Users
 {
 	public class Login : Authentication
     {
-		//private IWallet wallet;
+		private IWallet wallet;
 
-		//public IWallet Wallet
-		//{
-		//	get => wallet;
-		//	set
-		//	{
-		//		wallet = value ?? throw new ArgumentNullException("Wallet cannot be null");
-		//	}
-		//}
+		public IWallet Wallet
+		{
+			get => wallet;
+			set
+			{
+				wallet = value ?? throw new ArgumentNullException("Wallet cannot be null");
+			}
+		}
 
-		public IUser CreateUser()
+		public Login()
 		{
 			EnterUserInfo();
 			if (!CheckIfUserExists(Name, Password)) throw new ArgumentException("That user is not registered!");
-			FillWallet(); // we need to read dictionary with objects, now it reads only cash
-			return new User(Name, Cash);
+		}
+
+		public IUser CreateUser()
+		{
+			return new User(Name, IOStream.BinaryRead($"{Name}{walletName}"));
 		}
 
 		protected override void EnterUserInfo()
 		{
-			Console.WriteLine("Welcome\nType: 'username' 'password' seperated by whitespace");
+			Console.WriteLine("Hello!\nType:'username' 'password' seperated by whitespace in order to login");
 			string[] input = Console.ReadLine().Split(' ');
 			Name = input[0];
 			Password = input[1];
@@ -49,12 +50,5 @@ namespace NES.Entities.Users
 			return false;
 		}
 
-		private void FillWallet()
-		{
-			foreach (var read in IOStream.ReadLine($"{Name}{walletName}"))
-			{
-				Cash = decimal.Parse(read);
-			}
-		}
 	}
 }

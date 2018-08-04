@@ -1,5 +1,4 @@
 ﻿using NES.Entities.Users.Contracts;
-using NES.Entities.Wallets;
 using NES.Entities.Wallets.Contracts;
 using System;
 
@@ -30,10 +29,10 @@ namespace NES.Entities.Users
 			}
 		}
 
-		public User(string name, decimal cash)
+		public User(string name, IWallet wallet)
 		{
 			Name = name;
-			Wallet = new Wallet(cash);
+			Wallet = wallet;
 		}
 	}
 }

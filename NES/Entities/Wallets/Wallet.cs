@@ -5,6 +5,7 @@ using NES.Entities.Wallets.Contracts;
 
 namespace NES.Entities.Wallets
 {
+	[Serializable]
 	public class Wallet : IWallet
 	{
 		private Dictionary<string, IAsset> portfolio;

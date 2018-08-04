@@ -1,5 +1,6 @@
 ﻿using System;
 using NES.Core.Commands.Contracts;
+using NES.Core.Providers;
 using NES.Entities.Broker.Contracts;
 using NES.Entities.Users;
 using NES.Entities.Users.Contracts;
@@ -24,9 +25,16 @@ namespace NES.Core.Commands
 						broker.EndDayTraiding();
 						break;
 					case "exit":
+						IOStream.BinaryWrite(user.Wallet, $"{user.Name}Wallet");
+						Console.WriteLine("Goodbye!");
 						break;
 					case "printwallet":
 						user.Wallet.PrintWallet();
+						break;
+					case "logout":
+						IOStream.BinaryWrite(user.Wallet, $"{user.Name}Wallet");
+						user = null;
+						Console.WriteLine("Successfully logged out!");
 						break;
 					default:
 						throw new ArgumentException($"{command.Action} is not a valid command.");
@@ -43,6 +51,9 @@ namespace NES.Core.Commands
 					case "login":
 						var login = new Login(); // I'll ask for a better disposal
 						user = login.CreateUser(); // user constructor should contain a wallet
+						break;
+					case "exit":
+						Console.WriteLine("Goodbye!");
 						break;
 					default:
 						throw new ArgumentException($"{command.Action} is not a valid command.");

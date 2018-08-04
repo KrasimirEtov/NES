@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using NES.Entities.Wallets.Contracts;
+using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace NES.Core.Providers
 {
@@ -30,6 +32,24 @@ namespace NES.Core.Providers
 			using (StreamWriter sw = new StreamWriter($"../../../Files/{fileName}.txt", true))
 			{
 				sw.WriteLine(message);
+			}
+		}
+
+		public static void BinaryWrite(IWallet wallet, string fileName)
+		{
+			BinaryFormatter formatter = new BinaryFormatter();
+			using (FileStream writerFileStream = new FileStream($"../../../Files/{fileName}.bin", FileMode.Create, FileAccess.Write))
+			{
+				formatter.Serialize(writerFileStream, wallet);
+			}
+		}
+
+		public static IWallet BinaryRead(string fileName)
+		{
+			BinaryFormatter formatter = new BinaryFormatter();
+			using (FileStream readerFileStream = new FileStream($"../../../Files/{fileName}.bin", FileMode.Open, FileAccess.Read))
+			{
+				return (IWallet)formatter.Deserialize(readerFileStream);
 			}
 		}
 	}

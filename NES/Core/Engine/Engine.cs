@@ -41,13 +41,14 @@ namespace NES.Core.Engine
 		private void ReadCommand()
 		{
 			ICommand command;
-			string input;
-			while ((input = this.consoleManager.ReadLine()) != exitCommand)
+			while (true)
 			{
 				try
 				{
-					command = Command.Parse(input);
+					// welcome messages need to be here
+					command = Command.Parse(this.consoleManager.ReadLine());
 					ProcessCommand.Process(command, ref this.user, this.broker);
+					if (command.Action == "exit") break;
 				}
 				catch (Exception ex)
 				{

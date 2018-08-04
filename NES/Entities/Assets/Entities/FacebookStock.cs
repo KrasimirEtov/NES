@@ -1,6 +1,9 @@
-﻿namespace NES.Entities.Assets.Entities
+﻿using System;
+
+namespace NES.Entities.Assets.Entities
 {
-    public class Facebookstock : Asset
+	[Serializable]
+	public class Facebookstock : Asset
     {
         public const string name = "Facebook";
         public const string id = "FB";

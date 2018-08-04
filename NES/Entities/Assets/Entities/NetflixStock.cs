@@ -1,6 +1,9 @@
-﻿namespace NES.Entities.Assets.Entities
+﻿using System;
+
+namespace NES.Entities.Assets.Entities
 {
-    public class Netflixstock : Asset
+	[Serializable]
+	public class Netflixstock : Asset
     {
         public const string name = "Netflix";
         public const string id = "NFLX";

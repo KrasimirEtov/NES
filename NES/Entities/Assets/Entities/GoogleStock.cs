@@ -1,6 +1,9 @@
-﻿namespace NES.Entities.Assets.Entities
+﻿using System;
+
+namespace NES.Entities.Assets.Entities
 {
-    public class Googlestock : Asset
+	[Serializable]
+	public class Googlestock : Asset
     {
         public const string name = "Google";
         public const string id = "GOOGL";

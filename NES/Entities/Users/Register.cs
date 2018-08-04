@@ -1,5 +1,6 @@
 ﻿using NES.Core.Providers;
 using NES.Entities.Users.Abstracts;
+using NES.Entities.Wallets;
 using System;
 using System.IO;
 using System.Text;
@@ -13,12 +14,12 @@ namespace NES.Entities.Users
 			EnterUserInfo();
 			if (CheckIfUserExists(Name)) throw new ArgumentException("That user is already registered");
 			IOStream.WriteLineAppend(GenerateUserInfo(Name, Password, Cash), usersFileName); // saves info to Users.txt
-			IOStream.WriteLine(Cash.ToString(), $"{Name}{walletName}"); // saves a new wallet in a file for the current user
+			IOStream.BinaryWrite(new Wallet(Cash), $"{Name}{walletName}"); // saves a new wallet in a file for the current user
 		}
 
 		protected override void EnterUserInfo()
 		{
-			Console.WriteLine("Welcome\nType: 'username' 'password' 'cash' seperated by whitespace");
+			Console.WriteLine("Hello!\nType: 'username' 'password' 'cash' seperated by whitespace in order to register");
 			string[] input = Console.ReadLine().Split(' ');
 			Name = input[0];
 			Password = input[1];

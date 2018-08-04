@@ -3,6 +3,7 @@ using System;
 
 namespace NES.Entities.Assets
 {
+	[Serializable]
 	public abstract class Asset : IAsset
 	{
 		private string name;

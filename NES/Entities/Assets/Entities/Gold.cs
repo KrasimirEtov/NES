@@ -1,6 +1,9 @@
-﻿namespace NES.Entities.Assets.Entities
+﻿using System;
+
+namespace NES.Entities.Assets.Entities
 {
-    public class Gold : Asset
+	[Serializable]
+	public class Gold : Asset
     {
         public const string name = "Gold";
         public const string id = "GLD";

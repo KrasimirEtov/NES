@@ -1,6 +1,9 @@
-﻿namespace NES.Entities.Assets.Entities
+﻿using System;
+
+namespace NES.Entities.Assets.Entities
 {
-    public class Litecoin : Asset
+	[Serializable]
+	public class Litecoin : Asset
     {
         public const string name = "Litecoin";
         public const string id = "LTC";
