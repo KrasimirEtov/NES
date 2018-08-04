@@ -29,10 +29,5 @@ namespace NES.Core.Engine
             return (Asset)Activator.CreateInstance(Type.GetType($"NES.Entities.Assets.Entities.{type}"), price, amount);
 		}
 
-
-		public IUser CreateUser(string name, int age, decimal cash)
-		{
-			return new User(name, age, cash); // need to do login logic
-		}
 	}
 }

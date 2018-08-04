@@ -10,6 +10,14 @@ namespace NES.Entities.Wallets
 		private Dictionary<string, IAsset> portfolio;
 		private decimal cash;
 
+		public Dictionary<string, IAsset> Portfolio
+		{
+			get
+			{
+				return new Dictionary<string, IAsset>(portfolio);
+			}
+		}
+
 		public Wallet(decimal cash)
 		{
 			this.portfolio = new Dictionary<string, IAsset>();

@@ -16,16 +16,15 @@ namespace NES.Core.Engine
 		private const string exitCommand = "exit";
 		private static readonly Engine SingleInstance = new Engine();
 
-		private readonly IUser user;
+		private IUser user;
 		private readonly IBroker broker;
-		private IOConsole consoleManager;
+		private readonly IOConsole consoleManager;
 		private IMarket market;
 
 		private Engine()
 		{
 			this.broker = new Broker();
 			this.consoleManager = new IOConsole();
-			this.user = new User("krasi", 20, 20000);
 			this.market = Market.Instance;
 		}
 
@@ -48,7 +47,7 @@ namespace NES.Core.Engine
 				try
 				{
 					command = Command.Parse(input);
-					ProcessCommand.Process(command, this.user, this.broker);
+					ProcessCommand.Process(command, ref this.user, this.broker);
 				}
 				catch (Exception ex)
 				{

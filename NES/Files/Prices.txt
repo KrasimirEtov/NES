@@ -1,0 +1,9 @@
+bitcoin 6742
+ethereum 1897
+facebookstock 5395
+gold 8583
+googlestock 2833
+litecoin 1843
+netflixstock 4365
+platinum 8440
+silver 6839

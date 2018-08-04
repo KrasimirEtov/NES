@@ -1,5 +1,0 @@
-pesho|1235|20000
-krasi|etov|200
-gosho|goshov|200000
-peshoGoshov|143242|300
-krasimir|etov|20

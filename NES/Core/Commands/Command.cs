@@ -9,8 +9,9 @@ namespace NES.Core.Commands
 
 		private string action;
         private string asset;
+		private decimal amount;
 
-        private Command(string input)
+		private Command(string input)
 		{
 			this.TranslateInput(input);
 		}
@@ -33,7 +34,15 @@ namespace NES.Core.Commands
             }
         }
 
-        public decimal Amount { get; private set; }
+		public decimal Amount
+		{
+			get => amount;
+			set
+			{
+				if (value < 0) throw new ArgumentOutOfRangeException("Amount cannot be negative!");
+				amount = value;
+			}
+		}
 
 		public static ICommand Parse(string input)
 		{

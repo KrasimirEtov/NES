@@ -8,7 +8,7 @@ namespace NES.Core.Commands
 {
 	public static class ProcessCommand
 	{
-		public static void Process(ICommand command, IUser user, IBroker broker)
+		public static void Process(ICommand command, ref IUser user, IBroker broker)
 		{
 			if (user != null)
 			{
@@ -37,12 +37,12 @@ namespace NES.Core.Commands
 				switch (command.Action)
 				{
 					case "register":
-						Console.WriteLine("Enter 'username' 'password' 'cash' seperated by whitespace");
-						var input = Console.ReadLine().Split(' ');
-						var reg = new Register(input[0], input[1], decimal.Parse(input[2]));
-						break;
+						var reg = new Register();
+						reg = null; // I'll ask for a better disposal
+							break;
 					case "login":
-						user = new User("krasi", 20, 20000);
+						var login = new Login(); // I'll ask for a better disposal
+						user = login.CreateUser(); // user constructor should contain a wallet
 						break;
 					default:
 						throw new ArgumentException($"{command.Action} is not a valid command.");

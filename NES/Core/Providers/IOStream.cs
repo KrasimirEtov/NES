@@ -7,7 +7,7 @@ namespace NES.Core.Providers
 	{
 		public static IEnumerable<string> ReadLine(string fileName)
 		{
-			using (StreamReader sr = new StreamReader($"../../../{fileName}.txt"))
+			using (StreamReader sr = new StreamReader($"../../../Files/{fileName}.txt"))
 			{
 				string line;
 				while ((line = sr.ReadLine()) != null)
@@ -19,7 +19,7 @@ namespace NES.Core.Providers
 
 		public static void WriteLine(string message, string fileName)
 		{
-			using (StreamWriter sw = new StreamWriter($"../../../{fileName}.txt"))
+			using (StreamWriter sw = new StreamWriter($"../../../Files/{fileName}.txt"))
 			{
 				sw.WriteLine(message);
 			}
@@ -27,7 +27,7 @@ namespace NES.Core.Providers
 
 		public static void WriteLineAppend(string message, string fileName)
 		{
-			using (StreamWriter sw = new StreamWriter($"../../../{fileName}.txt", true))
+			using (StreamWriter sw = new StreamWriter($"../../../Files/{fileName}.txt", true))
 			{
 				sw.WriteLine(message);
 			}

@@ -8,7 +8,6 @@ namespace NES.Entities.Users
 	public class User : IUser
 	{
 		private string name;
-		private int age;
 		private IWallet wallet;
 
 		public string Name
@@ -22,17 +21,6 @@ namespace NES.Entities.Users
 			}
 		}
 
-		public int Age
-		{
-			get => age;
-			set
-			{
-				if (value < 0) throw new ArgumentOutOfRangeException("Age cannot be negative!");
-				if (value < 18 || value > 100) throw new ArgumentOutOfRangeException("Enter valid age!");
-				age = value;
-			}
-		}
-
 		public IWallet Wallet
 		{
 			get => wallet;
@@ -42,11 +30,10 @@ namespace NES.Entities.Users
 			}
 		}
 
-		public User(string name, int age, decimal cash)
+		public User(string name, decimal cash)
 		{
-			Wallet = new Wallet(cash);
 			Name = name;
-			Age = age;
+			Wallet = new Wallet(cash);
 		}
 	}
 }
