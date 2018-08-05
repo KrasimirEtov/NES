@@ -12,14 +12,12 @@ namespace NES.Entities.Marketplace
     {
         private const string fileWithPrices = "marketPrices";
 
-        private readonly Dictionary<string, ICollection<IAsset>> categories;
-        private Dictionary<string, decimal> assetPrices;
+        private List<MarketAssetPrice> assetPrices;
         private static readonly IMarket InstanceHolder = new Market();
 
         private Market()
         {
-            this.assetPrices = new Dictionary<string, decimal>();
-            this.categories = new Dictionary<string, ICollection<IAsset>>();
+            this.assetPrices = new List<MarketAssetPrice>();
             LoadPrices(fileWithPrices);
         }
 
@@ -30,7 +28,11 @@ namespace NES.Entities.Marketplace
 
         public decimal AssetPrice(string assetName)
         {
-            return assetPrices[assetName];
+            var current = this.assetPrices
+                .Where(x => x.Name.Equals(assetName))
+                .Select(x => x.Price)
+                .First();
+            return current;
         }
         
         public void UpdatePrices()
@@ -38,15 +40,24 @@ namespace NES.Entities.Marketplace
             Random random = new Random();
             for (int i = 0; i < this.assetPrices.Count; i++)
             {
-                var item = this.assetPrices.ElementAt(i);
-                this.assetPrices[item.Key] += random.Next(1, 20) - random.Next(1, 15);
-                if (item.Value <= 0)
-                {
-                    this.assetPrices[item.Key] = 0.1m;
-                }
+                string name = this.assetPrices[i].Name;
+                string category = this.assetPrices[i].Category;
+                decimal price = this.assetPrices[i].Price + random.Next(1, 20) - random.Next(1, 15) > 0
+                    ? this.assetPrices[i].Price + random.Next(1, 20) - random.Next(1, 15)
+                    : 0.1m;
+
+                this.assetPrices[i] = new MarketAssetPrice(name, price, category);
             }
             
             SavePrices(fileWithPrices);
+        }
+
+        public void PrintMarket()
+        {
+
+            StringBuilder sb = new StringBuilder();
+
+
         }
 
         private void SavePrices(string filename)
@@ -54,7 +65,7 @@ namespace NES.Entities.Marketplace
             StringBuilder sb = new StringBuilder();
             foreach (var asset in this.assetPrices)
             {
-                sb.AppendLine($"{asset.Key} {asset.Value}");
+                sb.AppendLine($"{asset.Name} {asset.Price} {asset.Category}");
             }
 
             IOStream.WriteLine(sb.ToString().Trim(), filename);
@@ -64,8 +75,8 @@ namespace NES.Entities.Marketplace
         {
             foreach (string line in IOStream.ReadLine(filename))
             {
-                string[] lineArr = line.Split();
-                this.assetPrices[lineArr[0].ToLower()] = decimal.Parse(lineArr[1]);
+                string[] lineArr = line.ToLower().Split();
+                this.assetPrices.Add(new MarketAssetPrice(lineArr[0], decimal.Parse(lineArr[1]), lineArr[2]));
             }
         }
     }

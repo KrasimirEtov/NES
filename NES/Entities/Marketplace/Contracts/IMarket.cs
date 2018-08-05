@@ -4,5 +4,6 @@
 	{
 		decimal AssetPrice(string assetName);
 		void UpdatePrices();
+        void PrintMarket();
 	}
 }
