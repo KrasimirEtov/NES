@@ -22,8 +22,8 @@ namespace NES.Core.Commands
                         broker.Sell(command.Asset, command.Amount, user);
                         break;
                     case "endday":
-						broker.EndDayTraiding();
-						break;
+						broker.EndDayTraiding(user);
+                        break;
 					case "exit":
 						IOStream.BinaryWrite(user.Wallet, $"{user.Name}Wallet");
 						Console.WriteLine("Goodbye!");
@@ -51,6 +51,7 @@ namespace NES.Core.Commands
 					case "login":
 						var login = new Login(); // I'll ask for a better disposal
 						user = login.CreateUser(); // user constructor should contain a wallet
+                        broker.EndDayTraiding(user);
 						break;
 					case "exit":
 						Console.WriteLine("Goodbye!");

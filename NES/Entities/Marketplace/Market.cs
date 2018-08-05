@@ -1,6 +1,7 @@
 ﻿using NES.Core.Providers;
 using NES.Entities.Assets.Contracts;
 using NES.Entities.Marketplace.Contracts;
+using NES.Entities.Users.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,12 +53,39 @@ namespace NES.Entities.Marketplace
             SavePrices(fileWithPrices);
         }
 
-        public void PrintMarket()
+        public void PrintMarket(IUser user)
         {
+            List<MarketAssetPrice> ordered = this.assetPrices.OrderBy(x => x.Category).ToList();
+            string category = "";
+            for (int i = 0; i < ordered.Count; i++)
+            {
+                if (ordered[i].Category != category)
+                {
+                    Console.WriteLine();
+                    category = ordered[i].Category;
+                    Console.Write("{0,20} => ", category);
+                }
 
-            StringBuilder sb = new StringBuilder();
+                Console.Write("{0,15} ", $"{ordered[i].Name}: ");
+                string key = ordered[i].Name.First().ToString().ToUpper() + ordered[i].Name.Substring(1);
+                if (user.Wallet.Portfolio.ContainsKey(key))
+                {
+                    if (user.Wallet.Portfolio[key].Price < ordered[i].Price)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                    }
+                    else if (user.Wallet.Portfolio[key].Price > ordered[i].Price)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+                }
 
+                Console.Write("{0,7} ", $"${ordered[i].Price}");
+                Console.ResetColor();
+                Console.Write("| ");
+            }
 
+            Console.WriteLine();
         }
 
         private void SavePrices(string filename)

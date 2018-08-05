@@ -20,9 +20,11 @@ namespace NES.Entities.Broker
 			this.market = Market.Instance;
 		}
 
-		public void EndDayTraiding()
+		public void EndDayTraiding(IUser user)
 		{
 			market.UpdatePrices();
+            Console.Clear();
+            market.PrintMarket(user);
 		}
 
 		public void Buy(string assetName, decimal amount, IUser user)
@@ -50,7 +52,6 @@ namespace NES.Entities.Broker
             user.Wallet.RemoveAsset(asset);
 
             user.Wallet.Cash += price * amount;
-
         }
     }
 }
