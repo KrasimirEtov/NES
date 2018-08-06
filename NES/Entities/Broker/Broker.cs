@@ -60,7 +60,7 @@ namespace NES.Entities.Broker
 
 			MarketProp.PrintMarket(user); 
 			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine("Purchase was succesfull!");
+			Console.WriteLine("Sell deal was succesfull!");
 			Console.ResetColor();
 		}
     }
