@@ -27,7 +27,7 @@ namespace NES.Core.Commands
                         break;
 					case "exit":
 						IOStream.BinaryWrite(user.Wallet, $"{user.Name}Wallet");
-						Console.WriteLine("Goodbye!");
+						Console.WriteLine("\nGoodbye!");
 						break;
 					case "printwallet":
 						user.Wallet.PrintWallet();
@@ -35,7 +35,7 @@ namespace NES.Core.Commands
 					case "logout":
 						IOStream.BinaryWrite(user.Wallet, $"{user.Name}Wallet");
 						user = null;
-						Console.WriteLine("Successfully logged out!");
+						Console.WriteLine("\nSuccessfully logged out!");
 						break;
 					default:
 						throw new ArgumentException($"{command.Action} is not a valid command.");
@@ -56,7 +56,7 @@ namespace NES.Core.Commands
                         broker.EndDayTraiding(user);
 						break;
 					case "exit":
-						Console.WriteLine("Goodbye!");
+						Console.WriteLine("\nGoodbye!");
 						break;
 					default:
 						throw new ArgumentException($"{command.Action} is not a valid command.");
