@@ -35,7 +35,10 @@ namespace NES.Core.Commands
 					case "logout":
 						IOStream.BinaryWrite(user.Wallet, $"{user.Name}Wallet");
 						user = null;
-						Console.WriteLine("\nSuccessfully logged out!");
+						Printer.InitialInstructions();
+						Console.ForegroundColor = ConsoleColor.Green;
+						Console.WriteLine("You logged out succesfully!");
+						Console.ResetColor();
 						break;
 					default:
 						throw new ArgumentException($"{command.Action} is not a valid command.");

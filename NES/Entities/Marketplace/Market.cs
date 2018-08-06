@@ -50,10 +50,13 @@ namespace NES.Entities.Marketplace
 
         public void PrintMarket(IUser user)
         {
-			// Print with some special shit :D
-			// debug this line below - it causes an exception
+			Console.Clear();
+			Printer.PrintMarketName();
             List<MarketAssetPrice> ordered = this.assetPrices.OrderBy(x => x.Category).ToList();
             string category = "";
+			Console.WriteLine($"User: {user.Name}");
+			Console.WriteLine($"Cash: ${user.Wallet.Cash}");
+
             for (int i = 0; i < ordered.Count; i++)
             {
                 if (ordered[i].Category != category)
@@ -81,7 +84,6 @@ namespace NES.Entities.Marketplace
                 Console.ResetColor();
                 Console.Write("| ");
             }
-
             Console.WriteLine();
         }
 

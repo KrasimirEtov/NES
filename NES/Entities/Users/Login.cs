@@ -22,8 +22,13 @@ namespace NES.Entities.Users
 
 		public Login()
 		{
+			Printer.PrintStartup();
 			EnterUserInfo();
-			if (!CheckIfUserExists(Name, Password)) throw new ArgumentException("That user is not registered!");
+			if (!CheckIfUserExists(Name, Password))
+			{
+				Printer.InitialInstructions();
+				throw new ArgumentException("That user is not registered!");
+			}
 		}
 
 		public IUser CreateUser()
@@ -33,9 +38,13 @@ namespace NES.Entities.Users
 
 		protected override void EnterUserInfo()
 		{
-			Console.WriteLine("Type:'username' 'password' seperated by whitespace in order to login");
+			Console.WriteLine("Type:'username' 'password' seperated by whitespace in order to login\n");
 			string[] input = Console.ReadLine().Split(' ');
-			if (input.Length != 2) throw new ArgumentOutOfRangeException("Input was not in correct format");
+			if (input.Length != 2)
+			{
+				Printer.InitialInstructions();
+				throw new ArgumentOutOfRangeException("Input was not in correct format");
+			}
 			Name = input[0];
 			Password = input[1];
 		}

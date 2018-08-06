@@ -52,5 +52,10 @@ namespace NES.Core.Providers
 				return (IWallet)formatter.Deserialize(readerFileStream);
 			}
 		}
+
+		public static string ReadAllText(string fileName)
+		{
+			return File.ReadAllText($"../../../Files/ConsoleMenus/{fileName}.txt");
+		}
 	}
 }

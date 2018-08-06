@@ -10,26 +10,41 @@ namespace NES.Entities.Users
 	public class Register : Authentication
 	{
 		public Register()
-		{
+		{ 
+			Printer.PrintStartup();
 			EnterUserInfo();
-			if (CheckIfUserExists(Name)) throw new ArgumentException("Username already exists.");
-			IOStream.WriteLineAppend(GenerateUserInfo(Name, Password, Cash), usersFileName); // saves info to Users.txt
-			IOStream.BinaryWrite(new Wallet(Cash), $"{Name}{walletName}"); // saves a new wallet in a file for the current user
+			if (CheckIfUserExists(Name))
+			{
+				Printer.InitialInstructions();
+				throw new ArgumentException("Username already exists.");
+			}
+			IOStream.WriteLineAppend(GenerateUserInfo(Name, Password, Cash), usersFileName); 
+			IOStream.BinaryWrite(new Wallet(Cash), $"{Name}{walletName}"); 
+
+			Printer.InitialInstructions();
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.WriteLine("Your registration is complete. You can login now!");
+			Console.ResetColor();
 		}
 
 		protected override void EnterUserInfo()
 		{
-			Console.WriteLine("Type: 'username' 'password' 'cash' seperated by whitespace in order to register");
+			Console.WriteLine("Type: 'username' 'password' 'cash' seperated by whitespace in order to register\n");
 			string[] input = Console.ReadLine().Split(' ');
-			if (input.Length != 3) throw new ArgumentOutOfRangeException("Input was not in correct format");
+			if (input.Length != 3)
+			{
+				Printer.InitialInstructions();
+				throw new ArgumentOutOfRangeException("Input was not in correct format");
+			}
 			Name = input[0];
 			Password = input[1];
 			if (decimal.TryParse(input[2], out var cash))
 			{
-				Cash = cash; // needs proper validation
+				Cash = cash;
 			}
 			else
 			{
+				Printer.InitialInstructions();
 				throw new ArgumentException("Incorrent input for cash!");
 			}
 		}

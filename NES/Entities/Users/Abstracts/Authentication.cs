@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NES.Core.Providers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,11 @@ namespace NES.Entities.Users.Abstracts
 			get => name;
 			set
 			{
-				if (value.All(char.IsDigit)) throw new ArgumentException("Name cannot contain only letters!");
+				if (value.All(char.IsDigit))
+				{
+					Printer.InitialInstructions();
+					throw new ArgumentException("Name cannot contain only letters!");
+				}
 				if (value == null) throw new ArgumentNullException("Name cannot be null!");
 				if (value.Length < 1 || value.Length > 50) throw new ArgumentOutOfRangeException("Name length cannot be less than 1 or more than 50 characters!");
 				name = value;
@@ -30,8 +35,8 @@ namespace NES.Entities.Users.Abstracts
 			get => password;
 			set
 			{
-				if (value == null) throw new ArgumentNullException("Name cannot be null!");
-				if (value.Length < 1 || value.Length > 50) throw new ArgumentOutOfRangeException("Name length cannot be less than 1 or more than 50 characters!");
+				if (value == null) throw new ArgumentNullException("Password cannot be null!");
+				if (value.Length < 1 || value.Length > 50) throw new ArgumentOutOfRangeException("Password length cannot be less than 1 or more than 50 characters!");
 				password = value;
 			}
 		}

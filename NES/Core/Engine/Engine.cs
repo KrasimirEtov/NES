@@ -28,7 +28,8 @@ namespace NES.Core.Engine
 
 		public void Start()
 		{
-           InitialInstructions();
+			Printer.SetScreenSize();
+			Printer.InitialInstructions();
             ReadCommand();
 		}
 
@@ -51,14 +52,5 @@ namespace NES.Core.Engine
 				}
 			}
 		}
-
-        private void InitialInstructions()
-        {
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("Welcome to Wall Street Simulator!\n");
-			Console.ResetColor(); // use this instead of Console.ForegroundColor = ConsoleColor.Black; because it's showing empty input
-			Console.WriteLine("If you already have an account, please use command 'login'.");
-            Console.WriteLine("If you don't have an account, please create one using command 'register'.\n");
-        }
     }
 }

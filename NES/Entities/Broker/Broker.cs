@@ -24,7 +24,6 @@ namespace NES.Entities.Broker
 		public void EndDayTraiding(IUser user)
 		{
 			MarketProp.UpdatePrices();
-            Console.Clear();
 			MarketProp.PrintMarket(user);
 		}
 
@@ -37,28 +36,32 @@ namespace NES.Entities.Broker
 				IAsset asset = Factory.CreateAsset(assetName, price, amount);
 				user.Wallet.AddAsset(asset);
                 user.Wallet.Cash -= price * amount;
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Purchase was succesfull!");
-                Console.ForegroundColor = ConsoleColor.Black;
-            }
+                
+			}
 			else
 			{
 				throw new ArgumentException("You don't have enough funds for this purchase.");
 			}
+
+			MarketProp.PrintMarket(user);
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.WriteLine("Purchase was succesfull!");
+			Console.ResetColor();
 		}
 
         public void Sell(string assetName, decimal amount, IUser user)
         {
-            decimal price = MarketProp.AssetPrice(assetName);
+			decimal price = MarketProp.AssetPrice(assetName);
 
             IAsset asset = Factory.CreateAsset(assetName, price, amount);
             user.Wallet.RemoveAsset(asset);
 
             user.Wallet.Cash += price * amount;
 
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Sale of asset was succesfull!");
-            Console.ForegroundColor = ConsoleColor.Black;
-        }
+			MarketProp.PrintMarket(user); 
+			Console.ForegroundColor = ConsoleColor.Green;
+			Console.WriteLine("Purchase was succesfull!");
+			Console.ResetColor();
+		}
     }
 }
