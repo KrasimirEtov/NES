@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NES.Entities.Assets.Enums;
+using System;
 
 namespace NES.Entities.Assets.Entities
 {
@@ -6,8 +7,7 @@ namespace NES.Entities.Assets.Entities
 	public class Ethereum : Asset
     {
         public const string name = "Ethereum";
-        public const string id = "ETH";
-        public Ethereum(decimal price, decimal amount) : base(name, id, price, amount)
+        public Ethereum(decimal price, decimal amount) : base(name, AssetType.CRIPTO, price, amount)
         {
 
         }

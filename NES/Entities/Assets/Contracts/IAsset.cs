@@ -1,9 +1,11 @@
-﻿namespace NES.Entities.Assets.Contracts
+﻿using NES.Entities.Assets.Enums;
+
+namespace NES.Entities.Assets.Contracts
 {
 	public interface IAsset
     {
 		string Name { get; }
-		string Id { get; }
+        AssetType Type { get; }
 		decimal Price { get; set; }
 		decimal Amount { get; set; }
 	}

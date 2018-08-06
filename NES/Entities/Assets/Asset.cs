@@ -1,4 +1,5 @@
 ﻿using NES.Entities.Assets.Contracts;
+using NES.Entities.Assets.Enums;
 using System;
 
 namespace NES.Entities.Assets
@@ -7,7 +8,7 @@ namespace NES.Entities.Assets
 	public abstract class Asset : IAsset
 	{
 		private string name;
-		private string id;
+		private AssetType type;
 		private decimal price;
 		private decimal amount;
 
@@ -20,13 +21,10 @@ namespace NES.Entities.Assets
 			}
 		}
 
-		public string Id
+		public AssetType Type
 		{
-			get => id;
-			set
-			{
-				id = value ?? throw new ArgumentNullException("ID cannot be null!");
-			}
+			get => type;
+            set => this.type = value;
 		}
 
 		public decimal Price
@@ -49,10 +47,10 @@ namespace NES.Entities.Assets
 			}
 		}
 
-		public Asset(string name, string id, decimal price, decimal amount)
+		public Asset(string name, AssetType type, decimal price, decimal amount)
 		{
 			Name = name;
-			Id = id;
+            Type = type;
 			Price = price;
 			Amount = amount;
 		}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NES.Entities.Assets.Enums;
+using System;
 
 namespace NES.Entities.Assets.Entities
 {
@@ -6,8 +7,7 @@ namespace NES.Entities.Assets.Entities
 	public class Platinum : Asset
     {
         public const string name = "Platinum";
-        public const string id = "PT";
-        public Platinum(decimal price, decimal amount) : base(name, id, price, amount)
+        public Platinum(decimal price, decimal amount) : base(name, AssetType.METAL, price, amount)
         {
 
         }
