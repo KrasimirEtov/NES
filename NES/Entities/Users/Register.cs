@@ -12,14 +12,14 @@ namespace NES.Entities.Users
 		public Register()
 		{
 			EnterUserInfo();
-			if (CheckIfUserExists(Name)) throw new ArgumentException("That user is already registered");
+			if (CheckIfUserExists(Name)) throw new ArgumentException("Username already exists.");
 			IOStream.WriteLineAppend(GenerateUserInfo(Name, Password, Cash), usersFileName); // saves info to Users.txt
 			IOStream.BinaryWrite(new Wallet(Cash), $"{Name}{walletName}"); // saves a new wallet in a file for the current user
 		}
 
 		protected override void EnterUserInfo()
 		{
-			Console.WriteLine("Hello!\nType: 'username' 'password' 'cash' seperated by whitespace in order to register");
+			Console.WriteLine("Type: 'username' 'password' 'cash' seperated by whitespace in order to register");
 			string[] input = Console.ReadLine().Split(' ');
 			Name = input[0];
 			Password = input[1];

@@ -33,7 +33,7 @@ namespace NES.Entities.Users
 
 		protected override void EnterUserInfo()
 		{
-			Console.WriteLine("Hello!\nType:'username' 'password' seperated by whitespace in order to login");
+			Console.WriteLine("Type:'username' 'password' seperated by whitespace in order to login");
 			string[] input = Console.ReadLine().Split(' ');
 			Name = input[0];
 			Password = input[1];

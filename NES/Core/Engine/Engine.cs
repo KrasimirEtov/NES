@@ -35,10 +35,11 @@ namespace NES.Core.Engine
 
 		public void Start()
 		{
-			ReadCommand();
+            InitialInstructions();
+            ReadCommand();
 		}
 
-		private void ReadCommand()
+        private void ReadCommand()
 		{
 			ICommand command;
 			while (true)
@@ -58,5 +59,16 @@ namespace NES.Core.Engine
 				}
 			}
 		}
-	}
+
+        private void InitialInstructions()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Welcome to Wall Street Simulator!");
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine("If you already have an account, please use command 'login'.");
+            Console.WriteLine("If you don't have an account, please create one using command 'register'.");
+            Console.WriteLine();
+            Console.WriteLine();
+        }
+    }
 }
