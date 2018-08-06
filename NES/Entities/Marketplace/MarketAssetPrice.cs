@@ -1,20 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace NES.Entities.Marketplace
 {
     public struct MarketAssetPrice
     {
+		private string name;
+		private decimal price;
+		private string category;
+
         public MarketAssetPrice(string name, decimal price, string category) : this()
         {
-            this.Name = name;
-            this.Price = price;
+            Name = name;
+            Price = price;
             this.Category = category;
         }
 
-        public string Name { get; set; }
-        public decimal Price { get; set; }
-        public string Category { get; set; }
+		public string Name
+		{
+			get => name;
+			set
+			{
+				if (value.All(char.IsDigit)) throw new ArgumentException("Name cannot contain only letters!");
+				if (value == null) throw new ArgumentNullException("Name cannot be null!");
+				if (value.Length < 1 || value.Length > 50) throw new ArgumentOutOfRangeException("Name length cannot be less than 1 or more than 50 characters!");
+				name = value;
+			}
+		}
+
+		public decimal Price
+		{
+			get => price;
+			set
+			{
+				if (value < 1) throw new ArgumentOutOfRangeException("Price cannot be negative!");
+				price = value;
+			}
+		}
+
+		public string Category
+		{
+			get => category;
+			set
+			{
+				if (value.All(char.IsDigit)) throw new ArgumentException("Category cannot contain only letters!");
+				if (value == null) throw new ArgumentNullException("Category cannot be null!");
+				if (value.Length < 1 || value.Length > 50) throw new ArgumentOutOfRangeException("Category length cannot be less than 1 or more than 50 characters!");
+				category = value;
+			}
+		}
     }
 }

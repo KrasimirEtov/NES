@@ -1,5 +1,4 @@
 ﻿using NES.Core.Providers;
-using NES.Entities.Assets.Contracts;
 using NES.Entities.Marketplace.Contracts;
 using NES.Entities.Users.Contracts;
 using System;
@@ -13,21 +12,17 @@ namespace NES.Entities.Marketplace
     {
         private const string fileWithPrices = "marketPrices";
 
-        private List<MarketAssetPrice> assetPrices;
-        private static readonly IMarket InstanceHolder = new Market();
+        private readonly List<MarketAssetPrice> assetPrices;
 
-        private Market()
+		public static IMarket Instance { get; } = new Market();
+
+		private Market()
         {
             this.assetPrices = new List<MarketAssetPrice>();
             LoadPrices(fileWithPrices);
         }
 
-        public static IMarket Instance
-        {
-            get => InstanceHolder;
-        }
-
-        public decimal AssetPrice(string assetName)
+		public decimal AssetPrice(string assetName)
         {
             var current = this.assetPrices
                 .Where(x => x.Name.Equals(assetName))
@@ -55,6 +50,8 @@ namespace NES.Entities.Marketplace
 
         public void PrintMarket(IUser user)
         {
+			// Print with some special shit :D
+			// debug this line below - it causes an exception
             List<MarketAssetPrice> ordered = this.assetPrices.OrderBy(x => x.Category).ToList();
             string category = "";
             for (int i = 0; i < ordered.Count; i++)
@@ -63,7 +60,7 @@ namespace NES.Entities.Marketplace
                 {
                     Console.WriteLine();
                     category = ordered[i].Category;
-                    Console.Write("{0,20} => ", category);
+                    Console.Write("\n{0,20} => ", category);
                 }
 
                 Console.Write("{0,15} ", $"{ordered[i].Name}: ");

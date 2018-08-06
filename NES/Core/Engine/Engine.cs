@@ -5,33 +5,26 @@ using NES.Entities.Broker;
 using NES.Entities.Broker.Contracts;
 using NES.Entities.Marketplace;
 using NES.Entities.Marketplace.Contracts;
-using NES.Entities.Users;
 using NES.Entities.Users.Contracts;
 using System;
 
 namespace NES.Core.Engine
 {
-	public class Engine
+	public class Engine :IEngine
 	{
 		private const string exitCommand = "exit";
-		private static readonly Engine SingleInstance = new Engine();
-
 		private IUser user;
-		private readonly IBroker broker;
-		private readonly IOConsole consoleManager;
-		private IMarket market;
+
+		public static Engine Instance { get; } = new Engine();
+		private IMarket MarketProp { get; set; }
+		private IBroker Broker { get; } = new Broker();
+		private IOConsole ConsoleManager { get; } = new IOConsole();
 
 		private Engine()
 		{
-			this.broker = new Broker();
-			this.consoleManager = new IOConsole();
-			this.market = Market.Instance;
+			MarketProp = Market.Instance;
 		}
 
-		public static Engine Instance
-		{
-			get => SingleInstance;
-		}
 
 		public void Start()
 		{
@@ -45,14 +38,13 @@ namespace NES.Core.Engine
 			{
 				try
 				{
-					// welcome messages need to be here
-					command = Command.Parse(this.consoleManager.ReadLine());
-					ProcessCommand.Process(command, ref this.user, this.broker);
+					command = Command.Parse(ConsoleManager.ReadLine());
+					ProcessCommand.Process(command, ref this.user, Broker);
 					if (command.Action == "exit") break;
 				}
 				catch (Exception ex)
 				{
-					this.consoleManager.WriteLine(ex.Message);
+					ConsoleManager.WriteLine(ex.Message);
 				}
 			}
 		}

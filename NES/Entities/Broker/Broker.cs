@@ -11,29 +11,30 @@ namespace NES.Entities.Broker
 {
 	public class Broker : IBroker
 	{
-		private IMarket market;
-		private IFactory factory;
+		//private IMarket market;
+
+		private IFactory Factory { get; set; } = AssetFactory.Instance;
+		private IMarket MarketProp { get; set; } = Market.Instance;
 
 		public Broker()
 		{
-			this.factory = AssetFactory.Instance;
-			this.market = Market.Instance;
+
 		}
 
 		public void EndDayTraiding(IUser user)
 		{
-			market.UpdatePrices();
+			MarketProp.UpdatePrices();
             Console.Clear();
-            market.PrintMarket(user);
+			MarketProp.PrintMarket(user);
 		}
 
 		public void Buy(string assetName, decimal amount, IUser user)
 		{
-			decimal price = market.AssetPrice(assetName);
+			decimal price = MarketProp.AssetPrice(assetName);
 
 			if (user.Wallet.Cash >= price * amount)
 			{
-				IAsset asset = factory.CreateAsset(assetName, price, amount);
+				IAsset asset = Factory.CreateAsset(assetName, price, amount);
 				user.Wallet.AddAsset(asset);
                 user.Wallet.Cash -= price * amount;
 
@@ -46,9 +47,9 @@ namespace NES.Entities.Broker
 
         public void Sell(string assetName, decimal amount, IUser user)
         {
-            decimal price = market.AssetPrice(assetName);
+            decimal price = MarketProp.AssetPrice(assetName);
 
-            IAsset asset = factory.CreateAsset(assetName, price, amount);
+            IAsset asset = Factory.CreateAsset(assetName, price, amount);
             user.Wallet.RemoveAsset(asset);
 
             user.Wallet.Cash += price * amount;

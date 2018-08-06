@@ -71,10 +71,10 @@ namespace NES.Entities.Wallets
 
         public void PrintWallet()
 		{
-            Console.WriteLine($"Cash: ${this.Cash}");
-			foreach (var asset in portfolio)
+            Console.WriteLine($"\nCash: ${this.Cash}");
+			foreach (var asset in Portfolio)
 			{
-				Console.WriteLine($"{asset.Key} Amount: {asset.Value.Amount} Price per unit: {asset.Value.Price}");
+				Console.WriteLine($"{asset.Key}: Amount: {asset.Value.Amount}, Price per unit: {asset.Value.Price}");
 			}
 		}
 	}

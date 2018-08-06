@@ -59,7 +59,14 @@ namespace NES.Core.Commands
 			}
 			this.Action = chunks[0];
             this.Asset = chunks[1];
-            this.Amount = decimal.Parse(chunks[2]);
+			if (decimal.TryParse(chunks[2], out var amount))
+			{
+				this.Amount = amount;
+			}
+			else
+			{
+				throw new ArgumentException("Incorrent input for amount!");
+			}
 		}
 	}
 }

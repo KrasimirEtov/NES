@@ -19,11 +19,19 @@ namespace NES.Entities.Users
 
 		protected override void EnterUserInfo()
 		{
-			Console.WriteLine("Hello!\nType: 'username' 'password' 'cash' seperated by whitespace in order to register");
+			Console.WriteLine("Type: 'username' 'password' 'cash' seperated by whitespace in order to register");
 			string[] input = Console.ReadLine().Split(' ');
+			if (input.Length != 3) throw new ArgumentOutOfRangeException("Input was not in correct format");
 			Name = input[0];
 			Password = input[1];
-			Cash = decimal.Parse(input[2]); // needs proper validation
+			if (decimal.TryParse(input[2], out var cash))
+			{
+				Cash = cash; // needs proper validation
+			}
+			else
+			{
+				throw new ArgumentException("Incorrent input for cash!");
+			}
 		}
 
 		private string GenerateUserInfo(string name, string password, decimal cash)
@@ -35,13 +43,13 @@ namespace NES.Entities.Users
 			return temp.ToString();
 		}
 
-		private bool CheckIfUserExists(string name)
+		private bool CheckIfUserExists(string userName)
 		{
 			if (!File.Exists($"../../../Files/{usersFileName}.txt")) return false;
 			foreach (var read in IOStream.ReadLine(usersFileName))
 			{
 				var nameFromFile = read.Substring(0, read.IndexOf('|'));
-				if (nameFromFile.Equals(name)) return true; // there is already such a name in the file
+				if (nameFromFile.Equals(userName)) return true;
 			}
 			return false;
 		}

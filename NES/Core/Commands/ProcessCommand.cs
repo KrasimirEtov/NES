@@ -46,11 +46,12 @@ namespace NES.Core.Commands
 				{
 					case "register":
 						var reg = new Register();
-						reg = null; // I'll ask for a better disposal
+						reg = null;
 							break;
 					case "login":
-						var login = new Login(); // I'll ask for a better disposal
-						user = login.CreateUser(); // user constructor should contain a wallet
+						var login = new Login(); 
+						user = login.CreateUser();
+						login = null;
                         broker.EndDayTraiding(user);
 						break;
 					case "exit":

@@ -33,19 +33,20 @@ namespace NES.Entities.Users
 
 		protected override void EnterUserInfo()
 		{
-			Console.WriteLine("Hello!\nType:'username' 'password' seperated by whitespace in order to login");
+			Console.WriteLine("Type:'username' 'password' seperated by whitespace in order to login");
 			string[] input = Console.ReadLine().Split(' ');
+			if (input.Length != 2) throw new ArgumentOutOfRangeException("Input was not in correct format");
 			Name = input[0];
 			Password = input[1];
 		}
 
-		private bool CheckIfUserExists(string name, string password)
+		private bool CheckIfUserExists(string userName, string password)
 		{
 			if (!File.Exists($"../../../Files/{usersFileName}.txt")) return false;
 			foreach (var read in IOStream.ReadLine(usersFileName))
 			{
 				string[] data = read.Split('|');
-				if ((data[0].Equals(name)) && (data[1].Equals(password))) return true; // there is already such a name in the file
+				if ((data[0].Equals(userName)) && (data[1].Equals(password))) return true;
 			}
 			return false;
 		}
