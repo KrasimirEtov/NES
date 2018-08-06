@@ -37,7 +37,9 @@ namespace NES.Entities.Broker
 				IAsset asset = Factory.CreateAsset(assetName, price, amount);
 				user.Wallet.AddAsset(asset);
                 user.Wallet.Cash -= price * amount;
-
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Purchase was succesfull!");
+                Console.ForegroundColor = ConsoleColor.Black;
             }
 			else
 			{
@@ -53,6 +55,10 @@ namespace NES.Entities.Broker
             user.Wallet.RemoveAsset(asset);
 
             user.Wallet.Cash += price * amount;
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Sale of asset was succesfull!");
+            Console.ForegroundColor = ConsoleColor.Black;
         }
     }
 }
