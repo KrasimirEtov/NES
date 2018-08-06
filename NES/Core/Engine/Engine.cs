@@ -52,7 +52,9 @@ namespace NES.Core.Engine
 				}
 				catch (Exception ex)
 				{
-					this.consoleManager.WriteLine(ex.Message);
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    this.consoleManager.WriteLine(ex.Message);
+                    Console.ForegroundColor = ConsoleColor.Black;
 				}
 			}
 		}

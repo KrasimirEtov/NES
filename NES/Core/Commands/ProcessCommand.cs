@@ -23,6 +23,7 @@ namespace NES.Core.Commands
                         break;
                     case "endday":
 						broker.EndDayTraiding(user);
+                        Console.WriteLine("Trading day has ended!");
                         break;
 					case "exit":
 						IOStream.BinaryWrite(user.Wallet, $"{user.Name}Wallet");

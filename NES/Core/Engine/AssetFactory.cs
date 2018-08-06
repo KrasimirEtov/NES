@@ -28,6 +28,5 @@ namespace NES.Core.Engine
             type = type.First().ToString().ToUpper() + type.Substring(1);
             return (Asset)Activator.CreateInstance(Type.GetType($"NES.Entities.Assets.Entities.{type}"), price, amount);
 		}
-
 	}
 }
