@@ -11,8 +11,6 @@ namespace NES.Entities.Broker
 {
 	public class Broker : IBroker
 	{
-		//private IMarket market;
-
 		private IFactory Factory { get; set; } = AssetFactory.Instance;
 		private IMarket MarketProp { get; set; } = Market.Instance;
 
@@ -25,6 +23,7 @@ namespace NES.Entities.Broker
 		{
 			MarketProp.UpdatePrices();
 			MarketProp.PrintMarket(user);
+			user.Wallet.Cash += 5; // we can remove this. I added it so user can gain more money over time without selling
 		}
 
 		public void Buy(string assetName, decimal amount, IUser user)
@@ -45,7 +44,7 @@ namespace NES.Entities.Broker
 
 			MarketProp.PrintMarket(user);
 			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine("Purchase was succesfull!");
+			Console.WriteLine($"Succesfully purchased {amount} {assetName} " + (amount > 1 ? "assets" : "asset"));
 			Console.ResetColor();
 		}
 
@@ -60,7 +59,7 @@ namespace NES.Entities.Broker
 
 			MarketProp.PrintMarket(user); 
 			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine("Sell deal was succesfull!");
+			Console.WriteLine($"Succesfully selled {amount} {assetName} " + (amount > 1 ? "assets" : "asset"));
 			Console.ResetColor();
 		}
     }

@@ -1,4 +1,5 @@
 ﻿using NES.Core.Commands.Contracts;
+using NES.Core.Providers;
 using NES.Entities.Assets.Enums;
 using System;
 
@@ -58,6 +59,7 @@ namespace NES.Core.Commands
                 this.Action = chunks[0];
                 return;
             }
+			if (chunks.Length != 3) throw new Exception("Invalid command format");
             this.Action = chunks[0];
             this.Asset = chunks[1];
 			if (decimal.TryParse(chunks[2], out var amount))

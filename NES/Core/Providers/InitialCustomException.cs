@@ -1,0 +1,12 @@
+﻿using System;
+
+namespace NES.Core.Providers
+{
+    public class InitialCustomException : Exception
+    {
+		public InitialCustomException(string message) : base(message)
+		{
+			Printer.InitialInstructions();
+		}
+    }
+}

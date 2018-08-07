@@ -84,8 +84,8 @@ namespace NES.Entities.Marketplace
                 Console.ResetColor();
                 Console.Write("| ");
             }
-            Console.WriteLine();
-        }
+            Console.WriteLine("\n");
+		}
 
         private void SavePrices(string filename)
         {

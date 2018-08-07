@@ -40,9 +40,16 @@ namespace NES.Core.Engine
 			{
 				try
 				{
+					ConsoleManager.WriteLine("\nEnter command:\n");
 					command = Command.Parse(ConsoleManager.ReadLine());
                     ProcessCommand.Process(command, ref this.user, Broker);
 					if (command.Action == "exit") break;
+				}
+				catch(InitialCustomException ice)
+				{
+					Console.ForegroundColor = ConsoleColor.Red;
+					ConsoleManager.WriteLine(ice.Message);
+					Console.ResetColor();
 				}
 				catch (Exception ex)
 				{

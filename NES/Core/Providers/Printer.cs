@@ -14,12 +14,11 @@ namespace NES.Core.Providers
 			Console.ForegroundColor = ConsoleColor.Blue;
 			Console.WriteLine(IOStream.ReadAllText(welcomeScreen));
 			Console.ResetColor();
-			Console.CursorVisible = false;
 		}
 
 		public static void SetScreenSize()
 		{
-			Console.BufferHeight = Console.WindowHeight = 30;
+			Console.WindowHeight = 30;
 			Console.BufferWidth = Console.WindowWidth = 120;
 		}
 
@@ -28,14 +27,13 @@ namespace NES.Core.Providers
 			Console.ForegroundColor = ConsoleColor.Blue;
 			Console.WriteLine(IOStream.ReadAllText(marketName));
 			Console.ResetColor();
-			Console.CursorVisible = false;
 		}
 
 		public static void InitialInstructions()
 		{
 			Console.ForegroundColor = ConsoleColor.Blue;
 			PrintStartup();
-			Console.WriteLine("If you already have an account, please use command 'login'.");
+			Console.WriteLine("If you already have an account, please use command 'login'.\n");
 			Console.WriteLine("If you don't have an account, please create one using command 'register'.\n");
 		}
 

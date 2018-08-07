@@ -15,8 +15,7 @@ namespace NES.Entities.Users
 			EnterUserInfo();
 			if (CheckIfUserExists(Name))
 			{
-				Printer.InitialInstructions();
-				throw new ArgumentException("Username already exists.");
+				throw new InitialCustomException($"User with name \"{Name}\" is already registered.");
 			}
 			IOStream.WriteLineAppend(GenerateUserInfo(Name, Password, Cash), usersFileName); 
 			IOStream.BinaryWrite(new Wallet(Cash), $"{Name}{walletName}"); 
@@ -31,11 +30,7 @@ namespace NES.Entities.Users
 		{
 			Console.WriteLine("Type: 'username' 'password' 'cash' seperated by whitespace in order to register\n");
 			string[] input = Console.ReadLine().Split(' ');
-			if (input.Length != 3)
-			{
-				Printer.InitialInstructions();
-				throw new ArgumentOutOfRangeException("Input was not in correct format");
-			}
+			if (input.Length != 3) throw new InitialCustomException("Input was not in correct format");
 			Name = input[0];
 			Password = input[1];
 			if (decimal.TryParse(input[2], out var cash))
@@ -44,8 +39,7 @@ namespace NES.Entities.Users
 			}
 			else
 			{
-				Printer.InitialInstructions();
-				throw new ArgumentException("Incorrent input for cash!");
+				throw new InitialCustomException("Incorrent input for cash!");
 			}
 		}
 
