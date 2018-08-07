@@ -8,7 +8,6 @@ namespace NES.Entities.Assets
 	public abstract class Asset : IAsset
 	{
 		private string name;
-		private AssetType type;
 		private decimal price;
 		private decimal amount;
 
@@ -21,11 +20,7 @@ namespace NES.Entities.Assets
 			}
 		}
 
-		public AssetType Type
-		{
-			get => type;
-            set => this.type = value;
-		}
+		public AssetType Type { get; set; }
 
 		public decimal Price
 		{
@@ -50,7 +45,7 @@ namespace NES.Entities.Assets
 		public Asset(string name, AssetType type, decimal price, decimal amount)
 		{
 			Name = name;
-            Type = type;
+			Type = type;
 			Price = price;
 			Amount = amount;
 		}

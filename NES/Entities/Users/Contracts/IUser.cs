@@ -6,5 +6,6 @@ namespace NES.Entities.Users.Contracts
 	{
 		string Name { get; }
 		IWallet Wallet { get; }
+		void SaveWallet();
 	}
 }

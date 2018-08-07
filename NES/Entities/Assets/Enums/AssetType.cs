@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NES.Entities.Assets.Enums
+﻿namespace NES.Entities.Assets.Enums
 {
     public enum AssetType
     {

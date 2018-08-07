@@ -51,6 +51,10 @@ namespace NES.Entities.Users
 			{
 				string[] data = read.Split('|');
 				if ((data[0].Equals(userName)) && (data[1].Equals(password))) return true;
+				if ((data[0].Equals(userName)) && (!data[1].Equals(password)))
+				{
+					throw new InitialCustomException("You have entered an invalid username or password");
+				}
 			}
 			return false;
 		}

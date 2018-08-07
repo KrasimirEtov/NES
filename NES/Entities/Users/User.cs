@@ -1,4 +1,5 @@
-﻿using NES.Entities.Users.Contracts;
+﻿using NES.Core.Providers;
+using NES.Entities.Users.Contracts;
 using NES.Entities.Wallets.Contracts;
 using System;
 using System.Linq;
@@ -35,6 +36,11 @@ namespace NES.Entities.Users
 		{
 			Name = name;
 			Wallet = wallet;
+		}
+
+		public void SaveWallet()
+		{
+			IOStream.BinaryWrite(Wallet, $"{Name}Wallet");
 		}
 	}
 }

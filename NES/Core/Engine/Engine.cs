@@ -1,5 +1,6 @@
 ﻿using NES.Core.Commands;
 using NES.Core.Commands.Contracts;
+using NES.Core.Engine.Contracts;
 using NES.Core.Providers;
 using NES.Entities.Broker;
 using NES.Entities.Broker.Contracts;
@@ -20,8 +21,11 @@ namespace NES.Core.Engine
 		private IBroker Broker { get; } = new Broker();
 		private IOConsole ConsoleManager { get; } = new IOConsole();
 
+		private IUserFactory UserFactoryProp { get; set; }
+
 		private Engine()
 		{
+			UserFactoryProp = UserFactory.Instance;
 			MarketProp = Market.Instance;
 		}
 
@@ -42,7 +46,7 @@ namespace NES.Core.Engine
 				{
 					ConsoleManager.WriteLine("\nEnter command:\n");
 					command = Command.Parse(ConsoleManager.ReadLine());
-                    ProcessCommand.Process(command, ref this.user, Broker);
+                    ProcessCommand.Process(command, ref this.user, Broker, UserFactoryProp);
 					if (command.Action == "exit") break;
 				}
 				catch(InitialCustomException ice)

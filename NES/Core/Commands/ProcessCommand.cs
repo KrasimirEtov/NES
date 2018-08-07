@@ -1,15 +1,15 @@
 ﻿using System;
 using NES.Core.Commands.Contracts;
+using NES.Core.Engine.Contracts;
 using NES.Core.Providers;
 using NES.Entities.Broker.Contracts;
-using NES.Entities.Users;
 using NES.Entities.Users.Contracts;
 
 namespace NES.Core.Commands
 {
 	public static class ProcessCommand
 	{
-		public static void Process(ICommand command, ref IUser user, IBroker broker)
+		public static void Process(ICommand command, ref IUser user, IBroker broker, IUserFactory userFactory)
 		{
 			if (user != null)
 			{
@@ -33,7 +33,7 @@ namespace NES.Core.Commands
 						user.Wallet.PrintWallet();
 						break;
 					case "logout":
-						IOStream.BinaryWrite(user.Wallet, $"{user.Name}Wallet");
+						user.SaveWallet();
 						user = null;
 						Printer.InitialInstructions();
 						Console.ForegroundColor = ConsoleColor.Green;
@@ -49,13 +49,10 @@ namespace NES.Core.Commands
 				switch (command.Action)
 				{
 					case "register":
-						var reg = new Register();
-						reg = null;
+						userFactory.RegisterUser();
 							break;
 					case "login":
-						var login = new Login(); 
-						user = login.CreateUser();
-						login = null;
+						user = userFactory.CreateUser();
                         broker.EndDayTraiding(user);
 						break;
 					case "exit":
