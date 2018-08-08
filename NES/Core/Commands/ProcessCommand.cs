@@ -24,11 +24,11 @@ namespace NES.Core.Commands
                         break;
                     case "endday":
 						broker.EndDayTraiding(user);
-                        Console.WriteLine("Trading day has ended!");
+                        IOConsole.WriteLine("Trading day has ended!");
                         break;
 					case "exit":
 						IOStream.BinaryWrite(user.Wallet, $"{user.Name}Wallet");
-						Console.WriteLine("\nGoodbye!");
+						IOConsole.WriteLine("\nGoodbye!");
 						break;
 					case "printwallet":
 						user.Wallet.PrintWallet();
@@ -38,7 +38,7 @@ namespace NES.Core.Commands
 						user = null;
 						Printer.InitialInstructions();
 						Console.ForegroundColor = ConsoleColor.Green;
-						Console.WriteLine("You logged out succesfully!");
+						IOConsole.WriteLine("You logged out succesfully!");
 						Console.ResetColor();
 						break;
 					default:
@@ -60,7 +60,7 @@ namespace NES.Core.Commands
                         broker.EndDayTraiding(user);
 						break;
 					case "exit":
-						Console.WriteLine("\nGoodbye!");
+						IOConsole.WriteLine("\nGoodbye!");
 						break;
 					default:
 						throw new ArgumentException($"{command.Action} is not a valid command.");

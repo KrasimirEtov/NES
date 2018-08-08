@@ -6,6 +6,7 @@ using NES.Entities.Broker.Contracts;
 using NES.Entities.Marketplace;
 using NES.Entities.Marketplace.Contracts;
 using NES.Entities.Users.Contracts;
+using NES.Core.Providers;
 
 namespace NES.Entities.Broker
 {
@@ -22,8 +23,7 @@ namespace NES.Entities.Broker
 		public void EndDayTraiding(IUser user)
 		{
 			MarketProp.UpdatePrices();
-			MarketProp.PrintMarket(user);
-			user.Wallet.Cash += 5; // we can remove this. I added it so user can gain more money over time without selling
+            MarketProp.PrintMarket(user);
 		}
 
 		public void Buy(string assetName, decimal amount, IUser user)
@@ -44,7 +44,7 @@ namespace NES.Entities.Broker
 
 			MarketProp.PrintMarket(user);
 			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine($"Succesfully purchased {amount} {assetName} " + (amount > 1 ? "assets" : "asset"));
+			IOConsole.WriteLine($"Succesfully purchased {amount} {assetName} " + (amount > 1 ? "assets" : "asset"));
 			Console.ResetColor();
 		}
 
@@ -59,7 +59,7 @@ namespace NES.Entities.Broker
 
 			MarketProp.PrintMarket(user); 
 			Console.ForegroundColor = ConsoleColor.Green;
-			Console.WriteLine($"Succesfully selled {amount} {assetName} " + (amount > 1 ? "assets" : "asset"));
+			IOConsole.WriteLine($"Succesfully selled {amount} {assetName} " + (amount > 1 ? "assets" : "asset"));
 			Console.ResetColor();
 		}
     }

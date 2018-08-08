@@ -21,7 +21,6 @@ namespace NES.Core.Engine
         private UserHandler Handler { get; set; }
         private IMarket MarketProp { get; set; }
 		private IBroker Broker { get; } 
-		private IOConsole ConsoleManager { get; } = new IOConsole();
 
         public static Engine Instance { get; } = instance;
 
@@ -47,21 +46,21 @@ namespace NES.Core.Engine
 			{
 				try
 				{
-					ConsoleManager.WriteLine("\nEnter command:\n");
-					command = Command.Parse(ConsoleManager.ReadLine());
+					IOConsole.WriteLine("\nEnter command:\n");
+					command = Command.Parse(IOConsole.ReadLine());
                     ProcessCommand.Process(command, this.user, Broker, this.Handler);
 					if (command.Action == "exit") break;
 				}
 				catch(InitialCustomException ice)
 				{
 					Console.ForegroundColor = ConsoleColor.Red;
-					ConsoleManager.WriteLine(ice.Message);
+					IOConsole.WriteLine(ice.Message);
 					Console.ResetColor();
 				}
 				catch (Exception ex)
 				{
                     Console.ForegroundColor = ConsoleColor.Red;
-                    ConsoleManager.WriteLine(ex.Message);
+                    IOConsole.WriteLine(ex.Message);
 					Console.ResetColor();
 				}
 			}

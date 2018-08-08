@@ -97,7 +97,7 @@ namespace NES.Entities.Users
 
             Printer.InitialInstructions();
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Your registration is complete. You can login now!");
+            IOConsole.WriteLine("Your registration is complete. You can login now!");
             Console.ResetColor();
 
             return userFactory.CreateUser(name, wallet);
