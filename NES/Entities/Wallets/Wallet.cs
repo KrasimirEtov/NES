@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using NES.Core.Providers;
 using NES.Entities.Assets.Contracts;
 using NES.Entities.Wallets.Contracts;
 
@@ -74,11 +75,11 @@ namespace NES.Entities.Wallets
 			Console.WriteLine();
 			if (Portfolio.Count < 1)
 			{
-				Console.WriteLine("You don't have any purchased assets!");
+				IOConsole.WriteLine("You don't have any purchased assets!");
 			}
 			foreach (var asset in Portfolio)
 			{
-				Console.WriteLine($"{asset.Key}: Amount: {asset.Value.Amount}, Price per unit: {asset.Value.Price}");
+				IOConsole.WriteLine($"{asset.Key}: Amount: {asset.Value.Amount}, Price per unit: {asset.Value.Price}");
 			}
 		}
 	}

@@ -55,8 +55,8 @@ namespace NES.Entities.Marketplace
 			Printer.PrintMarketName();
             List<MarketAssetPrice> ordered = this.assetPrices.OrderBy(x => x.Category).ToList();
             string category = "";
-			Console.WriteLine($"User: {user.Name}");
-			Console.WriteLine($"Cash: ${user.Wallet.Cash}");
+			IOConsole.WriteLine($"User: {user.Name}");
+			IOConsole.WriteLine($"Cash: ${user.Wallet.Cash}");
 
             for (int i = 0; i < ordered.Count; i++)
             {
@@ -83,9 +83,9 @@ namespace NES.Entities.Marketplace
 
                 Console.Write("{0,7} ", $"${ordered[i].Price}");
                 Console.ResetColor();
-                Console.Write("| ");
+                IOConsole.Write("| ");
             }
-            Console.WriteLine("\n");
+            IOConsole.WriteLine("\n");
 		}
 
         private void SavePrices(string filename)

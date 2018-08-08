@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using NES.Core.Providers;
 
 namespace NES.Core.Providers
 {
@@ -33,7 +34,7 @@ namespace NES.Core.Providers
 		{
 			Console.ForegroundColor = ConsoleColor.Blue;
 			PrintStartup();
-			Console.WriteLine("If you already have an account, please use command 'login'.\n");
+			IOConsole.WriteLine("If you already have an account, please use command 'login'.\n");
 			Console.WriteLine("If you don't have an account, please create one using command 'register'.\n");
 		}
 
