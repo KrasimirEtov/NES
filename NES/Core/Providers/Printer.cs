@@ -34,9 +34,9 @@ namespace NES.Core.Providers
 		{
 			Console.ForegroundColor = ConsoleColor.Blue;
 			PrintStartup();
-			IOConsole.WriteLine("If you already have an account, please use command 'login'.\n");
-			Console.WriteLine("If you don't have an account, please create one using command 'register'.\n");
+			IOConsole.WriteLine("If you already have an account, please use command 'login' followed by user name and password separated by space.\n");
+            IOConsole.WriteLine("If you don't have an account, please create one using command 'register'\nfollowed by user name, password and money for traiding separated by space.");
 		}
-
-	}
+        
+    }
 }

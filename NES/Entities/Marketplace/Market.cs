@@ -51,12 +51,12 @@ namespace NES.Entities.Marketplace
 
         public void PrintMarket(IUser user)
         {
-			Console.Clear();
-			Printer.PrintMarketName();
+            Console.Clear();
+            Printer.PrintMarketName();
             List<MarketAssetPrice> ordered = this.assetPrices.OrderBy(x => x.Category).ToList();
             string category = "";
-			IOConsole.WriteLine($"User: {user.Name}");
-			IOConsole.WriteLine($"Cash: ${user.Wallet.Cash}");
+            IOConsole.WriteLine($"User: {user.Name}");
+            IOConsole.WriteLine($"Cash: ${user.Wallet.Cash}");
 
             for (int i = 0; i < ordered.Count; i++)
             {
@@ -86,7 +86,7 @@ namespace NES.Entities.Marketplace
                 IOConsole.Write("| ");
             }
             IOConsole.WriteLine("\n");
-		}
+        }
 
         private void SavePrices(string filename)
         {
