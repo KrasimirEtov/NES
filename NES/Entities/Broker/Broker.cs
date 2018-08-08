@@ -23,8 +23,7 @@ namespace NES.Entities.Broker
 		public void EndDayTraiding(IUser user)
 		{
 			MarketProp.UpdatePrices();
-			MarketProp.PrintMarket(user);
-			user.Wallet.Cash += 5; // we can remove this. I added it so user can gain more money over time without selling
+            MarketProp.PrintMarket(user);
 		}
 
 		public void Buy(string assetName, decimal amount, IUser user)
