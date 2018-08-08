@@ -3,13 +3,14 @@ using NES.Core.Commands.Contracts;
 using NES.Core.Engine.Contracts;
 using NES.Core.Providers;
 using NES.Entities.Broker.Contracts;
+using NES.Entities.Users;
 using NES.Entities.Users.Contracts;
 
 namespace NES.Core.Commands
 {
 	public static class ProcessCommand
 	{
-		public static void Process(ICommand command, ref IUser user, IBroker broker, IUserFactory userFactory)
+		public static void Process(ICommand command, IUser user, IBroker broker, UserHandler handler)
 		{
 			if (user != null)
 			{
@@ -49,10 +50,13 @@ namespace NES.Core.Commands
 				switch (command.Action)
 				{
 					case "register":
-						userFactory.RegisterUser();
-							break;
+                        user = handler.RegisteUser(command.Parameters);
+                        Engine.Engine.Instance.SetUser(user);
+                        broker.EndDayTraiding(user);
+                        break;
 					case "login":
-						user = userFactory.CreateUser();
+                        user = handler.LoginUser(command.Parameters);
+                        Engine.Engine.Instance.SetUser(user);
                         broker.EndDayTraiding(user);
 						break;
 					case "exit":

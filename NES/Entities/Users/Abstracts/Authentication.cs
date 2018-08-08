@@ -6,8 +6,6 @@ namespace NES.Entities.Users.Abstracts
 {
     public abstract class Authentication
     {
-		protected const string usersFileName = "RegisteredUsers";
-		protected const string walletName = "Wallet";
 		private string name;
 		private string password;
 		private decimal cash;

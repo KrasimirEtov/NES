@@ -2,6 +2,8 @@
 using NES.Core.Providers;
 using NES.Entities.Assets.Enums;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace NES.Core.Commands
 {
@@ -12,6 +14,7 @@ namespace NES.Core.Commands
         private string action;
         private string asset;
         private decimal amount;
+        private List<string> parameters;
 
         private Command(string input)
         {
@@ -36,6 +39,15 @@ namespace NES.Core.Commands
             }
         }
 
+        public List<string> Parameters
+        {
+            get => new List<string>(this.parameters);
+            private set
+            {
+                this.parameters = value;
+            }
+        }
+
         public decimal Amount
         {
             get => amount;
@@ -54,12 +66,20 @@ namespace NES.Core.Commands
         private void TranslateInput(string input)
         {
             string[] chunks = input.ToLower().Split(SplitCommandSymbol);
-            if (chunks.Length == 1)
+            this.Parameters = chunks.Skip(1).ToList();
+            this.Action = chunks[0];
+
+            if (chunks.Length == 1) //exit
             {
-                this.Action = chunks[0];
                 return;
             }
+            if (this.Action == "login" || this.Action == "register")
+            {
+                return;
+            }            
+
 			if (chunks.Length != 3) throw new Exception("Invalid command format");
+
             this.Action = chunks[0];
             this.Asset = chunks[1];
 			if (decimal.TryParse(chunks[2], out var amount))

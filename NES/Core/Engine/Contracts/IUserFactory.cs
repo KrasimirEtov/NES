@@ -5,7 +5,6 @@ namespace NES.Core.Engine.Contracts
 {
     public interface IUserFactory
     {
-		IUser CreateUser();
-		void RegisterUser();
+		IUser CreateUser(string name, IWallet wallet);
     }
 }

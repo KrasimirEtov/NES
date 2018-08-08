@@ -6,28 +6,31 @@ using NES.Entities.Broker;
 using NES.Entities.Broker.Contracts;
 using NES.Entities.Marketplace;
 using NES.Entities.Marketplace.Contracts;
+using NES.Entities.Users;
 using NES.Entities.Users.Contracts;
 using System;
 
 namespace NES.Core.Engine
 {
-	public class Engine :IEngine
+	public class Engine : IEngine
 	{
 		private const string exitCommand = "exit";
-		private IUser user;
+        private readonly static Engine instance = new Engine();
+        private IUser user;
 
-		public static Engine Instance { get; } = new Engine();
-		private IMarket MarketProp { get; set; }
-		private IBroker Broker { get; } = new Broker();
+        private UserHandler Handler { get; set; }
+        private IMarket MarketProp { get; set; }
+		private IBroker Broker { get; } 
 		private IOConsole ConsoleManager { get; } = new IOConsole();
 
-		private IUserFactory UserFactoryProp { get; set; }
+        public static Engine Instance { get; } = instance;
 
-		private Engine()
+        private Engine()
 		{
-			UserFactoryProp = UserFactory.Instance;
-			MarketProp = Market.Instance;
-		}
+            this.Handler = new UserHandler();
+			this.MarketProp = Market.Instance;
+            this.Broker = new Broker();
+        }
 
 
 		public void Start()
@@ -46,7 +49,7 @@ namespace NES.Core.Engine
 				{
 					ConsoleManager.WriteLine("\nEnter command:\n");
 					command = Command.Parse(ConsoleManager.ReadLine());
-                    ProcessCommand.Process(command, ref this.user, Broker, UserFactoryProp);
+                    ProcessCommand.Process(command, this.user, Broker, this.Handler);
 					if (command.Action == "exit") break;
 				}
 				catch(InitialCustomException ice)
@@ -63,5 +66,10 @@ namespace NES.Core.Engine
 				}
 			}
 		}
+
+        public void SetUser(IUser user)
+        {
+            this.user = user;
+        }
     }
 }

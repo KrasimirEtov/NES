@@ -10,11 +10,12 @@ namespace NES.Entities.Marketplace
 {
     public class Market : IMarket
     {
+        private readonly static IMarket instance = new Market();
         private const string fileWithPrices = "marketPrices";
 
         private readonly List<MarketAssetPrice> assetPrices;
 
-		public static IMarket Instance { get; } = new Market();
+		public static IMarket Instance { get; } = instance;
 
 		private Market()
         {

@@ -1,6 +1,8 @@
 ﻿using NES.Core.Engine.Contracts;
 using NES.Entities.Users;
 using NES.Entities.Users.Contracts;
+using NES.Entities.Wallets;
+using NES.Entities.Wallets.Contracts;
 
 namespace NES.Core.Engine
 {
@@ -12,16 +14,9 @@ namespace NES.Core.Engine
 
 		public static IUserFactory Instance { get; } = new UserFactory();
 
-		public IUser CreateUser()
-		{
-			var login = new Login();
-			return login.CreateUser();
-		}
-
-		public void RegisterUser()
-		{
-			var reg = new Register();
-			reg = null;
-		}
+		public IUser CreateUser(string name, IWallet wallet)
+        {
+            return new User(name, wallet);
+        }
 	}
 }
