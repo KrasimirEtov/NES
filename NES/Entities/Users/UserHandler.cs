@@ -90,7 +90,7 @@ namespace NES.Entities.Users
 			}
 			else
 			{
-				throw new Exception("Incorrent input for cash!");
+				throw new InitialCustomException("Incorrent input for cash!");
 			}
 
             if (CheckName(this.Name))
@@ -113,7 +113,7 @@ namespace NES.Entities.Users
 
         private bool CheckName(string userName)
         {
-            if (!File.Exists($"../../../Files/{usersFileName}.txt")) return false;
+			if (!IOStream.CheckIfFileExists(usersFileName)) return false;
 
             foreach (var read in IOStream.ReadLine(usersFileName))
             {
@@ -126,7 +126,7 @@ namespace NES.Entities.Users
 
         private bool CheckPass(string userName, string password)
         {
-            if (!File.Exists($"../../../Files/{usersFileName}.txt")) return false;
+            if (!IOStream.CheckIfFileExists(usersFileName)) return false;
             foreach (var read in IOStream.ReadLine(usersFileName))
             {
                 string[] data = read.Split('|');

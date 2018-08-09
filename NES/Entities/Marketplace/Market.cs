@@ -55,10 +55,9 @@ namespace NES.Entities.Marketplace
             Printer.PrintMarketName();
             List<MarketAssetPrice> ordered = this.assetPrices.OrderBy(x => x.Category).ToList();
             string category = "";
-            IOConsole.WriteLine($"User: {user.Name}");
-            IOConsole.WriteLine($"Cash: ${user.Wallet.Cash}");
+			Printer.PrintUserInfo(user);
 
-            for (int i = 0; i < ordered.Count; i++)
+			for (int i = 0; i < ordered.Count; i++)
             {
                 if (ordered[i].Category != category)
                 {

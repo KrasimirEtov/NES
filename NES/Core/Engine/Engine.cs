@@ -1,6 +1,5 @@
 ﻿using NES.Core.Commands;
 using NES.Core.Commands.Contracts;
-using NES.Core.Engine.Contracts;
 using NES.Core.Providers;
 using NES.Entities.Broker;
 using NES.Entities.Broker.Contracts;
@@ -47,7 +46,9 @@ namespace NES.Core.Engine
 				try
 				{
 					IOConsole.WriteLine("\nEnter command:\n");
+					IOConsole.ChangeColor(ConsoleColor.Blue);
 					command = Command.Parse(IOConsole.ReadLine());
+					IOConsole.ResetColor();
                     ProcessCommand.Process(command, this.user, Broker, this.Handler);
 					if (command.Action == "exit") break;
 				}

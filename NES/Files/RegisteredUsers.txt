@@ -4,3 +4,5 @@ aleks|123
 ioan|123
 bobi|123
 krasi|1234
+test|1234
+test2|1234

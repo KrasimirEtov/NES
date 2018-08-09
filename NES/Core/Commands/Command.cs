@@ -76,7 +76,7 @@ namespace NES.Core.Commands
                 return;
             }            
 
-			if (chunks.Length != 3) throw new Exception("Invalid command format");
+			if (chunks.Length != 3) throw new Exception("\nInvalid command format");
 
             this.Action = chunks[0];
             this.Asset = chunks[1];

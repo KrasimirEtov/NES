@@ -53,10 +53,11 @@ namespace NES.Entities.Broker
 			decimal price = MarketProp.AssetPrice(assetName);
 
             IAsset asset = Factory.CreateAsset(assetName, price, amount);
-            user.Wallet.RemoveAsset(asset);
+			user.Wallet.TotalWinnings += (price - user.Wallet.Portfolio[asset.Name].Price) * amount; // get total winnings
+			user.Wallet.RemoveAsset(asset);
 
             user.Wallet.Cash += price * amount;
-
+			
 			MarketProp.PrintMarket(user); 
 			Console.ForegroundColor = ConsoleColor.Green;
 			IOConsole.WriteLine($"Succesfully selled {amount} {assetName} " + (amount > 1 ? "assets" : "asset"));

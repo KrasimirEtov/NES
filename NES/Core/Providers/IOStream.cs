@@ -1,4 +1,5 @@
 ﻿using NES.Entities.Wallets.Contracts;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -9,6 +10,7 @@ namespace NES.Core.Providers
 	{
 		public static IEnumerable<string> ReadLine(string fileName)
 		{
+			if (!CheckIfFileExists(fileName)) throw new Exception("File does not exist"); 
 			using (StreamReader sr = new StreamReader($"../../../Files/{fileName}.txt"))
 			{
 				string line;
@@ -56,6 +58,12 @@ namespace NES.Core.Providers
 		public static string ReadAllText(string fileName)
 		{
 			return File.ReadAllText($"../../../Files/ConsoleMenus/{fileName}.txt");
+		}
+
+		public static bool CheckIfFileExists(string fileName)
+		{
+			if (File.Exists($"../../../Files/{fileName}.txt")) return true;
+			return false;
 		}
 	}
 }
