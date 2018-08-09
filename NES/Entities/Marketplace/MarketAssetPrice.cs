@@ -23,7 +23,7 @@ namespace NES.Entities.Marketplace
 			{
 				if (value.All(char.IsDigit)) throw new ArgumentException("Name cannot contain only letters!");
 				if (value == null) throw new ArgumentNullException("Name cannot be null!");
-				if (value.Length < 1 || value.Length > 50) throw new ArgumentOutOfRangeException("Name length cannot be less than 1 or more than 50 characters!");
+				if (value.Length < 1 || value.Length > 50) throw new Exception("Name length cannot be less than 1 or more than 50 characters!");
 				name = value;
 			}
 		}
@@ -33,7 +33,7 @@ namespace NES.Entities.Marketplace
 			get => price;
 			set
 			{
-				if (value < 1) throw new ArgumentOutOfRangeException("Price cannot be negative!");
+				if (value < 1) throw new Exception("Price cannot be negative!");
 				price = value;
 			}
 		}
@@ -45,7 +45,7 @@ namespace NES.Entities.Marketplace
 			{
 				if (value.All(char.IsDigit)) throw new ArgumentException("Category cannot contain only letters!");
 				if (value == null) throw new ArgumentNullException("Category cannot be null!");
-				if (value.Length < 1 || value.Length > 50) throw new ArgumentOutOfRangeException("Category length cannot be less than 1 or more than 50 characters!");
+				if (value.Length < 1 || value.Length > 50) throw new Exception("Category length cannot be less than 1 or more than 50 characters!");
 				category = value;
 			}
 		}

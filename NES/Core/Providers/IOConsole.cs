@@ -18,5 +18,26 @@ namespace NES.Core.Providers
 		{
 			Console.WriteLine(message);
 		}
+
+		public static void ChangeColor(ConsoleColor console)
+		{
+			Console.ForegroundColor = console;
+		}
+
+		public static void ResetColor()
+		{
+			Console.ResetColor();
+		}
+
+		public static void Clear()
+		{
+			Console.Clear();
+		}
+
+		public static void SetScreenSize()
+		{
+			Console.WindowHeight = 30;
+			Console.BufferWidth = Console.WindowWidth = 120;
+		}
 	}
 }

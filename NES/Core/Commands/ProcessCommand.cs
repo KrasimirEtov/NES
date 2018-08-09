@@ -1,6 +1,5 @@
 ﻿using System;
 using NES.Core.Commands.Contracts;
-using NES.Core.Engine.Contracts;
 using NES.Core.Providers;
 using NES.Entities.Broker.Contracts;
 using NES.Entities.Users;
@@ -34,12 +33,12 @@ namespace NES.Core.Commands
 						user.Wallet.PrintWallet();
 						break;
 					case "logout":
-						user.SaveWallet();
-						user = null;
+						handler.SaveWallet(user.Wallet, user.Name);
+						Engine.Engine.Instance.SetUser(null);
 						Printer.InitialInstructions();
-						Console.ForegroundColor = ConsoleColor.Green;
+						IOConsole.ChangeColor(ConsoleColor.Green);
 						IOConsole.WriteLine("You logged out succesfully!");
-						Console.ResetColor();
+						IOConsole.ResetColor();
 						break;
 					default:
 						throw new ArgumentException($"{command.Action} is not a valid command.");

@@ -34,7 +34,7 @@ namespace NES.Core.Engine
 
 		public void Start()
 		{
-			Printer.SetScreenSize();
+			IOConsole.SetScreenSize();
 			Printer.InitialInstructions();
             ReadCommand();
 		}

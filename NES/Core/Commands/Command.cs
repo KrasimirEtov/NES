@@ -1,6 +1,4 @@
 ﻿using NES.Core.Commands.Contracts;
-using NES.Core.Providers;
-using NES.Entities.Assets.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,7 +51,7 @@ namespace NES.Core.Commands
             get => amount;
             set
             {
-                if (value < 0) throw new ArgumentOutOfRangeException("Amount cannot be negative!");
+                if (value <= 0) throw new Exception("Amount cannot be negative or equal to zero!");
                 amount = value;
             }
         }
@@ -88,7 +86,7 @@ namespace NES.Core.Commands
 			}
 			else
 			{
-				throw new ArgumentException("Incorrent input for amount!");
+				throw new Exception("Incorrent input for amount!");
 			}
 		}
 	}

@@ -27,7 +27,7 @@ namespace NES.Entities.Assets
 			get => price;
 			set
 			{
-				if (value < 0) throw new ArgumentOutOfRangeException("Price cannot be negative!");
+				if (value < 0) throw new Exception("Price cannot be negative!");
 				price = value;
 			}
 		}
@@ -37,7 +37,7 @@ namespace NES.Entities.Assets
 			get => amount;
 			set
 			{
-				if (value < 0) throw new ArgumentOutOfRangeException("Amount cannot be negative!");
+				if (value < 0) throw new Exception("Amount cannot be negative!");
 				amount = value;
 			}
 		}

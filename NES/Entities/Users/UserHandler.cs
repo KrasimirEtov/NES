@@ -22,7 +22,7 @@ namespace NES.Entities.Users
         private string password;
         private decimal cash;
 
-        protected string Name
+        private string Name
         {
             get => name;
             set
@@ -34,7 +34,7 @@ namespace NES.Entities.Users
             }
         }
 
-        protected string Password
+		private string Password
         {
             get => password;
             set
@@ -45,7 +45,7 @@ namespace NES.Entities.Users
             }
         }
 
-        protected decimal Cash
+		private decimal Cash
         {
             get => cash;
             set
@@ -70,7 +70,7 @@ namespace NES.Entities.Users
             }
             if (!CheckPass(this.Name, this.Password))
             {
-                throw new InitialCustomException("Invalid password.");
+                throw new InitialCustomException("You have entered an invalid username or password");
             }
 
             return userFactory.CreateUser(name, IOStream.BinaryRead($"{Name}{walletName}"));
@@ -84,7 +84,14 @@ namespace NES.Entities.Users
             }
             this.Name = parameters[0];
             this.Password = parameters[1];
-            this.Cash = decimal.Parse(parameters[2]);
+			if (decimal.TryParse(parameters[2], out var cash))
+			{
+				this.Cash = cash;
+			}
+			else
+			{
+				throw new Exception("Incorrent input for cash!");
+			}
 
             if (CheckName(this.Name))
             {
@@ -96,11 +103,11 @@ namespace NES.Entities.Users
             IOStream.BinaryWrite(wallet, $"{Name}{walletName}");
 
             Printer.InitialInstructions();
-            Console.ForegroundColor = ConsoleColor.Green;
+            IOConsole.ChangeColor(ConsoleColor.Green);
             IOConsole.WriteLine("Your registration is complete. You can login now!");
-            Console.ResetColor();
+            IOConsole.ResetColor();
 
-            return userFactory.CreateUser(name, wallet);
+            return userFactory.CreateUser(Name, wallet);
         }
 
 
@@ -137,5 +144,10 @@ namespace NES.Entities.Users
             temp.Append(password);
             return temp.ToString();
         }
-    }
+
+		public void SaveWallet(IWallet wallet, string userName)
+		{
+			IOStream.BinaryWrite(wallet, $"{userName}Wallet");
+		}
+	}
 }

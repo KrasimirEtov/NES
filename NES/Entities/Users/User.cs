@@ -38,9 +38,5 @@ namespace NES.Entities.Users
 			Wallet = wallet;
 		}
 
-		public void SaveWallet()
-		{
-			IOStream.BinaryWrite(Wallet, $"{Name}Wallet");
-		}
 	}
 }

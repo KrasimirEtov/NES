@@ -54,7 +54,7 @@ namespace NES.Entities.Wallets
         {
             if (!portfolio.ContainsKey(asset.Name))
             {
-                throw new ArgumentException("You can't cell what you don't have.");
+                throw new ArgumentException("You can't sell what you don't have.");
             }
             else if (this.portfolio[asset.Name].Amount - asset.Amount < 0)
             {
