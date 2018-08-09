@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NES.Core.Providers;
 using NES.Entities.Assets.Contracts;
 using NES.Entities.Wallets.Contracts;
@@ -18,7 +19,7 @@ namespace NES.Entities.Wallets
 		{
 			get
 			{
-				return new Dictionary<string, IAsset>(portfolio);
+                return new Dictionary<string, IAsset>(this.portfolio.OrderBy(x => x.Value.Type).Select(x => x));
 			}
 		}
 
@@ -74,14 +75,20 @@ namespace NES.Entities.Wallets
 
         public void PrintWallet()
 		{
+            string categoty = "";
 			Console.WriteLine();
 			if (Portfolio.Count < 1)
 			{
 				IOConsole.WriteLine("You don't have any purchased assets!");
 			}
 			foreach (var asset in Portfolio)
-			{
-				IOConsole.WriteLine($"{asset.Key}: Amount: {asset.Value.Amount}, Price per unit: {asset.Value.Price}");
+            {
+                if (categoty != asset.Value.Type.ToString())
+                {
+                    categoty = asset.Value.Type.ToString();
+                    Console.WriteLine(asset.Value.Type.ToString() + ":");
+                }
+                IOConsole.WriteLine($"    {asset.Key}: Amount: {asset.Value.Amount}, Price per unit: {asset.Value.Price}");
 			}
 		}
 	}
