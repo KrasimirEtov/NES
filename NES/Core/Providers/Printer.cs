@@ -10,21 +10,16 @@ namespace NES.Core.Providers
 		public static void PrintStartup()
 		{
 			IOConsole.Clear();
-			IOConsole.ChangeColor(ConsoleColor.Blue);
-			IOConsole.WriteLine(IOStream.ReadAllText(welcomeScreen));
-			IOConsole.ResetColor();
+			IOConsole.WriteLine(IOStream.ReadAllText(welcomeScreen), ConsoleColor.Blue);
 		}
 
 		public static void PrintMarketName()
 		{
-			IOConsole.ChangeColor(ConsoleColor.Blue);
-			IOConsole.WriteLine(IOStream.ReadAllText(marketName));
-			IOConsole.ResetColor();
+			IOConsole.WriteLine(IOStream.ReadAllText(marketName), ConsoleColor.Blue);
 		}
 
 		public static void InitialInstructions()
 		{
-			IOConsole.ChangeColor(ConsoleColor.Blue);
 			PrintStartup();
 			IOConsole.WriteLine("If you already have an account, please use command 'login' followed by user name and password separated by space.\n");
             IOConsole.WriteLine("If you don't have an account, please create one using command 'register'\nfollowed by user name, password and money for traiding separated by space.\n");
@@ -34,17 +29,6 @@ namespace NES.Core.Providers
 		{
 			IOConsole.WriteLine($"User: {user.Name}");
 			IOConsole.Write($"Cash: ${user.Wallet.Cash}");
-			IOConsole.Write($"\t\tTotal winnings: ");
-			if (user.Wallet.TotalWinnings < 0)
-			{
-				IOConsole.ChangeColor(ConsoleColor.Red);
-			}
-			else
-			{
-				IOConsole.ChangeColor(ConsoleColor.Green);
-			}
-			 IOConsole.Write($"{user.Wallet.TotalWinnings}");
-			IOConsole.ResetColor();
 		}       
     }
 }

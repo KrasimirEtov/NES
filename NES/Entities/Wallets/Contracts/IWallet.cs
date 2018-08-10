@@ -10,6 +10,5 @@ namespace NES.Entities.Wallets.Contracts
         void RemoveAsset(IAsset asset);
         void PrintWallet();
 		Dictionary<string, IAsset> Portfolio { get; }
-		decimal TotalWinnings { get; set; }
 	}
 }

@@ -103,9 +103,7 @@ namespace NES.Entities.Users
             IOStream.BinaryWrite(wallet, $"{Name}{walletName}");
 
             Printer.InitialInstructions();
-            IOConsole.ChangeColor(ConsoleColor.Green);
-            IOConsole.WriteLine("Your registration is complete. You can login now!");
-            IOConsole.ResetColor();
+            IOConsole.WriteLine("Your registration is complete. You can login now!", ConsoleColor.Green);
 
             return userFactory.CreateUser(Name, wallet);
         }

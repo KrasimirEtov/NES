@@ -57,7 +57,7 @@ namespace NES.Entities.Marketplace
             string category = "";
 			Printer.PrintUserInfo(user);
 
-			for (int i = 0; i < ordered.Count; i++)
+            for (int i = 0; i < ordered.Count; i++)
             {
                 if (ordered[i].Category != category)
                 {

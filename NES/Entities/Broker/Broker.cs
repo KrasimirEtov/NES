@@ -1,5 +1,5 @@
-﻿using NES.Core.Engine;
-using System;
+﻿using System;
+using NES.Core.Engine;
 using NES.Core.Engine.Contracts;
 using NES.Entities.Assets.Contracts;
 using NES.Entities.Broker.Contracts;
@@ -7,7 +7,6 @@ using NES.Entities.Marketplace;
 using NES.Entities.Marketplace.Contracts;
 using NES.Entities.Users.Contracts;
 using NES.Core.Providers;
-using NES.Entities.Assets;
 
 namespace NES.Entities.Broker
 {
@@ -42,9 +41,7 @@ namespace NES.Entities.Broker
 			}
 
 			MarketProp.PrintMarket(user);
-            IOConsole.ChangeColor(ConsoleColor.Green);
-			IOConsole.WriteLine($"Succesfully purchased {amount} {assetName} " + (amount > 1 ? "assets" : "asset"));
-			IOConsole.ResetColor();
+			IOConsole.WriteLine($"Succesfully purchased {amount} {assetName} " + (amount > 1 ? "assets" : "asset"), ConsoleColor.Green);
 		}
 
         public void Sell(string assetName, decimal amount, IUser user)
@@ -52,22 +49,12 @@ namespace NES.Entities.Broker
 			decimal price = MarketProp.AssetPrice(assetName);
 
             IAsset asset = Factory.CreateAsset(assetName, price, amount);
-            try
-            {
-                user.Wallet.TotalWinnings += (price - user.Wallet.Portfolio[asset.Name].Price) * amount; // get total winnings
-            }
-            catch
-            {
-                throw new ArgumentException($"Not enough {assetName}s in the wallet.");
-            }
 			user.Wallet.RemoveAsset(asset);
 
             user.Wallet.Cash += price * amount;
 			
 			MarketProp.PrintMarket(user);
-            IOConsole.ChangeColor(ConsoleColor.Green);
-            IOConsole.WriteLine($"Succesfully selled {amount} {assetName} " + (amount > 1 ? "assets" : "asset"));
-			IOConsole.ResetColor();
+            IOConsole.WriteLine($"Succesfully selled {amount} {assetName} " + (amount > 1 ? "assets" : "asset"), ConsoleColor.Green);
 		}
     }
 }

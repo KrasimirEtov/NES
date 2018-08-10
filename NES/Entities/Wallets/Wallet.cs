@@ -12,14 +12,12 @@ namespace NES.Entities.Wallets
 	{
 		private Dictionary<string, IAsset> portfolio;
 		private decimal cash;
-
-		public decimal TotalWinnings { get; set; }
-
+        
 		public Dictionary<string, IAsset> Portfolio
 		{
 			get
 			{
-                return new Dictionary<string, IAsset>(this.portfolio.OrderBy(x => x.Value.Type).Select(x => x));
+                return new Dictionary<string, IAsset>(this.portfolio.OrderBy(x => x.Value.Type).ThenBy(x => x.Key));
 			}
 		}
 
@@ -76,7 +74,7 @@ namespace NES.Entities.Wallets
         public void PrintWallet()
 		{
             string categoty = "";
-			Console.WriteLine();
+            IOConsole.WriteLine();
 			if (Portfolio.Count < 1)
 			{
 				IOConsole.WriteLine("You don't have any purchased assets!");
@@ -86,9 +84,10 @@ namespace NES.Entities.Wallets
                 if (categoty != asset.Value.Type.ToString())
                 {
                     categoty = asset.Value.Type.ToString();
-                    Console.WriteLine(asset.Value.Type.ToString() + ":");
+                    IOConsole.WriteLine(asset.Value.Type.ToString() + ":", ConsoleColor.DarkRed);
                 }
-                IOConsole.WriteLine($"    {asset.Key}: Amount: {asset.Value.Amount}, Price per unit: {asset.Value.Price}");
+                IOConsole.Write($"    {asset.Key}:");
+                IOConsole.WriteLine($" Amount: {asset.Value.Amount}, Price per unit: {asset.Value.Price}", ConsoleColor.DarkGray);
 			}
 		}
 	}

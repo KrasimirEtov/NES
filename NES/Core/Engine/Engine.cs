@@ -54,15 +54,11 @@ namespace NES.Core.Engine
 				}
 				catch(InitialCustomException ice)
 				{
-                    IOConsole.ChangeColor(ConsoleColor.Red);
-                    IOConsole.WriteLine(ice.Message);
-					Console.ResetColor();
+                    IOConsole.WriteLine(ice.Message, ConsoleColor.Red);
 				}
 				catch (Exception ex)
 				{
-                    IOConsole.ChangeColor(ConsoleColor.Red);
-                    IOConsole.WriteLine(ex.Message);
-					IOConsole.ResetColor();
+                    IOConsole.WriteLine(ex.Message, ConsoleColor.Red);
 				}
 			}
 		}

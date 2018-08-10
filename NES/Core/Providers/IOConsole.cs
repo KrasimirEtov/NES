@@ -9,15 +9,19 @@ namespace NES.Core.Providers
 			return Console.ReadLine();
 		}
 
-		public static void Write(string message)
+		public static void Write(string message, ConsoleColor color = ConsoleColor.White)
 		{
-			Console.Write(message);
-		}
+            ChangeColor(color);
+            Console.Write(message);
+            ResetColor();
+        }
 
-		public static void WriteLine(string message = "")
-		{
-			Console.WriteLine(message);
-		}
+		public static void WriteLine(string message = "", ConsoleColor color = ConsoleColor.White)
+        {
+            ChangeColor(color);
+            Console.WriteLine(message);
+            ResetColor();
+        }
 
 		public static void ChangeColor(ConsoleColor console)
 		{
@@ -26,7 +30,7 @@ namespace NES.Core.Providers
 
 		public static void ResetColor()
 		{
-			Console.ResetColor();
+            ChangeColor(ConsoleColor.White);
 		}
 
 		public static void Clear()
@@ -44,5 +48,5 @@ namespace NES.Core.Providers
         {
             Console.Write(spacing, value);
         }
-	}
+    }
 }
