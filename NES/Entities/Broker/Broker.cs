@@ -7,6 +7,7 @@ using NES.Entities.Marketplace;
 using NES.Entities.Marketplace.Contracts;
 using NES.Entities.Users.Contracts;
 using NES.Core.Providers;
+using NES.Entities.Assets;
 
 namespace NES.Entities.Broker
 {
@@ -51,7 +52,14 @@ namespace NES.Entities.Broker
 			decimal price = MarketProp.AssetPrice(assetName);
 
             IAsset asset = Factory.CreateAsset(assetName, price, amount);
-			user.Wallet.TotalWinnings += (price - user.Wallet.Portfolio[asset.Name].Price) * amount; // get total winnings
+            try
+            {
+                user.Wallet.TotalWinnings += (price - user.Wallet.Portfolio[asset.Name].Price) * amount; // get total winnings
+            }
+            catch
+            {
+                throw new ArgumentException($"Not enough {assetName}s in the wallet.");
+            }
 			user.Wallet.RemoveAsset(asset);
 
             user.Wallet.Cash += price * amount;
