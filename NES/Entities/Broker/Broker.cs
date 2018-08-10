@@ -42,9 +42,9 @@ namespace NES.Entities.Broker
 			}
 
 			MarketProp.PrintMarket(user);
-			Console.ForegroundColor = ConsoleColor.Green;
+            IOConsole.ChangeColor(ConsoleColor.Green);
 			IOConsole.WriteLine($"Succesfully purchased {amount} {assetName} " + (amount > 1 ? "assets" : "asset"));
-			Console.ResetColor();
+			IOConsole.ResetColor();
 		}
 
         public void Sell(string assetName, decimal amount, IUser user)
@@ -64,10 +64,10 @@ namespace NES.Entities.Broker
 
             user.Wallet.Cash += price * amount;
 			
-			MarketProp.PrintMarket(user); 
-			Console.ForegroundColor = ConsoleColor.Green;
-			IOConsole.WriteLine($"Succesfully selled {amount} {assetName} " + (amount > 1 ? "assets" : "asset"));
-			Console.ResetColor();
+			MarketProp.PrintMarket(user);
+            IOConsole.ChangeColor(ConsoleColor.Green);
+            IOConsole.WriteLine($"Succesfully selled {amount} {assetName} " + (amount > 1 ? "assets" : "asset"));
+			IOConsole.ResetColor();
 		}
     }
 }
