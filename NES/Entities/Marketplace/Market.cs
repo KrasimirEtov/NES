@@ -63,24 +63,25 @@ namespace NES.Entities.Marketplace
                 {
                     IOConsole.WriteLine();
                     category = ordered[i].Category;
-                    Console.Write("\n{0,20} => ", category);
+                    IOConsole.WriteAligned("\n{0,20} => ", category);
                 }
 
-                Console.Write("{0,15} ", $"{ordered[i].Name}: ");
+                IOConsole.WriteAligned("{0,15} ", $"{ordered[i].Name}: ");
                 string key = ordered[i].Name.First().ToString().ToUpper() + ordered[i].Name.Substring(1);
                 if (user.Wallet.Portfolio.ContainsKey(key))
                 {
                     if (user.Wallet.Portfolio[key].Price < ordered[i].Price)
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
+                        IOConsole.ChangeColor(ConsoleColor.Green);
                     }
                     else if (user.Wallet.Portfolio[key].Price > ordered[i].Price)
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
+                        IOConsole.ChangeColor(ConsoleColor.Red);
                     }
                 }
 
-                Console.Write("{0,7} ", $"${ordered[i].Price}");
+                IOConsole.WriteAligned("{0,7 } ", $"${ordered[i].Price}");
+
                 IOConsole.ResetColor();
                 IOConsole.Write("| ");
             }

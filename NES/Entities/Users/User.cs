@@ -37,6 +37,5 @@ namespace NES.Entities.Users
 			Name = name;
 			Wallet = wallet;
 		}
-
 	}
 }

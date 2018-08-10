@@ -39,5 +39,10 @@ namespace NES.Core.Providers
 			Console.WindowHeight = 30;
 			Console.BufferWidth = Console.WindowWidth = 120;
 		}
+
+        public static void WriteAligned(string spacing, string value)
+        {
+            Console.Write(spacing, value);
+        }
 	}
 }
