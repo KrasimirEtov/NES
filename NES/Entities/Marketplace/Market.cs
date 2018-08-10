@@ -51,7 +51,7 @@ namespace NES.Entities.Marketplace
 
         public void PrintMarket(IUser user)
         {
-            Console.Clear();
+            IOConsole.Clear();
             Printer.PrintMarketName();
             List<MarketAssetPrice> ordered = this.assetPrices.OrderBy(x => x.Category).ToList();
             string category = "";
@@ -61,7 +61,7 @@ namespace NES.Entities.Marketplace
             {
                 if (ordered[i].Category != category)
                 {
-                    Console.WriteLine();
+                    IOConsole.WriteLine();
                     category = ordered[i].Category;
                     Console.Write("\n{0,20} => ", category);
                 }
@@ -81,7 +81,7 @@ namespace NES.Entities.Marketplace
                 }
 
                 Console.Write("{0,7} ", $"${ordered[i].Price}");
-                Console.ResetColor();
+                IOConsole.ResetColor();
                 IOConsole.Write("| ");
             }
             IOConsole.WriteLine("\n");

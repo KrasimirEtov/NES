@@ -9,7 +9,6 @@ namespace NES.Entities.Assets.Entities
         public const string name = "Google";
         public Google(decimal price, decimal amount) : base(name, AssetType.STOCK, price, amount)
         {
-
         }
     }
 }

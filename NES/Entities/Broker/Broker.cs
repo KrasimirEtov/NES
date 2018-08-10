@@ -17,7 +17,6 @@ namespace NES.Entities.Broker
 
 		public Broker()
 		{
-
 		}
 
 		public void EndDayTraiding(IUser user)
@@ -34,8 +33,7 @@ namespace NES.Entities.Broker
 			{
 				IAsset asset = Factory.CreateAsset(assetName, price, amount);
 				user.Wallet.AddAsset(asset);
-                user.Wallet.Cash -= price * amount;
-                
+                user.Wallet.Cash -= price * amount;                
 			}
 			else
 			{

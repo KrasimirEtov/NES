@@ -9,7 +9,6 @@ namespace NES.Entities.Assets.Entities
         public const string name = "Facebook";
         public Facebook(decimal price, decimal amount) : base(name, AssetType.STOCK, price, amount)
         {
-
         }
     }
 }

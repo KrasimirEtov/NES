@@ -45,7 +45,6 @@ namespace NES.Core.Providers
 			}
 			 IOConsole.Write($"{user.Wallet.TotalWinnings}");
 			IOConsole.ResetColor();
-		}
-        
+		}       
     }
 }

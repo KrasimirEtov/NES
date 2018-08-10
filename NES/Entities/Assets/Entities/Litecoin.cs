@@ -9,7 +9,6 @@ namespace NES.Entities.Assets.Entities
         public const string name = "Litecoin";
         public Litecoin(decimal price, decimal amount) : base(name, AssetType.CRIPTO, price, amount)
         {
-
         }
     }
 }

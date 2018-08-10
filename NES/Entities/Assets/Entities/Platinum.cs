@@ -9,7 +9,6 @@ namespace NES.Entities.Assets.Entities
         public const string name = "Platinum";
         public Platinum(decimal price, decimal amount) : base(name, AssetType.METAL, price, amount)
         {
-
         }
     }
 }

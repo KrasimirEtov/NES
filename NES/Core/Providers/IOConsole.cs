@@ -14,7 +14,7 @@ namespace NES.Core.Providers
 			Console.Write(message);
 		}
 
-		public static void WriteLine(string message)
+		public static void WriteLine(string message = "")
 		{
 			Console.WriteLine(message);
 		}
