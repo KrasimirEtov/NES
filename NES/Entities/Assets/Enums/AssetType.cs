@@ -4,7 +4,7 @@
     {
         CRIPTO,
         METAL,
-        CURRENCY,
+        //CURRENCY,
         STOCK
     }
 }

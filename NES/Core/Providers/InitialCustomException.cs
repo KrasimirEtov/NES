@@ -6,7 +6,7 @@ namespace NES.Core.Providers
     {
 		public InitialCustomException(string message) : base(message)
 		{
-			Printer.InitialInstructions();
+            IOConsole.WriteLine(message);
 		}
     }
 }
