@@ -6,15 +6,11 @@ using System.Linq;
 
 namespace NES.Core.Engine
 {
-	public class AssetFactory : IFactory
+	public class AssetFactory : IAssetFactory
 	{
-        private readonly static IFactory instance = new AssetFactory();
-
-        private AssetFactory()
+        public AssetFactory()
 		{
 		}
-
-        public static IFactory Instance { get; } = instance;
 
         public IAsset CreateAsset(string type, decimal price, decimal amount)
 		{

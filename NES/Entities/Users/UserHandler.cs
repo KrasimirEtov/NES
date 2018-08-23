@@ -17,7 +17,13 @@ namespace NES.Entities.Users
         private const string usersFileName = "RegisteredUsers";
         private const string walletName = "Wallet";
 
-        private IUserFactory userFactory = UserFactory.Instance;
+        private IUserFactory userFactory;
+
+        public UserHandler(IUserFactory userFactory)
+        {
+            this.userFactory = userFactory;
+        }
+
         private string name;
         private string password;
         private decimal cash;

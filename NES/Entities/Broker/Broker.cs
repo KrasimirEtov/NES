@@ -3,7 +3,6 @@ using NES.Core.Engine;
 using NES.Core.Engine.Contracts;
 using NES.Entities.Assets.Contracts;
 using NES.Entities.Broker.Contracts;
-using NES.Entities.Marketplace;
 using NES.Entities.Marketplace.Contracts;
 using NES.Entities.Users.Contracts;
 using NES.Core.Providers;
@@ -12,11 +11,13 @@ namespace NES.Entities.Broker
 {
 	public class Broker : IBroker
 	{
-		private IFactory Factory { get; set; } = AssetFactory.Instance;
-		private IMarket MarketProp { get; set; } = Market.Instance;
+		private IAssetFactory Factory { get; set; }
+		private IMarket MarketProp { get; set; }
 
-		public Broker()
+		public Broker(IAssetFactory factory, IMarket market)
 		{
+            this.Factory = factory;
+            this.MarketProp = market;
 		}
 
 		public void EndDayTraiding(IUser user)

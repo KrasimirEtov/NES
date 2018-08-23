@@ -34,7 +34,7 @@ namespace NES.Core.Commands
 						break;
 					case "logout":
 						handler.SaveWallet(user.Wallet, user.Name);
-						Engine.Engine.Instance.SetUser(null);
+						Engine.Engine.SetUser(null);
 						Printer.InitialInstructions();
 						IOConsole.WriteLine("You logged out succesfully!", ConsoleColor.Green);
 						break;
@@ -48,12 +48,12 @@ namespace NES.Core.Commands
 				{
 					case "register":
                         user = handler.RegisteUser(command.Parameters);
-                        Engine.Engine.Instance.SetUser(user);
+                        Engine.Engine.SetUser(user);
                         broker.EndDayTraiding(user);
                         break;
 					case "login":
                         user = handler.LoginUser(command.Parameters);
-                        Engine.Engine.Instance.SetUser(user);
+                        Engine.Engine.SetUser(user);
                         broker.EndDayTraiding(user);
 						break;
 					case "exit":

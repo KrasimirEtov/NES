@@ -8,13 +8,9 @@ namespace NES.Core.Engine
 {
     public class UserFactory : IUserFactory
     {
-        private readonly static IUserFactory instance = new UserFactory();
-
-        private UserFactory()
+        public UserFactory()
 		{
 		}
-
-		public static IUserFactory Instance { get; } = instance;
 
 		public IUser CreateUser(string name, IWallet wallet)
         {

@@ -1,9 +1,7 @@
 ﻿using NES.Core.Commands;
 using NES.Core.Commands.Contracts;
 using NES.Core.Providers;
-using NES.Entities.Broker;
 using NES.Entities.Broker.Contracts;
-using NES.Entities.Marketplace;
 using NES.Entities.Marketplace.Contracts;
 using NES.Entities.Users;
 using NES.Entities.Users.Contracts;
@@ -11,23 +9,20 @@ using System;
 
 namespace NES.Core.Engine
 {
-	public class Engine : IEngine
-	{
-		private const string exitCommand = "exit";
-        private readonly static Engine instance = new Engine();
-        private IUser user;
+    public class Engine : IEngine
+    {
+        private const string exitCommand = "exit";
+        private static IUser currentUser;
 
         private UserHandler Handler { get; set; }
         private IMarket MarketProp { get; set; }
-		private IBroker Broker { get; } 
+        private IBroker Broker { get; }
 
-        public static Engine Instance { get; } = instance;
-
-        private Engine()
+        public Engine(UserHandler handler, IMarket market, IBroker broker)
 		{
-            this.Handler = new UserHandler();
-			this.MarketProp = Market.Instance;
-            this.Broker = new Broker();
+            this.Handler = handler;
+            this.MarketProp = market;
+            this.Broker = broker;
         }
 
 
@@ -49,7 +44,7 @@ namespace NES.Core.Engine
 					IOConsole.ChangeColor(ConsoleColor.Blue);
 					command = Command.Parse(IOConsole.ReadLine());
 					IOConsole.ResetColor();
-                    ProcessCommand.Process(command, this.user, Broker, this.Handler);
+                    ProcessCommand.Process(command, currentUser, Broker, Handler);
 					if (command.Action == "exit") break;
 				}
 				catch(InitialCustomException ice)
@@ -63,9 +58,9 @@ namespace NES.Core.Engine
 			}
 		}
 
-        public void SetUser(IUser user)
+        public static void SetUser(IUser user)
         {
-            this.user = user;
+            currentUser = user;
         }
     }
 }
