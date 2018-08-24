@@ -36,7 +36,7 @@ namespace NES.Injection
 
         private static void RegisterCommands(ContainerBuilder builder)
         {
-
+            //will register commands here
         }
     }
 }
