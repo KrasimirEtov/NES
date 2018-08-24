@@ -71,7 +71,7 @@ namespace NES.Entities.Wallets
             }
         }
 
-        public void PrintWallet()
+        public string PrintWallet()
 		{
             string categoty = "";
             IOConsole.WriteLine();
@@ -89,6 +89,8 @@ namespace NES.Entities.Wallets
                 IOConsole.Write($"    {asset.Key}:");
                 IOConsole.WriteLine($" Amount: {asset.Value.Amount}, Price per unit: {asset.Value.Price}", ConsoleColor.DarkGray);
 			}
+
+            return "";
 		}
 	}
 }

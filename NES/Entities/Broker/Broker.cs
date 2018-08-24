@@ -20,13 +20,15 @@ namespace NES.Entities.Broker
             this.MarketProp = market;
 		}
 
-		public void EndDayTraiding(IUser user)
+		public string EndDayTraiding(IUser user)
 		{
 			MarketProp.UpdatePrices();
             MarketProp.PrintMarket(user);
-		}
 
-		public void Buy(string assetName, decimal amount, IUser user)
+            return "Trading day has ended!";
+        }
+
+		public string Buy(string assetName, decimal amount, IUser user)
 		{
 			decimal price = MarketProp.AssetPrice(assetName);
 
@@ -42,10 +44,10 @@ namespace NES.Entities.Broker
 			}
 
 			MarketProp.PrintMarket(user);
-			IOConsole.WriteLine($"Succesfully purchased {amount} {assetName} " + (amount > 1 ? "assets" : "asset"), ConsoleColor.Green);
+            return $"Succesfully purchased {amount} {assetName} " + (amount > 1 ? "assets" : "asset");
 		}
 
-        public void Sell(string assetName, decimal amount, IUser user)
+        public string Sell(string assetName, decimal amount, IUser user)
         {
 			decimal price = MarketProp.AssetPrice(assetName);
 
@@ -55,7 +57,7 @@ namespace NES.Entities.Broker
             user.Wallet.Cash += price * amount;
 			
 			MarketProp.PrintMarket(user);
-            IOConsole.WriteLine($"Succesfully selled {amount} {assetName} " + (amount > 1 ? "assets" : "asset"), ConsoleColor.Green);
+            return $"Succesfully selled {amount} {assetName} " + (amount > 1 ? "assets" : "asset");
 		}
     }
 }
