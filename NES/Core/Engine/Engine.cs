@@ -15,17 +15,10 @@ namespace NES.Core.Engine
     {
         private const string exitCommand = "exit";
         private static IUser currentUser;
-
-        private UserHandler Handler { get; set; }
-        private IMarket MarketProp { get; set; }
-        private IBroker Broker { get; }
         private IProcessCommand CommandProcessor { get; }
 
-        public Engine(UserHandler handler, IMarket market, IBroker broker, IProcessCommand commandProcessor)
+        public Engine(IProcessCommand commandProcessor)
 		{
-            this.Handler = handler;
-            this.MarketProp = market;
-            this.Broker = broker;
             this.CommandProcessor = commandProcessor;
         }
 
