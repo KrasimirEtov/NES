@@ -61,8 +61,13 @@ namespace NES.Entities.Users
             }
         }
         
-        public IUser LoginUser(IList<string> parameters)
+        public IUser LoginUser(IList<string> parameters, IUser user)
         {
+            if (user != null)
+            {
+                throw new InitialCustomException("You are already logged in!");
+            }
+
             if (parameters.Count != 2)
             {
                 throw new InitialCustomException($"Invalid login parameters!");
@@ -82,8 +87,13 @@ namespace NES.Entities.Users
             return userFactory.CreateUser(name, IOStream.BinaryRead($"{Name}{walletName}"));
         }
 
-        public IUser RegisteUser(IList<string> parameters)
+        public IUser RegisteUser(IList<string> parameters, IUser user)
         {
+            if (user != null)
+            {
+                throw new InitialCustomException("You are already logged in!");
+            }
+
             if (parameters.Count != 3)
             {
                 throw new InitialCustomException($"Invalid register parameters!");

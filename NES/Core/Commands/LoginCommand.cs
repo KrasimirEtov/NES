@@ -21,7 +21,7 @@ namespace NES.Core.Commands
 
         public string Execute(IList<string> input, IUser user)
         {
-            user = this.Handler.LoginUser(input);
+            user = this.Handler.LoginUser(input, user);
             Engine.Engine.SetUser(user);
             this.Broker.EndDayTraiding(user);
 
