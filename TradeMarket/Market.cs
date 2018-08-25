@@ -1,24 +1,25 @@
-﻿using NES.Core.Providers;
-using NES.Entities.Marketplace.Contracts;
-using NES.Entities.Users.Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TradeMarket.Contracts;
+using TradeMarket.Providers;
 
-namespace NES.Entities.Marketplace
+namespace TradeMarket
 {
     public class Market : IMarket
     {
         private const string fileWithPrices = "marketPrices";
 
-        private readonly List<MarketAssetPrice> assetPrices;
+        private readonly List<IMarketAssetPrice> assetPrices;
 
-		public Market()
+        public Market()
         {
-            this.assetPrices = new List<MarketAssetPrice>();
+            this.assetPrices = new List<IMarketAssetPrice>();
             LoadPrices(fileWithPrices);
         }
+
+        public IList<IMarketAssetPrice>AssetPrices { get => new List<IMarketAssetPrice>(this.assetPrices); }
 
 		public decimal AssetPrice(string assetName)
         {
@@ -46,44 +47,6 @@ namespace NES.Entities.Marketplace
             SavePrices(fileWithPrices);
         }
 
-        public void PrintMarket(IUser user)
-        {
-            IOConsole.Clear();
-            Printer.PrintMarketName();
-            List<MarketAssetPrice> ordered = this.assetPrices.OrderBy(x => x.Category).ToList();
-            string category = "";
-			Printer.PrintUserInfo(user);
-
-            for (int i = 0; i < ordered.Count; i++)
-            {
-                if (ordered[i].Category != category)
-                {
-                    IOConsole.WriteLine();
-                    category = ordered[i].Category;
-                    IOConsole.WriteAligned("\n{0,20} => ", category);
-                }
-
-                IOConsole.WriteAligned("{0,15} ", $"{ordered[i].Name}: ");
-                string key = ordered[i].Name.First().ToString().ToUpper() + ordered[i].Name.Substring(1);
-                if (user.Wallet.Portfolio.ContainsKey(key))
-                {
-                    if (user.Wallet.Portfolio[key].Price < ordered[i].Price)
-                    {
-                        IOConsole.ChangeColor(ConsoleColor.Green);
-                    }
-                    else if (user.Wallet.Portfolio[key].Price > ordered[i].Price)
-                    {
-                        IOConsole.ChangeColor(ConsoleColor.Red);
-                    }
-                }
-
-                IOConsole.WriteAligned("{0,7 } ", $"${ordered[i].Price}");
-
-                IOConsole.ResetColor();
-                IOConsole.Write("| ");
-            }
-            IOConsole.WriteLine("\n");
-        }
 
         private void SavePrices(string filename)
         {

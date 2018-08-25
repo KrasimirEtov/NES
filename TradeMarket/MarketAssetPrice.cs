@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Linq;
+using TradeMarket.Contracts;
 
-namespace NES.Entities.Marketplace
+namespace TradeMarket
 {
-    public struct MarketAssetPrice
+    internal struct MarketAssetPrice : IMarketAssetPrice
     {
 		private string name;
 		private decimal price;

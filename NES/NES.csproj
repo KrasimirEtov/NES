@@ -13,4 +13,8 @@
     <PackageReference Include="Autofac" Version="4.8.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TradeMarket\TradeMarket.csproj" />
+  </ItemGroup>
+
 </Project>

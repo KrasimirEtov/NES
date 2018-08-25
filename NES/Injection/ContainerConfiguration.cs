@@ -5,12 +5,9 @@ using NES.Core.Engine;
 using NES.Core.Engine.Contracts;
 using NES.Entities.Broker;
 using NES.Entities.Broker.Contracts;
-using NES.Entities.Marketplace;
-using NES.Entities.Marketplace.Contracts;
 using NES.Entities.Users;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using TradeMarket;
+using TradeMarket.Contracts;
 
 namespace NES.Injection
 {
