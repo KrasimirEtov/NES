@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 bitcoin 8146 criptocurrencys
 ethereum 3245 criptocurrencys
 facebook 6693 stocks
@@ -7,3 +8,14 @@ litecoin 3399 criptocurrencys
 netflix 6206 stocks
 platinum 10095 preciousmetals
 silver 7906 preciousmetals
+=======
+bitcoin 8133 criptocurrencys
+ethereum 3245 criptocurrencys
+facebook 6679 stocks
+gold 9732 preciousmetals
+google 4012 stocks
+litecoin 3369 criptocurrencys
+netflix 6174 stocks
+platinum 10132 preciousmetals
+silver 7857 preciousmetals
+>>>>>>> 348c98f615e8fa70754f0d96f17572b0691ffe18

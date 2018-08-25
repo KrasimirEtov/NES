@@ -1,11 +1,12 @@
 ﻿using System;
-using NES.Core.Engine;
+using System.Collections.Generic;
+using System.Linq;
 using NES.Core.Engine.Contracts;
+using NES.Core.Providers;
 using NES.Entities.Assets.Contracts;
 using NES.Entities.Broker.Contracts;
-using NES.Entities.Marketplace.Contracts;
 using NES.Entities.Users.Contracts;
-using NES.Core.Providers;
+using TradeMarket.Contracts;
 
 namespace NES.Entities.Broker
 {
@@ -23,7 +24,7 @@ namespace NES.Entities.Broker
 		public string EndDayTraiding(IUser user)
 		{
 			MarketProp.UpdatePrices();
-            MarketProp.PrintMarket(user);
+            this.PrintMarket(user);
 
             return "Trading day has ended!";
         }
@@ -43,7 +44,7 @@ namespace NES.Entities.Broker
 				throw new ArgumentException("You don't have enough funds for this purchase.");
 			}
 
-			MarketProp.PrintMarket(user);
+			this.PrintMarket(user);
             return $"Succesfully purchased {amount} {assetName} " + (amount > 1 ? "assets" : "asset");
 		}
 
@@ -56,8 +57,48 @@ namespace NES.Entities.Broker
 
             user.Wallet.Cash += price * amount;
 			
-			MarketProp.PrintMarket(user);
+			this.PrintMarket(user);
             return $"Succesfully selled {amount} {assetName} " + (amount > 1 ? "assets" : "asset");
 		}
+
+        private void PrintMarket(IUser user)
+        {
+            IOConsole.Clear();
+            Printer.PrintMarketName();
+            List<IMarketAssetPrice> ordered = MarketProp.AssetPrices.OrderBy(x => x.Category).ToList();
+            string category = "";
+            Printer.PrintUserInfo(user);
+
+            for (int i = 0; i < ordered.Count; i++)
+            {
+                if (ordered[i].Category != category)
+                {
+                    IOConsole.WriteLine();
+                    category = ordered[i].Category;
+                    IOConsole.WriteAligned("\n{0,20} => ", category);
+                }
+
+                IOConsole.WriteAligned("{0,15} ", $"{ordered[i].Name}: ");
+                string key = ordered[i].Name.First().ToString().ToUpper() + ordered[i].Name.Substring(1);
+                if (user.Wallet.Portfolio.ContainsKey(key))
+                {
+                    if (user.Wallet.Portfolio[key].Price < ordered[i].Price)
+                    {
+                        IOConsole.ChangeColor(ConsoleColor.Green);
+                    }
+                    else if (user.Wallet.Portfolio[key].Price > ordered[i].Price)
+                    {
+                        IOConsole.ChangeColor(ConsoleColor.Red);
+                    }
+                }
+
+                IOConsole.WriteAligned("{0,7 } ", $"${ordered[i].Price}");
+
+                IOConsole.ResetColor();
+                IOConsole.Write("| ");
+            }
+            IOConsole.WriteLine("\n");
+        }
+
     }
 }
