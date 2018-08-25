@@ -27,7 +27,7 @@ namespace NES.Injection
 
         private static void RegisterComponents(ContainerBuilder builder)
         {
-            builder.RegisterType<Engine>().As<IEngine>().SingleInstance();
+            builder.RegisterType<NESEngine>().As<IEngine>().SingleInstance();
             builder.RegisterType<Market>().As<IMarket>().SingleInstance();
             builder.RegisterType<Broker>().As<IBroker>();
 

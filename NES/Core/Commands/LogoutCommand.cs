@@ -20,7 +20,7 @@ namespace NES.Core.Commands
         public string Execute(IList<string> input, IUser user)
         {
             this.UserHandler.SaveWallet(user.Wallet, user.Name);
-            Engine.Engine.SetUser(null);
+            Engine.NESEngine.SetUser(null);
             Printer.InitialInstructions();
             return "You logged out succesfully!";
         }
