@@ -1,9 +1,9 @@
-bitcoin 8154 criptocurrencys
-ethereum 3253 criptocurrencys
-facebook 6694 stocks
-gold 9751 preciousmetals
-google 4065 stocks
-litecoin 3421 criptocurrencys
+bitcoin 8169 criptocurrencys
+ethereum 3268 criptocurrencys
+facebook 6703 stocks
+gold 9753 preciousmetals
+google 4082 stocks
+litecoin 3399 criptocurrencys
 netflix 6225 stocks
-platinum 10117 preciousmetals
-silver 7911 preciousmetals
+platinum 10110 preciousmetals
+silver 7915 preciousmetals

@@ -10,9 +10,7 @@ namespace NES
 		static void Main(string[] args)
 		{
 			var builder = new ContainerBuilder();
-			builder.RegisterAssemblyModules(Assembly.GetExecutingAssembly());
-
-			builder.RegisterAssemblyModules(typeof(Market));
+			builder.RegisterAssemblyModules(Assembly.GetExecutingAssembly(), Assembly.GetAssembly(typeof(Market)));
 			var container = builder.Build();
 			var engine = container.Resolve<IEngine>();
 			engine.Start();
