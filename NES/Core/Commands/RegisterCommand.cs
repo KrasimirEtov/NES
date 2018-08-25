@@ -8,7 +8,7 @@ using System.Text;
 
 namespace NES.Core.Commands
 {
-    public class RegisterCommand : ICommands
+    public class RegisterCommand : ICommand
     {
         private UserHandler UserHandler { get; }
         private IBroker Broker { get; }

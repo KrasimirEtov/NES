@@ -8,8 +8,29 @@
 ## About
 NES Market is all about sales. It's basically a Wall Street simulator.
 
-## Guide
+## Quick info
 To begin user must register or login if he already have a registered account.
 After than you can start buying new assets to become the Wolf of Wall Street.
-Allowed commands: register, login, buy, sell, logout, exit
-Assets: bitcoin, ethereum, gold, silver...
+
+## Available commands
+
+- register [userName] [password] [cash] => registers a new user
+- login [userName] [password] => logs the user
+- buy [assetName] [amount] => allows the user to buy assets
+- sell [assetName] [amount] => allows the user to sell assets
+- logout => logouts the user
+- printwallet => prints the user wallet
+
+## Available assets
+**Crypto currencys:**
+- bitcoin
+- ethereum
+- litecoin
+**Precious metals**
+- gold
+- platinum
+- silver
+**Stocks**
+- facebook
+- google
+- netflix

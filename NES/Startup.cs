@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using NES.Core.Commands;
-using NES.Core.Engine;
-using NES.Injection;
+using System.Reflection;
 
 namespace NES
 {
@@ -9,11 +8,11 @@ namespace NES
 	{
 		static void Main(string[] args)
 		{
-            ContainerBuilder builder = new ContainerBuilder();
-            IContainer container = ContainerConfiguration.Load(builder);
-
-            IEngine engine = container.Resolve<IEngine>();
-            engine.Start();
+			var builder = new ContainerBuilder();
+			builder.RegisterAssemblyModules(Assembly.GetExecutingAssembly());
+			var container = builder.Build();
+			var engine = container.Resolve<IEngine>();
+			engine.Start();
 		}
 	}
 }

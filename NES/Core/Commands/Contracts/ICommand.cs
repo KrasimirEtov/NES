@@ -5,7 +5,7 @@ using System.Text;
 
 namespace NES.Core.Commands.Contracts
 {
-    public interface ICommands
+    public interface ICommand
     {
         string Execute(IList<string> input, IUser user);
     }

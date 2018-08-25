@@ -22,7 +22,7 @@ namespace NES.Core.Engine
             string commandName = parameters[0];
             IList<string> values = parameters.Skip(1).ToList();
 
-            ICommands command = this.CommandFactory.CreateCommand(commandName);
+            ICommand command = this.CommandFactory.CreateCommand(commandName);
 
             string result = command.Execute(values, user);
 

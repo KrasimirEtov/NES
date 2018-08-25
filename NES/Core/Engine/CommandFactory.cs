@@ -17,9 +17,9 @@ namespace NES.Core.Engine
         }
 
 
-        public ICommands CreateCommand(string commandName)
+        public ICommand CreateCommand(string commandName)
         {
-            return this.autofacContext.ResolveNamed<ICommands>(commandName);
+            return this.autofacContext.ResolveNamed<ICommand>(commandName);
         }
     }
 }

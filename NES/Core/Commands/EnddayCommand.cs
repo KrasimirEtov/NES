@@ -7,7 +7,7 @@ using System.Text;
 
 namespace NES.Core.Commands
 {
-    public class EnddayCommand : ICommands
+    public class EnddayCommand : ICommand
     {
         private IBroker Broker { get; }
 

@@ -9,7 +9,7 @@ using System.Text;
 
 namespace NES.Core.Commands
 {
-    public class LoginCommand : ICommands
+    public class LoginCommand : ICommand
     {
         private UserHandler Handler { get; }
         private IBroker Broker { get; }

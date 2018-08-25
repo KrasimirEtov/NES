@@ -8,10 +8,6 @@ namespace NES.Core.Engine
 {
 	public class AssetFactory : IAssetFactory
 	{
-        public AssetFactory()
-		{
-		}
-
         public IAsset CreateAsset(string type, decimal price, decimal amount)
 		{
             type = type.First().ToString().ToUpper() + type.Substring(1);

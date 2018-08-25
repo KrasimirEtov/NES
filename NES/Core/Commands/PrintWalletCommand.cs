@@ -6,7 +6,7 @@ using System.Text;
 
 namespace NES.Core.Commands
 {
-    public class PrintWalletCommand : ICommands
+    public class PrintWalletCommand : ICommand
     {
         public string Execute(IList<string> input, IUser user)
         {

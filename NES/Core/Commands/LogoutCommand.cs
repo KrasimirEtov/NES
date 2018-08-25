@@ -8,7 +8,7 @@ using System.Text;
 
 namespace NES.Core.Commands
 {
-    public class LogoutCommand : ICommands
+    public class LogoutCommand : ICommand
     {
         private UserHandler UserHandler { get; }
 

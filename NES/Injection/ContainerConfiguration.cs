@@ -9,29 +9,27 @@ using NES.Entities.Marketplace;
 using NES.Entities.Marketplace.Contracts;
 using NES.Entities.Users;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Reflection;
 
 namespace NES.Injection
 {
-    public static class ContainerConfiguration
+    public class ContainerConfiguration : Autofac.Module
     {
-        public static IContainer Load(ContainerBuilder builder)
-        {
-            RegisterComponents(builder);
-            RegisterCommands(builder);
+		protected override void Load(ContainerBuilder builder)
+		{
+			RegisterComponents(builder);
+			RegisterCommands(builder);
+			base.Load(builder);
+		}
 
-            IContainer container = builder.Build();
-            return container;
-        }
-
-        private static void RegisterComponents(ContainerBuilder builder)
+		private static void RegisterComponents(ContainerBuilder builder)
         {
             builder.RegisterType<NESEngine>().As<IEngine>().SingleInstance();
             builder.RegisterType<Market>().As<IMarket>().SingleInstance();
-            builder.RegisterType<Broker>().As<IBroker>();
+			builder.RegisterType<Broker>().As<IBroker>();
 
-            builder.RegisterType<UserHandler>().As<UserHandler>();
+			builder.RegisterType<UserHandler>().As<UserHandler>();
             builder.RegisterType<AssetFactory>().As<IAssetFactory>().SingleInstance();
             builder.RegisterType<UserFactory>().As<IUserFactory>().SingleInstance();
             builder.RegisterType<ProcessCommand>().As<IProcessCommand>();
@@ -40,13 +38,26 @@ namespace NES.Injection
 
         private static void RegisterCommands(ContainerBuilder builder)
         {
-            builder.RegisterType<LoginCommand>().Named<ICommands>("login");
-            builder.RegisterType<RegisterCommand>().Named<ICommands>("register");
-            builder.RegisterType<BuyCommand>().Named<ICommands>("buy");
-            builder.RegisterType<SellCommand>().Named<ICommands>("sell");
-            builder.RegisterType<EnddayCommand>().Named<ICommands>("endday");
-            builder.RegisterType<LogoutCommand>().Named<ICommands>("logout");
-            builder.RegisterType<PrintWalletCommand>().Named<ICommands>("printwallet");
-        }
+			builder.RegisterType<LoginCommand>().Named<ICommand>("login");
+			builder.RegisterType<RegisterCommand>().Named<ICommand>("register");
+			builder.RegisterType<BuyCommand>().Named<ICommand>("buy");
+			builder.RegisterType<SellCommand>().Named<ICommand>("sell");
+			builder.RegisterType<EnddayCommand>().Named<ICommand>("endday");
+			builder.RegisterType<LogoutCommand>().Named<ICommand>("logout");
+			builder.RegisterType<PrintWalletCommand>().Named<ICommand>("printwallet");
+
+			// reflection instead of magic strings
+
+			//var currentAssembly = Assembly.GetExecutingAssembly();
+			//var commandTypes = currentAssembly.DefinedTypes
+			//	.Where(x => x.ImplementedInterfaces.Contains(typeof(ICommand)))
+			//	.ToList();
+
+			//foreach (var currCommandType in commandTypes)
+			//{
+			//	builder.RegisterType(currCommandType.AsType()).Named<ICommand>(currCommandType.Name.ToLower().
+			//		Substring(0, currCommandType.Name.Length - 7));
+			//}
+		}
     }
 }

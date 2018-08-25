@@ -1,9 +1,7 @@
 ﻿using NES.Core.Commands;
 using NES.Core.Engine.Contracts;
 using NES.Core.Providers;
-using NES.Entities.Broker.Contracts;
-using NES.Entities.Marketplace.Contracts;
-using NES.Entities.Users;
+
 using NES.Entities.Users.Contracts;
 using System;
 using System.Collections.Generic;
