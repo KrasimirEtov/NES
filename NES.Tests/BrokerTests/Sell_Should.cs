@@ -102,7 +102,6 @@ namespace NES.Tests.BrokerTests
         {
             string assetName = "bitcoin";
             decimal price = 3000;
-            decimal cash = 10000;
             int amount = 1;
             string message = $"Succesfully purchased {amount} {assetName} " + (amount > 1 ? "assets" : "asset");
 
