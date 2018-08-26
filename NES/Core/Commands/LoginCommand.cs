@@ -22,7 +22,7 @@ namespace NES.Core.Commands
 
         public string Execute(IList<string> input, IUser user)
         {
-            user = this.Handler.LoginUser(input, user);
+			user = this.Handler.LoginUser(input, user);
             NESEngine.SetUser(user);
             this.Broker.EndDayTraiding(user);
 
