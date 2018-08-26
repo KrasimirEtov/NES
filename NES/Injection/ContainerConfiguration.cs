@@ -25,39 +25,29 @@ namespace NES.Injection
 
 		private static void RegisterComponents(ContainerBuilder builder)
         {
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+                   .AsImplementedInterfaces();
+
+            builder.RegisterType<UserHandler>().AsSelf();
             builder.RegisterType<NESEngine>().As<IEngine>().SingleInstance();
             builder.RegisterType<Market>().As<IMarket>().SingleInstance();
-			builder.RegisterType<Broker>().As<IBroker>();
-
-			builder.RegisterType<UserHandler>().As<UserHandler>();
             builder.RegisterType<AssetFactory>().As<IAssetFactory>().SingleInstance();
             builder.RegisterType<UserFactory>().As<IUserFactory>().SingleInstance();
-            builder.RegisterType<ProcessCommand>().As<IProcessCommand>();
             builder.RegisterType<CommandFactory>().As<ICommandFactory>().SingleInstance();
         }
 
         private static void RegisterCommands(ContainerBuilder builder)
         {
-			builder.RegisterType<LoginCommand>().Named<ICommand>("login");
-			builder.RegisterType<RegisterCommand>().Named<ICommand>("register");
-			builder.RegisterType<BuyCommand>().Named<ICommand>("buy");
-			builder.RegisterType<SellCommand>().Named<ICommand>("sell");
-			builder.RegisterType<EnddayCommand>().Named<ICommand>("endday");
-			builder.RegisterType<LogoutCommand>().Named<ICommand>("logout");
-			builder.RegisterType<PrintWalletCommand>().Named<ICommand>("printwallet");
+			var currentAssembly = Assembly.GetExecutingAssembly();
+			var commandTypes = currentAssembly.DefinedTypes
+				.Where(x => x.ImplementedInterfaces.Contains(typeof(ICommand)))
+				.ToList();
 
-			// reflection instead of magic strings
-
-			//var currentAssembly = Assembly.GetExecutingAssembly();
-			//var commandTypes = currentAssembly.DefinedTypes
-			//	.Where(x => x.ImplementedInterfaces.Contains(typeof(ICommand)))
-			//	.ToList();
-
-			//foreach (var currCommandType in commandTypes)
-			//{
-			//	builder.RegisterType(currCommandType.AsType()).Named<ICommand>(currCommandType.Name.ToLower().
-			//		Substring(0, currCommandType.Name.Length - 7));
-			//}
+			foreach (var currcommandtype in commandTypes)
+			{
+				builder.RegisterType(currcommandtype.AsType()).Named<ICommand>(currcommandtype.Name.ToLower()
+                    .Substring(0, currcommandtype.Name.Length - 7));
+			}
 		}
     }
 }
