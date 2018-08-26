@@ -1,52 +1,53 @@
-﻿using System;
+﻿using NES.Core.Engine.Contracts;
+using System;
 
 namespace NES.Core.Providers
 {
-	public static class IOConsole
+	public class IOConsole : IConsoleManager
 	{
-		public static string ReadLine()
+		public string ReadLine()
 		{
 			return Console.ReadLine();
 		}
 
-		public static void Write(string message, ConsoleColor color = ConsoleColor.White)
+		public void Write(string message, ConsoleColor color = ConsoleColor.White)
 		{
-            ChangeColor(color);
-            Console.Write(message);
-            ResetColor();
-        }
+			ChangeColor(color);
+			Console.Write(message);
+			ResetColor();
+		}
 
-		public static void WriteLine(string message = "", ConsoleColor color = ConsoleColor.White)
-        {
-            ChangeColor(color);
-            Console.WriteLine(message);
-            ResetColor();
-        }
+		public void WriteLine(string message = "", ConsoleColor color = ConsoleColor.White)
+		{
+			ChangeColor(color);
+			Console.WriteLine(message);
+			ResetColor();
+		}
 
-		public static void ChangeColor(ConsoleColor console)
+		public void ChangeColor(ConsoleColor console)
 		{
 			Console.ForegroundColor = console;
 		}
 
-		public static void ResetColor()
+		public void ResetColor()
 		{
-            ChangeColor(ConsoleColor.White);
+			ChangeColor(ConsoleColor.White);
 		}
 
-		public static void Clear()
+		public void Clear()
 		{
 			Console.Clear();
 		}
 
-		public static void SetScreenSize()
+		public void SetScreenSize()
 		{
 			Console.WindowHeight = 30;
 			Console.BufferWidth = Console.WindowWidth = 120;
 		}
 
-        public static void WriteAligned(string spacing, string value)
-        {
-            Console.Write(spacing, value);
-        }
-    }
+		public void WriteAligned(string spacing, string value)
+		{
+			Console.Write(spacing, value);
+		}
+	}
 }

@@ -1,4 +1,5 @@
-﻿using NES.Entities.Wallets.Contracts;
+﻿using NES.Core.Engine.Contracts;
+using NES.Entities.Wallets.Contracts;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,11 +7,11 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace NES.Core.Providers
 {
-	static public class IOStream
+	public class IOStream : IStreamManager
 	{
-		public static IEnumerable<string> ReadLine(string fileName)
+		public IEnumerable<string> ReadLine(string fileName)
 		{
-			if (!CheckIfFileExists(fileName)) throw new Exception("File does not exist"); 
+			if (!CheckIfFileExists(fileName)) throw new Exception("File does not exist");
 			using (StreamReader sr = new StreamReader($"../../../Files/{fileName}.txt"))
 			{
 				string line;
@@ -21,7 +22,7 @@ namespace NES.Core.Providers
 			}
 		}
 
-		public static void WriteLine(string message, string fileName)
+		public void WriteLine(string message, string fileName)
 		{
 			using (StreamWriter sw = new StreamWriter($"../../../Files/{fileName}.txt"))
 			{
@@ -29,7 +30,7 @@ namespace NES.Core.Providers
 			}
 		}
 
-		public static void WriteLineAppend(string message, string fileName)
+		public void WriteLineAppend(string message, string fileName)
 		{
 			using (StreamWriter sw = new StreamWriter($"../../../Files/{fileName}.txt", true))
 			{
@@ -37,7 +38,7 @@ namespace NES.Core.Providers
 			}
 		}
 
-		public static void BinaryWrite(IWallet wallet, string fileName)
+		public void BinaryWrite(IWallet wallet, string fileName)
 		{
 			BinaryFormatter formatter = new BinaryFormatter();
 			using (FileStream writerFileStream = new FileStream($"../../../Files/{fileName}.bin", FileMode.Create, FileAccess.Write))
@@ -46,7 +47,7 @@ namespace NES.Core.Providers
 			}
 		}
 
-		public static IWallet BinaryRead(string fileName)
+		public IWallet BinaryRead(string fileName)
 		{
 			BinaryFormatter formatter = new BinaryFormatter();
 			using (FileStream readerFileStream = new FileStream($"../../../Files/{fileName}.bin", FileMode.Open, FileAccess.Read))
@@ -55,12 +56,12 @@ namespace NES.Core.Providers
 			}
 		}
 
-		public static string ReadAllText(string fileName)
+		public string ReadAllText(string fileName)
 		{
 			return File.ReadAllText($"../../../Files/ConsoleMenus/{fileName}.txt");
 		}
 
-		public static bool CheckIfFileExists(string fileName)
+		public bool CheckIfFileExists(string fileName)
 		{
 			if (File.Exists($"../../../Files/{fileName}.txt")) return true;
 			return false;
