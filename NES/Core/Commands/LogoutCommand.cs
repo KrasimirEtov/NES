@@ -1,4 +1,5 @@
 ﻿using NES.Core.Commands.Contracts;
+using NES.Core.Engine;
 using NES.Core.Providers;
 using NES.Entities.Users;
 using NES.Entities.Users.Contracts;
@@ -20,7 +21,7 @@ namespace NES.Core.Commands
         public string Execute(IList<string> input, IUser user)
         {
             this.UserHandler.SaveWallet(user.Wallet, user.Name);
-            Engine.NESEngine.SetUser(null);
+            NESEngine.SetUser(null);
             Printer.InitialInstructions();
             return "You logged out succesfully!";
         }
