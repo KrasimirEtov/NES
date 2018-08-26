@@ -3,6 +3,7 @@ using NES.Core.Commands;
 using NES.Core.Commands.Contracts;
 using NES.Core.Engine;
 using NES.Core.Engine.Contracts;
+using NES.Core.Providers;
 using NES.Entities.Broker;
 using NES.Entities.Broker.Contracts;
 using NES.Entities.Users;
@@ -25,7 +26,7 @@ namespace NES.Injection
 
 		private static void RegisterComponents(ContainerBuilder builder)
         {
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly())
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly(), Assembly.GetAssembly(typeof(Market)))
                    .AsImplementedInterfaces();
 
             builder.RegisterType<UserHandler>().AsSelf();
@@ -34,7 +35,10 @@ namespace NES.Injection
             builder.RegisterType<AssetFactory>().As<IAssetFactory>().SingleInstance();
             builder.RegisterType<UserFactory>().As<IUserFactory>().SingleInstance();
             builder.RegisterType<CommandFactory>().As<ICommandFactory>().SingleInstance();
-        }
+			builder.RegisterType<IOConsole>().As<IConsoleManager>().SingleInstance();
+			builder.RegisterType<IOStream>().As<IStreamManager>().SingleInstance();
+			builder.RegisterType<Printer>().As<IPrinterManager>().SingleInstance();
+		}
 
         private static void RegisterCommands(ContainerBuilder builder)
         {
