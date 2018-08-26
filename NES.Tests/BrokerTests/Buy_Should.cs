@@ -84,7 +84,6 @@ namespace NES.Tests.BrokerTests
             var wallet = new Mock<IWallet>();
             var market = new Mock<IMarket>();
             var factory = new Mock<IAssetFactory>();
-            var asset = new Mock<IAsset>();
 
             user.Setup(x => x.Wallet).Returns(wallet.Object);
             
@@ -111,7 +110,6 @@ namespace NES.Tests.BrokerTests
             var wallet = new Mock<IWallet>();
             var market = new Mock<IMarket>();
             var factory = new Mock<IAssetFactory>();
-            var asset = new Mock<IAsset>();
 
             user.Setup(x => x.Wallet).Returns(wallet.Object);
 
@@ -123,6 +121,36 @@ namespace NES.Tests.BrokerTests
             string result = broker.Buy(assetName, amount, user.Object);
 
             Assert.AreEqual(cash - price, wallet.Object.Cash);
+        }
+
+        [TestMethod]
+        public void Invoke_WalletAddAsset()
+        {
+            string assetName = "bitcoin";
+            decimal price = 3000;
+            decimal cash = 10000;
+            int amount = 1;
+            string message = $"Succesfully purchased {amount} {assetName} " + (amount > 1 ? "assets" : "asset");
+
+            var user = new Mock<IUser>();
+            var wallet = new Mock<IWallet>();
+            var market = new Mock<IMarket>();
+            var factory = new Mock<IAssetFactory>();
+            var asset = new Mock<IAsset>();
+
+            user.Setup(x => x.Wallet).Returns(wallet.Object);
+
+            factory.Setup<IAsset>(x => x.CreateAsset(assetName, price, amount)).Returns(asset.Object);
+
+            wallet.SetupProperty(x => x.Cash, cash);
+            wallet.Setup(x => x.AddAsset(asset.Object));
+
+            market.Setup(x => x.AssetPrice(assetName)).Returns(price);
+
+            var broker = new BrokerMock(factory.Object, market.Object);
+            string result = broker.Buy(assetName, amount, user.Object);
+
+            wallet.Verify(x => x.AddAsset(asset.Object), Times.Once);
         }
     }
 }
