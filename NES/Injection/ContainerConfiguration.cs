@@ -4,8 +4,6 @@ using NES.Core.Commands.Contracts;
 using NES.Core.Engine;
 using NES.Core.Engine.Contracts;
 using NES.Core.Providers;
-using NES.Entities.Broker;
-using NES.Entities.Broker.Contracts;
 using NES.Entities.Users;
 using System;
 using System.Linq;
@@ -24,7 +22,7 @@ namespace NES.Injection
 			base.Load(builder);
 		}
 
-		private static void RegisterComponents(ContainerBuilder builder)
+		private void RegisterComponents(ContainerBuilder builder)
         {
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly(), Assembly.GetAssembly(typeof(Market)))
                    .AsImplementedInterfaces();
@@ -40,7 +38,7 @@ namespace NES.Injection
 			builder.RegisterType<Printer>().As<IPrinterManager>().SingleInstance();
 		}
 
-        private static void RegisterCommands(ContainerBuilder builder)
+        private void RegisterCommands(ContainerBuilder builder)
         {
 			var currentAssembly = Assembly.GetExecutingAssembly();
 			var commandTypes = currentAssembly.DefinedTypes
