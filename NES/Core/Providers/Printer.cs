@@ -1,34 +1,86 @@
-﻿using NES.Entities.Users.Contracts;
+﻿using NES.Core.Engine.Contracts;
+using NES.Entities.Users.Contracts;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using TradeMarket.Contracts;
 
 namespace NES.Core.Providers
 {
-    public static class Printer
-    {
+	public class Printer : IPrinterManager
+	{
 		private const string welcomeScreen = "Welcome";
 		private const string marketName = "MarketName";
-		public static void PrintStartup()
+
+		private IOManager ConsoleManager { get; }
+		private IStreamManager StreamManager { get; }
+
+		public Printer(IOManager consoleManager, IStreamManager streamManager)
 		{
-			IOConsole.Clear();
-			IOConsole.WriteLine(IOStream.ReadAllText(welcomeScreen), ConsoleColor.Blue);
+			ConsoleManager = consoleManager;
+			StreamManager = streamManager;
+		}
+		public void PrintStartup()
+		{
+			ConsoleManager.Clear();
+			ConsoleManager.WriteLine(StreamManager.ReadAllText(welcomeScreen), ConsoleColor.Blue);
 		}
 
-		public static void PrintMarketName()
+		public void PrintMarketName()
 		{
-			IOConsole.WriteLine(IOStream.ReadAllText(marketName), ConsoleColor.Blue);
+			ConsoleManager.WriteLine(StreamManager.ReadAllText(marketName), ConsoleColor.Blue);
 		}
 
-		public static void InitialInstructions()
+		public void InitialInstructions()
 		{
 			PrintStartup();
-			IOConsole.WriteLine("If you already have an account, please use command 'login' followed by user name and password separated by space.\n");
-            IOConsole.WriteLine("If you don't have an account, please create one using command 'register'\nfollowed by user name, password and money for traiding separated by space.\n");
+			ConsoleManager.WriteLine("If you already have an account, please use command 'login' followed by user name and password separated by space.\n");
+			ConsoleManager.WriteLine("If you don't have an account, please create one using command 'register'\nfollowed by user name, password and money for traiding separated by space.\n");
 		}
 
-		public static void PrintUserInfo(IUser user)
+		public void PrintUserInfo(IUser user)
 		{
-			IOConsole.WriteLine($"User: {user.Name}");
-			IOConsole.Write($"Cash: ${user.Wallet.Cash}");
-		}       
-    }
+			ConsoleManager.WriteLine($"User: {user.Name}");
+			ConsoleManager.Write($"Cash: ${user.Wallet.Cash}");
+		}
+
+		public void PrintMarket(IUser user, IMarket Market)
+		{
+			ConsoleManager.Clear();
+			PrintMarketName();
+			List<IMarketAssetPrice> ordered = Market.AssetPrices.OrderBy(x => x.Category).ToList();
+			string category = "";
+			PrintUserInfo(user);
+
+			for (int i = 0; i < ordered.Count; i++)
+			{
+				if (ordered[i].Category != category)
+				{
+					ConsoleManager.WriteLine();
+					category = ordered[i].Category;
+					ConsoleManager.WriteAligned("\n{0,20} => ", category);
+				}
+
+				ConsoleManager.WriteAligned("{0,15} ", $"{ordered[i].Name}: ");
+				string key = ordered[i].Name.First().ToString().ToUpper() + ordered[i].Name.Substring(1);
+				if (user.Wallet.Portfolio.ContainsKey(key))
+				{
+					if (user.Wallet.Portfolio[key].Price < ordered[i].Price)
+					{
+						ConsoleManager.ChangeColor(ConsoleColor.Green);
+					}
+					else if (user.Wallet.Portfolio[key].Price > ordered[i].Price)
+					{
+						ConsoleManager.ChangeColor(ConsoleColor.Red);
+					}
+				}
+
+				ConsoleManager.WriteAligned("{0,7 } ", $"${ordered[i].Price}");
+
+				ConsoleManager.ResetColor();
+				ConsoleManager.Write("| ");
+			}
+			ConsoleManager.WriteLine("\n");
+		}
+	}
 }

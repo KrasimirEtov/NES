@@ -25,12 +25,14 @@ namespace NES.Tests.BrokerTests
             var wallet = new Mock<IWallet>();
             var market = new Mock<IMarket>();
             var factory = new Mock<IAssetFactory>();
+			var consoleManager = new Mock<IOManager>();
+			var printerManager = new Mock<IPrinterManager>();
 
-            market.Setup(x => x.AssetPrice(asset)).Returns(assetPrice);
+			market.Setup(x => x.AssetPrice(asset)).Returns(assetPrice);
             user.Setup(x => x.Wallet).Returns(wallet.Object);
             wallet.SetupAllProperties();
 
-            var broker = new Broker(factory.Object, market.Object);
+            var broker = new Broker(factory.Object, market.Object, consoleManager.Object, printerManager.Object);
             try
             {
                 string result = broker.Sell(asset, 1, user.Object);
@@ -51,12 +53,14 @@ namespace NES.Tests.BrokerTests
             var wallet = new Mock<IWallet>();
             var market = new Mock<IMarket>();
             var factory = new Mock<IAssetFactory>();
+			var consoleManager = new Mock<IOManager>();
+			var printerManager = new Mock<IPrinterManager>();
 
-            user.Setup(x => x.Wallet).Returns(wallet.Object);
+			user.Setup(x => x.Wallet).Returns(wallet.Object);
             wallet.Setup(x => x.Cash).Returns(0);
             market.Setup(x => x.AssetPrice(asset)).Returns(3000);
 
-            var broker = new Broker(factory.Object, market.Object);
+            var broker = new Broker(factory.Object, market.Object, consoleManager.Object, printerManager.Object);
 
             try
             {

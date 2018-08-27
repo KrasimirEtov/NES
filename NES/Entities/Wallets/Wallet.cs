@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NES.Core.Providers;
+using System.Text;
 using NES.Entities.Assets.Contracts;
 using NES.Entities.Wallets.Contracts;
 
@@ -73,24 +73,24 @@ namespace NES.Entities.Wallets
 
         public string PrintWallet()
 		{
-            string categoty = "";
-            IOConsole.WriteLine();
+			StringBuilder walletString = new StringBuilder();
+			string categoty = "";
 			if (Portfolio.Count < 1)
 			{
-				IOConsole.WriteLine("You don't have any purchased assets!");
+				return "You don't have any purchased assets!";
 			}
 			foreach (var asset in Portfolio)
-            {
-                if (categoty != asset.Value.Type.ToString())
-                {
-                    categoty = asset.Value.Type.ToString();
-                    IOConsole.WriteLine(asset.Value.Type.ToString() + ":", ConsoleColor.DarkRed);
-                }
-                IOConsole.Write($"    {asset.Key}:");
-                IOConsole.WriteLine($" Amount: {asset.Value.Amount}, Price per unit: {asset.Value.Price}", ConsoleColor.DarkGray);
+			{
+				if (categoty != asset.Value.Type.ToString())
+				{
+					categoty = asset.Value.Type.ToString();
+					walletString.AppendLine("\n" + asset.Value.Type.ToString() + ":");
+				}
+				walletString.Append($"   {asset.Key}:");
+				walletString.AppendLine($" Amount: {asset.Value.Amount}, Price per unit: {asset.Value.Price}");
 			}
 
-            return "";
+			return walletString.ToString();
 		}
 	}
 }

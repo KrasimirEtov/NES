@@ -1,10 +1,8 @@
 ﻿using NES.Core.Commands.Contracts;
 using NES.Core.Engine.Contracts;
 using NES.Entities.Users.Contracts;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace NES.Core.Engine
 {
@@ -24,9 +22,7 @@ namespace NES.Core.Engine
 
             ICommand command = this.CommandFactory.CreateCommand(commandName);
 
-            string result = command.Execute(values, user);
-
-            return result;
+			return command.Execute(values, user);
         }
     }
 }

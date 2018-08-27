@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TradeMarket.Contracts;
-using TradeMarket.Providers;
 
 namespace TradeMarket
 {
@@ -12,12 +11,14 @@ namespace TradeMarket
         private const string fileWithPrices = "marketPrices";
 
         private readonly List<IMarketAssetPrice> assetPrices;
+		private readonly IMarketStreamManager marketStreamManager;
 
-        public Market()
+        public Market(IMarketStreamManager marketStreamManager)
         {
             this.assetPrices = new List<IMarketAssetPrice>();
-            LoadPrices(fileWithPrices);
-        }
+			this.marketStreamManager = marketStreamManager;
+			LoadPrices(fileWithPrices);
+		}
 
         public IList<IMarketAssetPrice>AssetPrices { get => new List<IMarketAssetPrice>(this.assetPrices); }
 
@@ -56,12 +57,12 @@ namespace TradeMarket
                 sb.AppendLine($"{asset.Name} {asset.Price} {asset.Category}");
             }
 
-            IOStream.WriteLine(sb.ToString().Trim(), filename);
+			this.marketStreamManager.WriteLine(sb.ToString().Trim(), filename);
         }
 
         private void LoadPrices(string filename)
         {
-            foreach (string line in IOStream.ReadLine(filename))
+            foreach (string line in this.marketStreamManager.ReadLine(filename))
             {
                 string[] lineArr = line.ToLower().Split();
                 this.assetPrices.Add(new MarketAssetPrice(lineArr[0], decimal.Parse(lineArr[1]), lineArr[2]));

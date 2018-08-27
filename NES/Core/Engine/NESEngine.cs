@@ -13,53 +13,51 @@ namespace NES.Core.Engine
         private const string exitCommand = "exit";
         private static IUser currentUser;
         private IProcessCommand CommandProcessor { get; }
+		private IOManager ConsoleManager { get; }
+		private IPrinterManager PrinterManager { get; }
 
-        public NESEngine(IProcessCommand commandProcessor)
+		public NESEngine(IProcessCommand commandProcessor, IOManager consoleManager, IPrinterManager printerManager)
 		{
-            this.CommandProcessor = commandProcessor;
-        }
-
+			CommandProcessor = commandProcessor;
+			ConsoleManager = consoleManager;
+			PrinterManager = printerManager;
+		}
 
 		public void Start()
 		{
-			IOConsole.SetScreenSize();
-			Printer.InitialInstructions();
-            ReadCommand();
+			ConsoleManager.SetScreenSize();
+			PrinterManager.InitialInstructions();
+			ReadCommand();
 		}
 
-        private void ReadCommand()
+		private void ReadCommand()
 		{
 			while (true)
 			{
 				try
 				{
-					IOConsole.WriteLine("\nEnter command:\n");
-					IOConsole.ChangeColor(ConsoleColor.Blue);
+					ConsoleManager.WriteLine("\nEnter command:\n");
+					ConsoleManager.ChangeColor(ConsoleColor.Blue);
 
-                    IList<string> parameters = IOConsole.ReadLine().Split().ToList();
+					IList<string> parameters = ConsoleManager.ReadLine().Split().ToList();
 
-                    if (parameters[0] == "exit")
-                    {
-                        IOConsole.WriteLine("GoodBye!", ConsoleColor.Green);
-                        Environment.Exit(0);
-                    }
-
-                    string result = CommandProcessor.ProcessCurrentCommand(parameters, currentUser);
-                    IOConsole.WriteLine(result, ConsoleColor.Green);
-                    IOConsole.ResetColor();
-                }
-				catch(InitialCustomException ice)
+					string result = CommandProcessor.ProcessCurrentCommand(parameters, currentUser);
+					ConsoleManager.WriteLine(result, ConsoleColor.Green);
+					ConsoleManager.ResetColor();
+					if (parameters[0] == "exit") Environment.Exit(0);
+				}
+				catch (InitialCustomException ice)
 				{
-                    IOConsole.WriteLine(ice.Message, ConsoleColor.Red);
+					ConsoleManager.WriteLine(ice.Message, ConsoleColor.Red);
 				}
 				catch (Exception ex)
 				{
-                    IOConsole.WriteLine(ex.Message, ConsoleColor.Red);
+					ConsoleManager.WriteLine(ex.Message, ConsoleColor.Red);
 				}
 			}
 		}
 
-        public static void SetUser(IUser user)
+		public static void SetUser(IUser user)
         {
             currentUser = user;
         }

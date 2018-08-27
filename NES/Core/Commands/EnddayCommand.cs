@@ -18,9 +18,8 @@ namespace NES.Core.Commands
 
         public string Execute(IList<string> input, IUser user)
         {
-            string result = this.Broker.EndDayTraiding(user);
-
-            return result;
+			if (input.Count != 0) throw new Exception("Invalid endday command arguments!");
+			return this.Broker.EndDayTraiding(user);
         }
     }
 }
