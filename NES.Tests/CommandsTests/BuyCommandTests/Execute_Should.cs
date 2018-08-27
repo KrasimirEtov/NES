@@ -42,24 +42,24 @@ namespace NES.Tests.CommandsTests.BuyCommandTests
             Assert.ThrowsException<Exception>(() => buyCommand.Execute(input, userMock.Object));
         }
 
-        //[TestMethod]
-        //public void CorrectlyExecute_WhenValidDataIsPassed()
-        //{
-        //    //Arrange
-        //    Mock<IBroker> brockerMock = new Mock<IBroker>();
-        //    Mock<IUser> userMock = new Mock<IUser>();
-        //    brockerMock.Setup(brocker => brocker.Buy("name", 10, userMock.Object));
-        //    BuyCommand buyCommand = new BuyCommand(brockerMock.Object);
+        [TestMethod]
+        public void CorrectlyExecute_WhenValidDataIsPassed()
+        {
+            //Arrange
+            Mock<IBroker> brockerMock = new Mock<IBroker>();
+            Mock<IUser> userMock = new Mock<IUser>();
+            brockerMock.Setup(brocker => brocker.Buy("name", 10, userMock.Object)).Returns("invoked");
+            BuyCommand buyCommand = new BuyCommand(brockerMock.Object);
 
-        //    IList<string> input = new List<string>();
-        //    input.Add("String");
-        //    input.Add("10");
+            IList<string> input = new List<string>();
+            input.Add("name");
+            input.Add("10");
 
-        //    //Act 
-        //    buyCommand.Execute(input, userMock.Object);
+            //Act 
+            string result = buyCommand.Execute(input, userMock.Object);
 
-        //    //Assert
-        //    brockerMock.Verify(x => x.Buy("name", 10, userMock.Object), Times.Once);
-        //}
+            //Assert
+            Assert.AreEqual("invoked", result);
+        }
     }
 }
