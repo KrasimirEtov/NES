@@ -29,13 +29,17 @@ After that he/she can start buying/selling assets to become the Wolf of Wall Str
 - ethereum
 - litecoin
 
+
 **Precious metals**
+
 
 - gold
 - platinum
 - silver
 
+
 **Stocks**
+
 
 - facebook
 - google
