@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using NES.Core.Providers;
 using NES.Entities.Assets.Contracts;
 using NES.Entities.Wallets.Contracts;
 

@@ -24,14 +24,19 @@ After that he/she can start buying/selling assets to become the Wolf of Wall Str
 
 ## Available assets
 **Crypto currencys:**
+
 - bitcoin
 - ethereum
 - litecoin
+
 **Precious metals**
+
 - gold
 - platinum
 - silver
+
 **Stocks**
+
 - facebook
 - google
 - netflix

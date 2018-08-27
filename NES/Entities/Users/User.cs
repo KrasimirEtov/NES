@@ -1,5 +1,4 @@
-﻿using NES.Core.Providers;
-using NES.Entities.Users.Contracts;
+﻿using NES.Entities.Users.Contracts;
 using NES.Entities.Wallets.Contracts;
 using System;
 using System.Linq;
