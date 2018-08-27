@@ -7,9 +7,7 @@ using NES.Entities.Users.Contracts;
 using NES.Entities.Wallets.Contracts;
 using NES.Tests.Mocks;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using TradeMarket.Contracts;
 
 namespace NES.Tests.BrokerTests
