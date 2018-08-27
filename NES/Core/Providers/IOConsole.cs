@@ -3,7 +3,7 @@ using System;
 
 namespace NES.Core.Providers
 {
-	public class IOConsole : IConsoleManager
+	public class IOConsole : IOManager
 	{
 		public string ReadLine()
 		{

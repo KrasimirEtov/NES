@@ -13,9 +13,9 @@ namespace NES.Core.Commands
 	{
 		private UserHandler UserHandler { get; }
 		private IPrinterManager PrinterManager { get; }
-		private IConsoleManager ConsoleManager { get; }
+		private IOManager ConsoleManager { get; }
 
-		public ExitCommand(UserHandler userHandler, IPrinterManager printerManager, IConsoleManager consoleManager)
+		public ExitCommand(UserHandler userHandler, IPrinterManager printerManager, IOManager consoleManager)
 		{
 			this.UserHandler = userHandler;
 			PrinterManager = printerManager;

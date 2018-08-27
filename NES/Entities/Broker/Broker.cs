@@ -14,10 +14,10 @@ namespace NES.Entities.Broker
 	{
 		private IAssetFactory Factory { get; set; }
 		private IMarket MarketProp { get; set; }
-		private IConsoleManager ConsoleManager { get; }
+		private IOManager ConsoleManager { get; }
 		private IPrinterManager PrinterManager { get; }
 
-		public Broker(IAssetFactory factory, IMarket market, IConsoleManager consoleManager, IPrinterManager printerManager)
+		public Broker(IAssetFactory factory, IMarket market, IOManager consoleManager, IPrinterManager printerManager)
 		{
 			this.Factory = factory;
 			this.MarketProp = market;
@@ -46,7 +46,7 @@ namespace NES.Entities.Broker
 			{
 				throw new ArgumentException("You don't have enough funds for this purchase.");
 			}
-
+			PrinterManager.PrintMarket(user, MarketProp);
 			return $"Succesfully purchased {amount} {assetName} " + (amount > 1 ? "assets" : "asset");
 		}
 
@@ -56,9 +56,8 @@ namespace NES.Entities.Broker
 
 			IAsset asset = Factory.CreateAsset(assetName, price, amount);
 			user.Wallet.RemoveAsset(asset);
-
 			user.Wallet.Cash += price * amount;
-
+			PrinterManager.PrintMarket(user, MarketProp);
 			return $"Succesfully selled {amount} {assetName} " + (amount > 1 ? "assets" : "asset");
 		}
 	}

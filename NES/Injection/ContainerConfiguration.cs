@@ -35,7 +35,7 @@ namespace NES.Injection
             builder.RegisterType<AssetFactory>().As<IAssetFactory>().SingleInstance();
             builder.RegisterType<UserFactory>().As<IUserFactory>().SingleInstance();
             builder.RegisterType<CommandFactory>().As<ICommandFactory>().SingleInstance();
-			builder.RegisterType<IOConsole>().As<IConsoleManager>().SingleInstance();
+			builder.RegisterType<IOConsole>().As<IOManager>().SingleInstance();
 			builder.RegisterType<IOStream>().As<IStreamManager>().SingleInstance();
 			builder.RegisterType<Printer>().As<IPrinterManager>().SingleInstance();
 		}

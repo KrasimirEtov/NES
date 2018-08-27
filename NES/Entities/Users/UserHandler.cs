@@ -19,10 +19,10 @@ namespace NES.Entities.Users
 
 		private IUserFactory UserFactory { get; }
 		private IStreamManager StreamManager { get; }
-		private IConsoleManager ConsoleManager { get; }
+		private IOManager ConsoleManager { get; }
 		private IPrinterManager PrinterManager { get; }
 
-		public UserHandler(IUserFactory userFactory, IStreamManager streamManager, IConsoleManager consoleManager, IPrinterManager printerManager)
+		public UserHandler(IUserFactory userFactory, IStreamManager streamManager, IOManager consoleManager, IPrinterManager printerManager)
 		{
 			UserFactory = userFactory;
 			StreamManager = streamManager;

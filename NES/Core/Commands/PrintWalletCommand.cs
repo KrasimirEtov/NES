@@ -9,8 +9,8 @@ namespace NES.Core.Commands
 {
 	public class PrintWalletCommand : ICommand
 	{
-		private IConsoleManager ConsoleManager { get; }
-		public PrintWalletCommand(IConsoleManager consoleManager)
+		private IOManager ConsoleManager { get; }
+		public PrintWalletCommand(IOManager consoleManager)
 		{
 			ConsoleManager = consoleManager;
 		}

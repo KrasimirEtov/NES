@@ -1,12 +1,9 @@
 ﻿using NES.Core.Commands.Contracts;
-using NES.Core.Engine.Contracts;
 using NES.Entities.Broker.Contracts;
 using NES.Entities.Users.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using TradeMarket.Contracts;
 
 namespace NES.Core.Commands
 {
@@ -15,8 +12,6 @@ namespace NES.Core.Commands
 		private string commandName;
 		private int amount;
         public IBroker Broker { get; }
-		public IMarket Market { get; }
-		public IPrinterManager PrinterManager { get; }
 
 		public string CommandName
 		{
@@ -40,11 +35,10 @@ namespace NES.Core.Commands
 			}
 		}
 
-		public SellCommand(IBroker broker, IMarket market, IPrinterManager printerManager)
+		public SellCommand(IBroker broker)
         {
             Broker = broker;
-			Market = market;
-			PrinterManager = printerManager;
+
 		}
 
         public string Execute(IList<string> input, IUser user)
@@ -59,10 +53,7 @@ namespace NES.Core.Commands
 			{
 				throw new Exception("Incorrent input for amount!");
 			}
-
-			var result = Broker.Sell(commandName, Amount, user);
-			PrinterManager.PrintMarket(user, Market);
-			return result;
+			return Broker.Sell(commandName, Amount, user);
         }
     }
 }

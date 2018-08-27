@@ -30,7 +30,7 @@ namespace NES.Tests.BrokerTests
             var wallet = new Mock<IWallet>();
             var market = new Mock<IMarket>();
             var factory = new Mock<IAssetFactory>();
-			var consoleManager = new Mock<IConsoleManager>();
+			var consoleManager = new Mock<IOManager>();
 			var printerManager = new Mock<IPrinterManager>();
 
 			user.Setup(x => x.Wallet).Returns(wallet.Object);
@@ -50,7 +50,7 @@ namespace NES.Tests.BrokerTests
             var wallet = new Mock<IWallet>();
             var market = new Mock<IMarket>();
             var factory = new Mock<IAssetFactory>();
-			var consoleManager = new Mock<IConsoleManager>();
+			var consoleManager = new Mock<IOManager>();
 			var printerManager = new Mock<IPrinterManager>();
 
 			user.Setup(x => x.Wallet).Returns(wallet.Object);

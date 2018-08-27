@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NES.Core.Engine.Contracts
 {
-	public interface IConsoleManager
+	public interface IOManager
 	{
 		string ReadLine();
 		void Write(string message, ConsoleColor color = ConsoleColor.White);

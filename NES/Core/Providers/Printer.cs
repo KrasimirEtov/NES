@@ -12,10 +12,10 @@ namespace NES.Core.Providers
 		private const string welcomeScreen = "Welcome";
 		private const string marketName = "MarketName";
 
-		private IConsoleManager ConsoleManager { get; }
+		private IOManager ConsoleManager { get; }
 		private IStreamManager StreamManager { get; }
 
-		public Printer(IConsoleManager consoleManager, IStreamManager streamManager)
+		public Printer(IOManager consoleManager, IStreamManager streamManager)
 		{
 			ConsoleManager = consoleManager;
 			StreamManager = streamManager;

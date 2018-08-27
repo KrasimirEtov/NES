@@ -13,10 +13,10 @@ namespace NES.Core.Engine
         private const string exitCommand = "exit";
         private static IUser currentUser;
         private IProcessCommand CommandProcessor { get; }
-		private IConsoleManager ConsoleManager { get; }
+		private IOManager ConsoleManager { get; }
 		private IPrinterManager PrinterManager { get; }
 
-		public NESEngine(IProcessCommand commandProcessor, IConsoleManager consoleManager, IPrinterManager printerManager)
+		public NESEngine(IProcessCommand commandProcessor, IOManager consoleManager, IPrinterManager printerManager)
 		{
 			CommandProcessor = commandProcessor;
 			ConsoleManager = consoleManager;
