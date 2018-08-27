@@ -20,7 +20,7 @@ namespace NES.Core.Commands
 			set
 			{
 				if (value.All(char.IsDigit)) throw new Exception("Asset name cannot contain only letters!");
-				if (value == null) throw new Exception("Asset name cannot be null!");
+				if (value == null) throw new ArgumentNullException("Asset name cannot be null!");
 				if (value.Length < 1 || value.Length > 50) throw new Exception("Asset name length cannot be less than 1 or more than 50 characters!");
 				commandName = value;
 			}
@@ -31,7 +31,7 @@ namespace NES.Core.Commands
 			get => amount;
 			set
 			{
-				if (value < 1) throw new Exception("You cannot sell negative amount of assets!");
+				if (value < 1) throw new Exception("You cannot buy negative amount of assets!");
 				amount = value;
 			}
 		}
@@ -47,14 +47,14 @@ namespace NES.Core.Commands
 			CommandName = input[0];
 			if (int.TryParse(input[1], out var tempAmount))
 			{
-				Amount = tempAmount;
+				this.Amount = tempAmount;
 			}
 			else
 			{
 				throw new Exception("Incorrent input for amount!");
 			}
 
-			return Broker.Buy(CommandName, Amount, user);
+			return Broker.Buy(this.CommandName, this.Amount, user);
         }
     }
 }
