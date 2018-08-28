@@ -1,4 +1,4 @@
-# First teamwork project for Telerik Academy Alpha .NET Jul' 18
+﻿# First teamwork project for Telerik Academy Alpha .NET Jul' 18
 
 ## Team members
 - **N** Алекс Никлев - https://my.telerikacademy.com/Users/alex.bul.10
@@ -44,3 +44,13 @@ After that he/she can start buying/selling assets to become the Wolf of Wall Str
 - facebook
 - google
 - netflix
+
+
+## What problems did the application have before you started refactoring?
+
+Bad use of Singelton pattern and a switch/case, which was breaking the Open/Closed principle. Before adding a container, classes were responsible for initializing their own dependency, which is a bad practice.
+
+## What design patterns have you used and why?
+
+Command pattern and Factory pattern.
+
