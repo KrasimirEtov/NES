@@ -50,7 +50,10 @@ After that he/she can start buying/selling assets to become the Wolf of Wall Str
 
 Bad use of Singelton pattern and a switch/case, which was breaking the Open/Closed principle. Before adding a container, classes were responsible for initializing their own dependency, which is a bad practice.
 
+
 ## What design patterns have you used and why?
 
-Command pattern and Factory pattern.
+Command pattern – to deal with the commands, helps us follow the Open/Closed principle and allows us to lower the coupling.
+
+Factory pattern – takes care of the creating of our objects, helps us follow the dependency inversion principle.
 
