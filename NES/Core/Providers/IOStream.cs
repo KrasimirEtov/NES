@@ -66,5 +66,35 @@ namespace NES.Core.Providers
 			if (File.Exists($"../../../Files/{fileName}.txt")) return true;
 			return false;
 		}
+
+		public bool CheckName(string userName, string fileName)
+		{
+			if (!CheckIfFileExists(fileName)) return false;
+
+			foreach (var read in ReadLine(fileName))
+			{
+				var nameFromFile = read.Substring(0, read.IndexOf('|'));
+				if (nameFromFile.Equals(userName)) return true;
+			}
+
+			return false;
+		}
+
+		public bool CheckPass(string userName, string password, string fileName)
+		{
+			if (!CheckIfFileExists(fileName)) return false;
+			foreach (var read in ReadLine(fileName))
+			{
+				string[] data = read.Split('|');
+				if ((data[0].Equals(userName)) && (data[1].Equals(password))) return true;
+			}
+
+			return false;
+		}
+
+		public void SaveWallet(IWallet wallet, string userName)
+		{
+			BinaryWrite(wallet, $"{userName}Wallet");
+		}
 	}
 }

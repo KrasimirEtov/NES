@@ -6,5 +6,7 @@ namespace NES.Core.Engine.Contracts
     public interface IUserFactory
     {
 		IUser CreateUser(string name, IWallet wallet);
-    }
+		IWallet CreateWallet(decimal cash);
+
+	}
 }

@@ -2,9 +2,7 @@
 using NES.Entities.Broker.Contracts;
 using NES.Entities.Users;
 using NES.Entities.Users.Contracts;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace NES.Core.Commands
 {
@@ -12,18 +10,19 @@ namespace NES.Core.Commands
     {
         private UserHandler UserHandler { get; }
         private IBroker Broker { get; }
+		private IUserSession UserSession { get; }
 
-        public RegisterCommand(UserHandler userHandler, IBroker broker)
+		public RegisterCommand(UserHandler userHandler, IBroker broker, IUserSession userSession)
         {
             this.UserHandler = userHandler;
             this.Broker = broker;
-        }
+			UserSession = userSession;
+		}
 
-        public string Execute(IList<string> input, IUser user)
+        public string Execute(IList<string> input)
         {
-			user = this.UserHandler.RegisteUser(input, user);
-            Engine.NESEngine.SetUser(user);
-            this.Broker.EndDayTraiding(user);
+			UserSession.User = UserHandler.RegisteUser(input);
+            this.Broker.EndDayTraiding();
 
             return "Welcome";
         }

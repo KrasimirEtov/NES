@@ -8,13 +8,14 @@ namespace NES.Core.Engine
 {
     public class UserFactory : IUserFactory
     {
-        public UserFactory()
-		{
-		}
-
 		public IUser CreateUser(string name, IWallet wallet)
         {
             return new User(name, wallet);
         }
+
+		public IWallet CreateWallet(decimal cash)
+		{
+			return new Wallet(cash);
+		}
 	}
 }

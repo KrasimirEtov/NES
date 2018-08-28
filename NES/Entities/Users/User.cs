@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace NES.Entities.Users
 {
+	[Serializable]
 	public class User : IUser
 	{
 		private string name;

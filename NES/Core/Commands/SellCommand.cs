@@ -1,6 +1,5 @@
 ﻿using NES.Core.Commands.Contracts;
 using NES.Entities.Broker.Contracts;
-using NES.Entities.Users.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +10,7 @@ namespace NES.Core.Commands
     {
 		private string commandName;
 		private int amount;
-        public IBroker Broker { get; }
+		private IBroker Broker { get; }
 
 		public string CommandName
 		{
@@ -38,10 +37,9 @@ namespace NES.Core.Commands
 		public SellCommand(IBroker broker)
         {
             Broker = broker;
-
 		}
 
-        public string Execute(IList<string> input, IUser user)
+        public string Execute(IList<string> input)
         {
 			if (input.Count != 2) throw new Exception("Invalid sell command arguments!");
             CommandName = input[0];
@@ -53,7 +51,7 @@ namespace NES.Core.Commands
 			{
 				throw new Exception("Incorrent input for amount!");
 			}
-			return Broker.Sell(commandName, Amount, user);
+			return Broker.Sell(commandName, Amount);
         }
     }
 }

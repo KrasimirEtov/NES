@@ -1,12 +1,9 @@
-﻿using NES.Entities.Users.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace NES.Core.Commands.Contracts
 {
     public interface ICommand
     {
-        string Execute(IList<string> input, IUser user);
+        string Execute(IList<string> input);
     }
 }

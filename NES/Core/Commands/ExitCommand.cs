@@ -1,36 +1,34 @@
 ﻿using NES.Core.Commands.Contracts;
-using NES.Core.Engine;
 using NES.Core.Engine.Contracts;
-using NES.Entities.Users;
 using NES.Entities.Users.Contracts;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace NES.Core.Commands
 {
 	public class ExitCommand : ICommand
 	{
-		private UserHandler UserHandler { get; }
-		private IPrinterManager PrinterManager { get; }
+		private IStreamManager StreamManager { get; }
 		private IOManager ConsoleManager { get; }
+		private IUserSession UserSession { get; }
 
-		public ExitCommand(UserHandler userHandler, IPrinterManager printerManager, IOManager consoleManager)
+		public ExitCommand(IStreamManager streamManager, IOManager consoleManager, IUserSession userSession)
 		{
-			this.UserHandler = userHandler;
-			PrinterManager = printerManager;
+			StreamManager = streamManager;
 			ConsoleManager = consoleManager;
+			UserSession = userSession;
 		}
 
-		public string Execute(IList<string> input, IUser user)
+		public string Execute(IList<string> input)
 		{
 			if (input.Count != 0) throw new Exception("Invalid exit command arguments!");
-			if (user == null)
+			if (UserSession.User == null)
 			{
 				ConsoleManager.WriteLine("\nGoodbye", ConsoleColor.Green);
 				Environment.Exit(0);
 			}
-			this.UserHandler.SaveWallet(user.Wallet, user.Name);
+			StreamManager.SaveWallet(UserSession.User.Wallet, UserSession.User.Name);
+
 			return "\nGoodbye";
 		}
 	}

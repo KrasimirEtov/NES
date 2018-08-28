@@ -8,7 +8,6 @@ namespace NES.Entities.Wallets.Contracts
 		decimal Cash { get; set; }
 		void AddAsset(IAsset asset);
         void RemoveAsset(IAsset asset);
-        string PrintWallet();
 		Dictionary<string, IAsset> Portfolio { get; }
 	}
 }

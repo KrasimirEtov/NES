@@ -1,8 +1,5 @@
 ﻿using NES.Core.Commands.Contracts;
-using NES.Core.Engine;
 using NES.Core.Engine.Contracts;
-using NES.Core.Providers;
-using NES.Entities.Users;
 using NES.Entities.Users.Contracts;
 using System;
 using System.Collections.Generic;
@@ -12,21 +9,24 @@ namespace NES.Core.Commands
 {
 	public class LogoutCommand : ICommand
 	{
-		private UserHandler UserHandler { get; }
+		public IStreamManager StreamManager { get; }
 		private IPrinterManager PrinterManager { get; }
+		private IUserSession UserSession { get; }
 
-		public LogoutCommand(UserHandler userHandler, IPrinterManager printerManager)
+		public LogoutCommand(IStreamManager streamManager, IPrinterManager printerManager, IUserSession userSession)
 		{
-			this.UserHandler = userHandler;
+			StreamManager = streamManager;
 			PrinterManager = printerManager;
+			UserSession = userSession;
 		}
 
-		public string Execute(IList<string> input, IUser user)
+		public string Execute(IList<string> input)
 		{
 			if (input.Count != 0) throw new Exception("Invalid logout command arguments!");
-			this.UserHandler.SaveWallet(user.Wallet, user.Name);
-			NESEngine.SetUser(null);
+			StreamManager.SaveWallet(UserSession.User.Wallet, UserSession.User.Name);
+			UserSession.Logout();
 			PrinterManager.InitialInstructions();
+
 			return "You logged out succesfully!";
 		}
 	}

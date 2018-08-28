@@ -1,9 +1,7 @@
 ﻿using NES.Core.Commands.Contracts;
 using NES.Entities.Broker.Contracts;
-using NES.Entities.Users.Contracts;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace NES.Core.Commands
 {
@@ -11,15 +9,15 @@ namespace NES.Core.Commands
     {
         private IBroker Broker { get; }
 
-        public EnddayCommand(IBroker broker)
+		public EnddayCommand(IBroker broker)
         {
             this.Broker = broker;
-        }
+		}
 
-        public string Execute(IList<string> input, IUser user)
+        public string Execute(IList<string> input)
         {
 			if (input.Count != 0) throw new Exception("Invalid endday command arguments!");
-			return this.Broker.EndDayTraiding(user);
+			return this.Broker.EndDayTraiding();
         }
     }
 }

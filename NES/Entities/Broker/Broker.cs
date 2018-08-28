@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using NES.Core.Engine.Contracts;
-using NES.Core.Providers;
 using NES.Entities.Assets.Contracts;
 using NES.Entities.Broker.Contracts;
 using NES.Entities.Users.Contracts;
@@ -16,48 +13,51 @@ namespace NES.Entities.Broker
 		private IMarket MarketProp { get; set; }
 		private IOManager ConsoleManager { get; }
 		private IPrinterManager PrinterManager { get; }
+		private IUserSession UserSession { get; }
 
-		public Broker(IAssetFactory factory, IMarket market, IOManager consoleManager, IPrinterManager printerManager)
+		public Broker(IAssetFactory factory, IMarket market, IOManager consoleManager, IPrinterManager printerManager, IUserSession userSession)
 		{
 			this.Factory = factory;
 			this.MarketProp = market;
 			ConsoleManager = consoleManager;
 			PrinterManager = printerManager;
+			UserSession = userSession;
 		}
 
-		public string EndDayTraiding(IUser user)
+		public string EndDayTraiding()
 		{
 			MarketProp.UpdatePrices();
-			PrinterManager.PrintMarket(user, MarketProp);
+			PrinterManager.PrintMarket();
 			return "Trading day has ended!";
 		}
 
-		public string Buy(string assetName, decimal amount, IUser user)
+		public string Buy(string assetName, decimal amount)
 		{
 			decimal price = MarketProp.AssetPrice(assetName);
 
-			if (user.Wallet.Cash >= price * amount)
+			if (UserSession.User.Wallet.Cash >= price * amount)
 			{
 				IAsset asset = Factory.CreateAsset(assetName, price, amount);
-				user.Wallet.AddAsset(asset);
-				user.Wallet.Cash -= price * amount;
+				UserSession.User.Wallet.AddAsset(asset);
+				UserSession.User.Wallet.Cash -= price * amount;
 			}
 			else
 			{
 				throw new ArgumentException("You don't have enough funds for this purchase.");
 			}
-			PrinterManager.PrintMarket(user, MarketProp);
+			PrinterManager.PrintMarket();
 			return $"Succesfully purchased {amount} {assetName} " + (amount > 1 ? "assets" : "asset");
 		}
 
-		public string Sell(string assetName, decimal amount, IUser user)
+		public string Sell(string assetName, decimal amount)
 		{
 			decimal price = MarketProp.AssetPrice(assetName);
 
 			IAsset asset = Factory.CreateAsset(assetName, price, amount);
-			user.Wallet.RemoveAsset(asset);
-			user.Wallet.Cash += price * amount;
-			PrinterManager.PrintMarket(user, MarketProp);
+			
+			UserSession.User.Wallet.RemoveAsset(asset);
+			UserSession.User.Wallet.Cash += price * amount;
+			PrinterManager.PrintMarket();
 			return $"Succesfully selled {amount} {assetName} " + (amount > 1 ? "assets" : "asset");
 		}
 	}

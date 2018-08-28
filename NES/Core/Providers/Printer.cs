@@ -3,6 +3,7 @@ using NES.Entities.Users.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using TradeMarket.Contracts;
 
 namespace NES.Core.Providers
@@ -14,11 +15,15 @@ namespace NES.Core.Providers
 
 		private IOManager ConsoleManager { get; }
 		private IStreamManager StreamManager { get; }
+		private IUserSession UserSession { get; }
+		private IMarket Market { get; }
 
-		public Printer(IOManager consoleManager, IStreamManager streamManager)
+		public Printer(IOManager consoleManager, IStreamManager streamManager, IUserSession userSession, IMarket market)
 		{
 			ConsoleManager = consoleManager;
 			StreamManager = streamManager;
+			UserSession = userSession;
+			Market = market;
 		}
 		public void PrintStartup()
 		{
@@ -38,19 +43,19 @@ namespace NES.Core.Providers
 			ConsoleManager.WriteLine("If you don't have an account, please create one using command 'register'\nfollowed by user name, password and money for traiding separated by space.\n");
 		}
 
-		public void PrintUserInfo(IUser user)
+		public void PrintUserInfo()
 		{
-			ConsoleManager.WriteLine($"User: {user.Name}");
-			ConsoleManager.Write($"Cash: ${user.Wallet.Cash}");
+			ConsoleManager.WriteLine($"User: {UserSession.User.Name}");
+			ConsoleManager.Write($"Cash: ${UserSession.User.Wallet.Cash}");
 		}
 
-		public void PrintMarket(IUser user, IMarket Market)
+		public void PrintMarket()
 		{
 			ConsoleManager.Clear();
 			PrintMarketName();
 			List<IMarketAssetPrice> ordered = Market.AssetPrices.OrderBy(x => x.Category).ToList();
 			string category = "";
-			PrintUserInfo(user);
+			PrintUserInfo();
 
 			for (int i = 0; i < ordered.Count; i++)
 			{
@@ -62,14 +67,15 @@ namespace NES.Core.Providers
 				}
 
 				ConsoleManager.WriteAligned("{0,15} ", $"{ordered[i].Name}: ");
+
 				string key = ordered[i].Name.First().ToString().ToUpper() + ordered[i].Name.Substring(1);
-				if (user.Wallet.Portfolio.ContainsKey(key))
+				if (UserSession.User.Wallet.Portfolio.ContainsKey(key))
 				{
-					if (user.Wallet.Portfolio[key].Price < ordered[i].Price)
+					if (UserSession.User.Wallet.Portfolio[key].Price < ordered[i].Price)
 					{
 						ConsoleManager.ChangeColor(ConsoleColor.Green);
 					}
-					else if (user.Wallet.Portfolio[key].Price > ordered[i].Price)
+					else if (UserSession.User.Wallet.Portfolio[key].Price > ordered[i].Price)
 					{
 						ConsoleManager.ChangeColor(ConsoleColor.Red);
 					}
@@ -81,6 +87,28 @@ namespace NES.Core.Providers
 				ConsoleManager.Write("| ");
 			}
 			ConsoleManager.WriteLine("\n");
+		}
+
+		public string PrintWallet()
+		{
+			StringBuilder walletString = new StringBuilder();
+			string categoty = "";
+			if (UserSession.User.Wallet.Portfolio.Count < 1)
+			{
+				return "You don't have any purchased assets!";
+			}
+			foreach (var asset in UserSession.User.Wallet.Portfolio)
+			{
+				if (categoty != asset.Value.Type.ToString())
+				{
+					categoty = asset.Value.Type.ToString();
+					walletString.AppendLine("\n" + asset.Value.Type.ToString() + ":");
+				}
+				walletString.Append($"   {asset.Key}:");
+				walletString.AppendLine($" Amount: {asset.Value.Amount}, Price per unit: {asset.Value.Price}");
+			}
+
+			return walletString.ToString();
 		}
 	}
 }

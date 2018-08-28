@@ -5,6 +5,7 @@ using NES.Core.Engine;
 using NES.Core.Engine.Contracts;
 using NES.Core.Providers;
 using NES.Entities.Users;
+using NES.Entities.Users.Contracts;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -36,6 +37,7 @@ namespace NES.Injection
 			builder.RegisterType<IOConsole>().As<IOManager>().SingleInstance();
 			builder.RegisterType<IOStream>().As<IStreamManager>().SingleInstance();
 			builder.RegisterType<Printer>().As<IPrinterManager>().SingleInstance();
+			builder.RegisterType<UserSession>().As<IUserSession>().SingleInstance();
 		}
 
         private void RegisterCommands(ContainerBuilder builder)

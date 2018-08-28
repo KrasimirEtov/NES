@@ -1,24 +1,25 @@
 ﻿using NES.Core.Commands.Contracts;
 using NES.Core.Engine.Contracts;
-using NES.Entities.Users.Contracts;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace NES.Core.Commands
 {
 	public class PrintWalletCommand : ICommand
 	{
 		private IOManager ConsoleManager { get; }
-		public PrintWalletCommand(IOManager consoleManager)
+		private IPrinterManager PrinterManager { get; }
+
+		public PrintWalletCommand(IOManager consoleManager, IPrinterManager printerManager)
 		{
 			ConsoleManager = consoleManager;
+			PrinterManager = printerManager;
 		}
 
-		public string Execute(IList<string> input, IUser user)
+		public string Execute(IList<string> input)
 		{
 			if (input.Count != 0) throw new Exception("Invalid printwallet command arguments!");
-			ConsoleManager.Write(user.Wallet.PrintWallet());
+			ConsoleManager.Write(PrinterManager.PrintWallet());
 			return string.Empty;
 		}
 	}

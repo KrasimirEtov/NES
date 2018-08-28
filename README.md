@@ -25,10 +25,10 @@ After that he/she can start buying/selling assets to become the Wolf of Wall Str
 ## Available assets
 **Crypto currencys:**
 
+
 - bitcoin
 - ethereum
 - litecoin
-
 
 **Precious metals**
 
@@ -37,14 +37,12 @@ After that he/she can start buying/selling assets to become the Wolf of Wall Str
 - platinum
 - silver
 
-
 **Stocks**
 
 
 - facebook
 - google
 - netflix
-
 
 ## What problems did the application have before you started refactoring?
 

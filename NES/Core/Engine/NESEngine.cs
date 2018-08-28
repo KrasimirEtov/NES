@@ -1,7 +1,6 @@
 ﻿using NES.Core.Commands;
 using NES.Core.Engine.Contracts;
 using NES.Core.Providers;
-using NES.Entities.Users.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +10,6 @@ namespace NES.Core.Engine
     public class NESEngine : IEngine
     {
         private const string exitCommand = "exit";
-        private static IUser currentUser;
         private IProcessCommand CommandProcessor { get; }
 		private IOManager ConsoleManager { get; }
 		private IPrinterManager PrinterManager { get; }
@@ -41,7 +39,7 @@ namespace NES.Core.Engine
 
 					IList<string> parameters = ConsoleManager.ReadLine().Split().ToList();
 
-					string result = CommandProcessor.ProcessCurrentCommand(parameters, currentUser);
+					string result = CommandProcessor.ProcessCurrentCommand(parameters);
 					ConsoleManager.WriteLine(result, ConsoleColor.Green);
 					ConsoleManager.ResetColor();
 					if (parameters[0] == "exit") Environment.Exit(0);
@@ -56,10 +54,5 @@ namespace NES.Core.Engine
 				}
 			}
 		}
-
-		public static void SetUser(IUser user)
-        {
-            currentUser = user;
-        }
     }
 }

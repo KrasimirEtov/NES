@@ -1,7 +1,5 @@
 ﻿using NES.Entities.Wallets.Contracts;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace NES.Core.Engine.Contracts
 {
@@ -14,5 +12,8 @@ namespace NES.Core.Engine.Contracts
 		IWallet BinaryRead(string fileName);
 		string ReadAllText(string fileName);
 		bool CheckIfFileExists(string fileName);
+		bool CheckName(string userName, string fileName);
+		bool CheckPass(string userName, string password, string fileName);
+		void SaveWallet(IWallet wallet, string userName);
 	}
 }
