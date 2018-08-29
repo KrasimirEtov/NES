@@ -10,5 +10,10 @@ namespace NES.Entities.Users
 		{
 			User = null;
 		}
+
+		public bool IsUserLoggedIn()
+		{
+			return User == null ? false : true;
+		}
 	}
 }

@@ -4,5 +4,6 @@
 	{
 		IUser User { get; set; }
 		void Logout();
+		bool IsUserLoggedIn();
 	}
 }

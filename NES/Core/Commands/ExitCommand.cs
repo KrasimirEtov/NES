@@ -22,7 +22,7 @@ namespace NES.Core.Commands
 		public string Execute(IList<string> input)
 		{
 			if (input.Count != 0) throw new Exception("Invalid exit command arguments!");
-			if (UserSession.User == null)
+			if (!UserSession.IsUserLoggedIn())
 			{
 				ConsoleManager.WriteLine("\nGoodbye", ConsoleColor.Green);
 				Environment.Exit(0);

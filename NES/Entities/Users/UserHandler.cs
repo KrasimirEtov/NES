@@ -68,7 +68,7 @@ namespace NES.Entities.Users
 
 		public IUser LoginUser(IList<string> parameters)
 		{
-			if (UserSession.User != null)
+			if (UserSession.IsUserLoggedIn())
 			{
 				throw new InitialCustomException("You are already logged in!");
 			}
@@ -94,7 +94,7 @@ namespace NES.Entities.Users
 
 		public IUser RegisteUser(IList<string> parameters)
 		{
-			if (UserSession.User != null)
+			if (UserSession.IsUserLoggedIn())
 			{
 				throw new InitialCustomException("Logout firts to register new account!");
 			}

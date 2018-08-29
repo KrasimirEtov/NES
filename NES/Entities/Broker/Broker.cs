@@ -27,7 +27,7 @@ namespace NES.Entities.Broker
 		public string EndDayTraiding()
 		{
 			MarketProp.UpdatePrices();
-			PrinterManager.PrintMarket();
+			PrinterManager.PrintMarket(UserSession.User, MarketProp);
 			return "Trading day has ended!";
 		}
 
@@ -45,7 +45,7 @@ namespace NES.Entities.Broker
 			{
 				throw new ArgumentException("You don't have enough funds for this purchase.");
 			}
-			PrinterManager.PrintMarket();
+			PrinterManager.PrintMarket(UserSession.User, MarketProp);
 			return $"Succesfully purchased {amount} {assetName} " + (amount > 1 ? "assets" : "asset");
 		}
 
@@ -57,7 +57,7 @@ namespace NES.Entities.Broker
 			
 			UserSession.User.Wallet.RemoveAsset(asset);
 			UserSession.User.Wallet.Cash += price * amount;
-			PrinterManager.PrintMarket();
+			PrinterManager.PrintMarket(UserSession.User, MarketProp);
 			return $"Succesfully selled {amount} {assetName} " + (amount > 1 ? "assets" : "asset");
 		}
 	}
