@@ -2,8 +2,6 @@
 using NES.Entities.Assets.Contracts;
 using NES.Entities.Users.Contracts;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using TradeMarket.Contracts;
 
 namespace NES.Tests.Mocks
@@ -12,29 +10,31 @@ namespace NES.Tests.Mocks
     {
         private IAssetFactory Factory { get; set; }
         private IMarket MarketProp { get; set; }
+		private IUserSession UserSession { get; }
 
-        public BrokerMock(IAssetFactory factory, IMarket market)
+		public BrokerMock(IAssetFactory factory, IMarket market, IUserSession userSession)
         {
             this.Factory = factory;
             this.MarketProp = market;
-        }
+			UserSession = userSession;
+		}
 
-        public string EndDayTraiding(IUser user)
+        public string EndDayTraiding()
         {
             MarketProp.UpdatePrices();
 
             return "Trading day has ended!";
         }
 
-        public string Buy(string assetName, decimal amount, IUser user)
+        public string Buy(string assetName, decimal amount)
         {
             decimal price = MarketProp.AssetPrice(assetName);
 
-            if (user.Wallet.Cash >= price * amount)
+            if (UserSession.User.Wallet.Cash >= price * amount)
             {
                 IAsset asset = Factory.CreateAsset(assetName, price, amount);
-                user.Wallet.AddAsset(asset);
-                user.Wallet.Cash -= price * amount;
+				UserSession.User.Wallet.AddAsset(asset);
+				UserSession.User.Wallet.Cash -= price * amount;
             }
             else
             {
@@ -44,14 +44,14 @@ namespace NES.Tests.Mocks
             return $"Succesfully purchased {amount} {assetName} " + (amount > 1 ? "assets" : "asset");
         }
 
-        public string Sell(string assetName, decimal amount, IUser user)
+        public string Sell(string assetName, decimal amount)
         {
             decimal price = MarketProp.AssetPrice(assetName);
 
             IAsset asset = Factory.CreateAsset(assetName, price, amount);
-            user.Wallet.RemoveAsset(asset);
+			UserSession.User.Wallet.RemoveAsset(asset);
 
-            user.Wallet.Cash += price * amount;
+			UserSession.User.Wallet.Cash += price * amount;
 
             return $"Succesfully selled {amount} {assetName} " + (amount > 1 ? "assets" : "asset");
         }

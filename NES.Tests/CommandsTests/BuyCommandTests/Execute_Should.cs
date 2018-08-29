@@ -5,7 +5,6 @@ using NES.Entities.Broker.Contracts;
 using NES.Entities.Users.Contracts;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace NES.Tests.CommandsTests.BuyCommandTests
 {
@@ -23,7 +22,7 @@ namespace NES.Tests.CommandsTests.BuyCommandTests
             IList<string> input = new List<string>();
 
             //Act & Assert
-            Assert.ThrowsException<Exception>(() => buyCommand.Execute(input, userMock.Object));
+            Assert.ThrowsException<Exception>(() => buyCommand.Execute(input));
         }
 
         [TestMethod]
@@ -39,7 +38,7 @@ namespace NES.Tests.CommandsTests.BuyCommandTests
             input.Add("Int");
 
             //Act & Assert
-            Assert.ThrowsException<Exception>(() => buyCommand.Execute(input, userMock.Object));
+            Assert.ThrowsException<Exception>(() => buyCommand.Execute(input));
         }
 
         [TestMethod]
@@ -48,7 +47,7 @@ namespace NES.Tests.CommandsTests.BuyCommandTests
             //Arrange
             Mock<IBroker> brockerMock = new Mock<IBroker>();
             Mock<IUser> userMock = new Mock<IUser>();
-            brockerMock.Setup(brocker => brocker.Buy("name", 10, userMock.Object)).Returns("invoked");
+            brockerMock.Setup(brocker => brocker.Buy("name", 10)).Returns("invoked");
             BuyCommand buyCommand = new BuyCommand(brockerMock.Object);
 
             IList<string> input = new List<string>();
@@ -56,7 +55,7 @@ namespace NES.Tests.CommandsTests.BuyCommandTests
             input.Add("10");
 
             //Act 
-            string result = buyCommand.Execute(input, userMock.Object);
+            string result = buyCommand.Execute(input);
 
             //Assert
             Assert.AreEqual("invoked", result);

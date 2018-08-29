@@ -16,11 +16,12 @@ namespace NES.Tests.BrokerTests
             var factory = new Mock<IAssetFactory>();
             var market = new Mock<IMarket>();
             var user = new Mock<IUser>();
+			var userSession = new Mock<IUserSession>();
 
-            market.Setup(x => x.UpdatePrices());
+			market.Setup(x => x.UpdatePrices());
 
-            var broker = new BrokerMock(factory.Object, market.Object);
-            broker.EndDayTraiding(user.Object);
+			var broker = new BrokerMock(factory.Object, market.Object, userSession.Object);
+			broker.EndDayTraiding();
 
             market.Verify(x => x.UpdatePrices(), Times.Once);
         }
@@ -33,11 +34,12 @@ namespace NES.Tests.BrokerTests
             var factory = new Mock<IAssetFactory>();
             var market = new Mock<IMarket>();
             var user = new Mock<IUser>();
+			var userSession = new Mock<IUserSession>();
 
-            market.Setup(x => x.UpdatePrices());
+			market.Setup(x => x.UpdatePrices());
 
-            var broker = new BrokerMock(factory.Object, market.Object);
-            string result = broker.EndDayTraiding(user.Object);
+			var broker = new BrokerMock(factory.Object, market.Object, userSession.Object);
+			string result = broker.EndDayTraiding();
 
             Assert.AreEqual(message, result);
         }

@@ -27,15 +27,17 @@ namespace NES.Tests.BrokerTests
             var factory = new Mock<IAssetFactory>();
 			var consoleManager = new Mock<IOManager>();
 			var printerManager = new Mock<IPrinterManager>();
+			var userSession = new Mock<IUserSession>();
 
 			market.Setup(x => x.AssetPrice(asset)).Returns(assetPrice);
             user.Setup(x => x.Wallet).Returns(wallet.Object);
             wallet.SetupAllProperties();
+			userSession.Setup(x => x.User).Returns(user.Object);
 
-            var broker = new Broker(factory.Object, market.Object, consoleManager.Object, printerManager.Object);
-            try
-            {
-                string result = broker.Sell(asset, 1, user.Object);
+			var broker = new Broker(factory.Object, market.Object, consoleManager.Object, printerManager.Object, userSession.Object);
+			try
+			{
+                string result = broker.Sell(asset, 1);
             }
             catch (DirectoryNotFoundException)
             {
@@ -55,16 +57,18 @@ namespace NES.Tests.BrokerTests
             var factory = new Mock<IAssetFactory>();
 			var consoleManager = new Mock<IOManager>();
 			var printerManager = new Mock<IPrinterManager>();
+			var userSession = new Mock<IUserSession>();
 
 			user.Setup(x => x.Wallet).Returns(wallet.Object);
             wallet.Setup(x => x.Cash).Returns(0);
             market.Setup(x => x.AssetPrice(asset)).Returns(3000);
+			userSession.Setup(x => x.User).Returns(user.Object);
 
-            var broker = new Broker(factory.Object, market.Object, consoleManager.Object, printerManager.Object);
+			var broker = new Broker(factory.Object, market.Object, consoleManager.Object, printerManager.Object, userSession.Object);
 
-            try
-            {
-                string result = broker.Buy(asset, 1, user.Object);
+			try
+			{
+                string result = broker.Buy(asset, 1);
             }
             catch (ArgumentException)
             {
@@ -86,15 +90,17 @@ namespace NES.Tests.BrokerTests
             var wallet = new Mock<IWallet>();
             var market = new Mock<IMarket>();
             var factory = new Mock<IAssetFactory>();
+			var userSession = new Mock<IUserSession>();
 
-            user.Setup(x => x.Wallet).Returns(wallet.Object);
+			user.Setup(x => x.Wallet).Returns(wallet.Object);
 
             wallet.Setup(x => x.Cash).Returns(cash);
 
             market.Setup(x => x.AssetPrice(assetName)).Returns(price);
+			userSession.Setup(x => x.User).Returns(user.Object);
 
-            var broker = new BrokerMock(factory.Object, market.Object);
-            string result = broker.Sell(assetName, amount, user.Object);
+			var broker = new BrokerMock(factory.Object, market.Object, userSession.Object);
+			string result = broker.Sell(assetName, amount);
 
             Assert.AreEqual(message, result);
         }
@@ -112,17 +118,19 @@ namespace NES.Tests.BrokerTests
             var market = new Mock<IMarket>();
             var factory = new Mock<IAssetFactory>();
             var asset = new Mock<IAsset>();
+			var userSession = new Mock<IUserSession>();
 
-            user.Setup(x => x.Wallet).Returns(wallet.Object);
+			user.Setup(x => x.Wallet).Returns(wallet.Object);
 
             factory.Setup<IAsset>(x => x.CreateAsset(assetName, price, amount)).Returns(asset.Object);
 
             wallet.Setup(x => x.RemoveAsset(asset.Object));
 
             market.Setup(x => x.AssetPrice(assetName)).Returns(price);
+			userSession.Setup(x => x.User).Returns(user.Object);
 
-            var broker = new BrokerMock(factory.Object, market.Object);
-            string result = broker.Sell(assetName, amount, user.Object);
+			var broker = new BrokerMock(factory.Object, market.Object, userSession.Object);
+			string result = broker.Sell(assetName, amount);
 
             wallet.Verify(x => x.RemoveAsset(asset.Object), Times.Once);
         }
