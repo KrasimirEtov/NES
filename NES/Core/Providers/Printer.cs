@@ -12,6 +12,7 @@ namespace NES.Core.Providers
 	{
 		private const string welcomeScreen = "Welcome";
 		private const string marketName = "MarketName";
+		private const string helpName = "Help";
 
 		private IOManager ConsoleManager { get; }
 		private IStreamManager StreamManager { get; }
@@ -37,6 +38,7 @@ namespace NES.Core.Providers
 			PrintStartup();
 			ConsoleManager.WriteLine("If you already have an account, please use command 'login' followed by user name and password separated by space.\n");
 			ConsoleManager.WriteLine("If you don't have an account, please create one using command 'register'\nfollowed by user name, password and money for traiding separated by space.\n");
+			ConsoleManager.WriteLine("If you are not sure what you can do, please use 'help' command to open the help screen!\n");
 		}
 
 		public void PrintUserInfo(IUser user)
@@ -105,6 +107,11 @@ namespace NES.Core.Providers
 			}
 
 			return walletString.ToString();
+		}
+
+		public void PrintHelp()
+		{
+			ConsoleManager.WriteLine(StreamManager.ReadAllText(helpName), ConsoleColor.Yellow);
 		}
 	}
 }

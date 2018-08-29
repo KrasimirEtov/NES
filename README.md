@@ -20,6 +20,7 @@ After that he/she can start buying/selling assets to become the Wolf of Wall Str
 - **sell** [assetName] [amount]                 => sell assets
 - **logout**                                    => logout of your session
 - **printwallet**                               => print the user wallet
+- **help**                                      => print help information
 - **exit**                                      => shuts down the program
 
 ## Available assets
@@ -30,14 +31,14 @@ After that he/she can start buying/selling assets to become the Wolf of Wall Str
 - ethereum
 - litecoin
 
-**Precious metals**
+**Precious metals:**
 
 
 - gold
 - platinum
 - silver
 
-**Stocks**
+**Stocks:**
 
 
 - facebook
@@ -54,4 +55,3 @@ Bad use of Singelton pattern and a switch/case, which was breaking the Open/Clos
 - Command pattern – to deal with the commands, helps us follow the Open/Closed principle and allows us to lower the coupling.
 
 - Factory pattern – takes care of the creating of our objects, helps us follow the dependency inversion principle.
-

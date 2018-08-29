@@ -1,0 +1,49 @@
+
+======================================================================================
+* Quick info *
+
+To begin user must register or login if he/she already have a registered account.
+After that he/she can start buying/selling assets to become the Wolf of Wall Street.
+
+======================================================================================
+
+* Available commands *					* Example commands *
+
+register [userName] [password] [cash]     		register telerik code1234 5000000
+
+login 	 [userName] [password]           		login telerik code1234	
+
+buy 	 [assetName] [amount]            		buy google 50
+
+sell 	 [assetName] [amount]            	 	sell google 50
+
+logout		=> logout of your session
+
+printwallet	=> print the user wallet
+
+help		=> print some help information
+
+exit		=> shuts down the program
+
+======================================================================================
+
+* Available assets *
+
+Crypto currencys:
+
+bitcoin
+ethereum
+litecoin
+
+Precious metals:						
+
+gold
+platinum
+silver
+
+Stocks:
+
+facebook
+google
+netflix
+======================================================================================

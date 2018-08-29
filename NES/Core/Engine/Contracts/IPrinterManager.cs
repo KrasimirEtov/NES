@@ -11,5 +11,6 @@ namespace NES.Core.Engine.Contracts
 		void PrintUserInfo(IUser user);
 		void PrintMarket(IUser user, IMarket market);
 		string PrintWallet(IUser user);
+		void PrintHelp();
 	}
 }
